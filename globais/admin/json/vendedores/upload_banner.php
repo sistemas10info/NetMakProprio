@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK) 
     {
         $nomeTemp = $_FILES['banner']['tmp_name'];
-        $nomeFinal = "Banner_".buildIdKey(30).".".pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+        $nomeFinal = "banner_".buildIdKey(30).".".pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
         // basename($_FILES['banner']['name']);
         $tipoMime = mime_content_type($nomeTemp);
 
@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 			http_response_code(400);
 			$response['msg'] = 'Imagem formato inválido';
 			$response['link'] = "X";
+			$response['imagem']="X";
 			exit(json_encode($response));
         }
 
@@ -36,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
  			http_response_code(200);
 			$response['msg']="Arquivo enviado com sucesso...";
-			$response['link']=$pastaDestino . $nomeFinal;
+			$response['link']=WEBSITE_UPLOAD . $nomeFinal;
+			$response['imagem']="<img src='".$response['link']."' width='60px;'>";
 			exit(json_encode($response));
         } 
         else 
@@ -44,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             http_response_code(500);
 			$response['msg']="Erro 500...";
 			$response['link']="X";
+			$response['imagem']="X";
 			exit(json_encode($response));
         }
     } 

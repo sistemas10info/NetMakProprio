@@ -21,8 +21,6 @@
 		});
 
 
-
-
 		// > Configuracoes iniciais da pagina **********************************************
 		
 		// < configuracoes do Bootgrid *****************************************************
@@ -197,6 +195,8 @@ $('#formUploadBanner').on('submit', function (e) {
         return;
     }
 
+	$('#resultado_baner').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	
     $.ajax({
         url: '../globais/admin/json/vendedores/upload_banner.php', // PHP que irá processar
         type: 'POST',
@@ -208,11 +208,13 @@ $('#formUploadBanner').on('submit', function (e) {
 				response = JSON.parse(dataReturn);
 				mensagem = response.msg;
 				link = response.link;
+				imagem = response.imagem;
 			} catch (e) {
 				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 			}
 
 			console.log("Mensagem - Link : "+mensagem+" - "+link);
+			$('#resultado_banner').html(imagem);
 			
         },
         error: function () {
@@ -220,3 +222,100 @@ $('#formUploadBanner').on('submit', function (e) {
         }
     });
 });
+
+
+$('#FormVendedor').on('submit', function (e) {
+
+    e.preventDefault(); // evita o envio normal do formulário
+
+    var form = document.getElementById('FormVendedor');
+    var formData = new FormData(form);
+    
+    console.log(formData);
+
+   Swal.fire({
+      title: 'Deseja salvar as informações ?',
+      text: "",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) 
+      {
+ 		    $.ajax({
+	        url: '../globais/admin/json/vendedores/post.php', // PHP que irá processar
+	        type: 'POST',
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        success: function (dataReturn) {
+				try {
+						response = JSON.parse(dataReturn);
+						mensagem = response.msg;
+						link = response.link;
+						imagem = response.imagem;
+				} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+				}
+	
+				window.location="vendedores_edit.php?id="+response.id;
+							
+	        },
+	        error: function (dataReturn) {
+	        
+					try {
+						response = JSON.parse(dataReturn.responseText);
+						mensagem = response.msg;
+					} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+					}
+	        
+			        Swal.fire(
+			          'Verifique as informações..',
+			          mensagem,
+			          'info'
+			        );
+	        }
+	        
+	      });
+
+        // Aqui você pode chamar uma função, enviar AJAX, etc.
+        // Exemplo: apagarRegistro();
+      } else {
+        // Ação se cancelar (opcional)
+        Swal.fire(
+          'Cancelado',
+          'Nenhuma alteração foi feita.',
+          'info'
+        );
+      }
+    });
+
+});
+
+
+function gerar_senha()
+{
+
+$('#altera_senha').val(1);
+const letras = 'abcdefghijklmnopqrstuvwxyz';
+const numeros = '0123456789';
+let resultado = '';
+
+// Gerar 4 letras minúsculas
+for (let i = 0; i < 4; i++) {
+resultado += letras.charAt(Math.floor(Math.random() * letras.length));
+}
+
+// Gerar 4 números
+for (let i = 0; i < 4; i++) {
+resultado += numeros.charAt(Math.floor(Math.random() * numeros.length));
+}
+
+$('#senha').show();
+$('#senha').val(resultado);
+
+}

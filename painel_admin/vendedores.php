@@ -167,30 +167,30 @@ if (file_exists($arquivo)) {
         <i class="fas fa-angle-up"></i>
     </a>
 
-		<!-- FastClick -->
-		<script src="../bootstrap/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script src="../bootstrap/vendors/nprogress/nprogress.js"></script>
-		<!-- iCheck -->
-		<script src="../bootstrap/vendors/iCheck/icheck.min.js"></script>
-		<!-- bootstrap-daterangepicker -->
-		<script src="../bootstrap/vendors/moment/min/moment.min.js"></script>
-		<script src="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-		<!-- bootstrap-datetimepicker -->    
-		<script src="../bootstrap/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-		<!-- Bootstrap Colorpicker -->
-		<script src="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-		<!-- PNotify -->
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.js"></script>
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.buttons.js"></script>
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.js"></script>
-		<!-- Switchery -->
-		<script src="../bootstrap/vendors/switchery/dist/switchery.min.js"></script>
-		<!-- jquery.inputmask -->
-		<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-		
-		<!-- Custom Theme Scripts -->
-		<script src="../bootstrap/build/js/custom.min.js"></script>
+	<!-- FastClick -->
+	<script src="../bootstrap/vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="../bootstrap/vendors/nprogress/nprogress.js"></script>
+	<!-- iCheck -->
+	<script src="../bootstrap/vendors/iCheck/icheck.min.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script src="../bootstrap/vendors/moment/min/moment.min.js"></script>
+	<script src="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- bootstrap-datetimepicker -->    
+	<script src="../bootstrap/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Bootstrap Colorpicker -->
+	<script src="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+	<!-- PNotify -->
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	<!-- Switchery -->
+	<script src="../bootstrap/vendors/switchery/dist/switchery.min.js"></script>
+	<!-- jquery.inputmask -->
+	<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+	
+	<!-- Custom Theme Scripts -->
+	<script src="../bootstrap/build/js/custom.min.js"></script>
 
 	<script src="../bootstrap/assets/plugins/shortenerUrl/jquery.urlshortener.js"></script>
 	<script src="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.min.js"></script>

@@ -159,22 +159,22 @@ $est1=executeQuery("select * from estados","all");
 									<div class="col-md-3">
 										<label class="control-label text-right f12" >CNPJ</label><BR>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control f12" value="" 
-													data-inputmask="'mask' : '999.999.999-99'" onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" >
+													data-inputmask="'mask' : '999.999.999-99'" onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=$ven3['cpf_cnpj']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Telefône</label><BR>
-										<input type="text" name="telefone" id="telefone" class="form-control f12" value="">
+										<input type="text" name="telefone" id="telefone" class="form-control f12" value="<?=$ven3['telefone']?>">
 									</div>
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Celular</label><BR>
-										<input type="text" name="celular" id="celular" class="form-control f12" value="">
+										<input type="text" name="celular" id="celular" class="form-control f12" value="<?=$ven3['celular']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Email</label><BR>
-										<input type="text" name="email" id="email" class="form-control f12" value="">
+										<input type="text" name="email" id="email" class="form-control f12" value="<?=$ven3['email']?>">
 									</div>
 								</div>
 							    
@@ -196,7 +196,7 @@ $est1=executeQuery("select * from estados","all");
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" >Rua</label><BR>
-										<input type="text" name="rua" id="rua" class="form-control f12" value="">
+										<input type="text" name="rua" id="rua" class="form-control f12" value="<?=$ven3['rua']?>">
 									</div>
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Nro</label><BR>
@@ -205,7 +205,7 @@ $est1=executeQuery("select * from estados","all");
 
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Complemento</label><BR>
-										<input type="text" name="comple" id="comple" class="form-control f12" value="<?=$ven3['nro']?>">
+										<input type="text" name="comple" id="comple" class="form-control f12" value="<?=$ven3['comple']?>">
 									</div>
 
 								</div>
@@ -213,11 +213,11 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Cidade</label><BR>
-										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=$ven3['cep']?>">
+										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=$ven3['cidade']?>">
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Bairro</label><BR>
-										<input type="text" name="bairro" id="bairro" class="form-control f12" value="">
+										<input type="text" name="bairro" id="bairro" class="form-control f12" value="<?=$ven3['bairro']?>">
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Estado</label><BR>
@@ -254,18 +254,19 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Nome de Usuário</label><BR>
-										<input type="text" name="usuario" id="usuario" class="form-control f12" value="">
+										<input type="text" name="usuario" id="usuario" class="form-control f12" value="<?=$ven3['usuario']?>">
 									</div>
 									<div class="col-md-4">
+									    <input type="hidden" id="altera_senha" name="altera_senha" value="0">
 										<label class="control-label text-right f12" >Senha <a href="javascript:gerar_senha();"><i class='fas fa-refresh'></i></a></label><BR>
-										<input type="text" name="senha" id="senha" class="form-control f12" value="" maxlength="30">
+										<input type="text" name="senha" id="senha" class="form-control f12" value="" maxlength="30" style='display:none;' readonly>
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Estado</label><BR>
-										<select class="form-control f12" id="estado">
-										   <option value='0'>Rascunho</option>
-										   <option value='1'>Pendente</option>
-										   <option value='9'>Ativo</option>
+										<select class="form-control f12" id="estado" name="estado">
+										   <option value='0' <? if ($ven3['estado']=="0") echo "selected ";?>>Rascunho</option>
+										   <option value='1' <? if ($ven3['estado']=="1") echo "selected ";?>>Pendente</option>
+										   <option value='9' <? if ($ven3['estado']=="9") echo "selected ";?>>Ativo</option>
 										</select>
 									</div>
 								</div>
@@ -286,7 +287,7 @@ $est1=executeQuery("select * from estados","all");
 									</div>
 									<div class="col-md-7">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Observações</label><BR>
-										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'></textarea>
+										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'><?=$ven3['obs']?></textarea>
 									</div>
 
 								</div>
@@ -302,18 +303,18 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-12">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Site</label><BR>
-										<input type="text" name="site" id="site" class="form-control f12" value="">
+										<input type="text" name="site" id="site" class="form-control f12" value="<?=$ven3['site']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Instagram</label><BR>
-										<input type="text" name="instagram" id="instagram" class="form-control f12" value="">
+										<input type="text" name="instagram" id="instagram" class="form-control f12" value="<?=$ven3['instagram']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Facebook</label><BR>
-										<input type="text" name="facebook" id="facebook" class="form-control f12" value="">
+										<input type="text" name="facebook" id="facebook" class="form-control f12" value="<?=$ven3['facebook']?>">
 									</div>
 								</div>
 	
@@ -346,11 +347,11 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Quem somos:</label><BR>
-										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'></textarea>
+										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'><?=$ven3['quem_somos']?></textarea>
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Serviços prestados:</label><BR>
-										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'></textarea>
+										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'><?=$ven3['servicos_prestados']?></textarea>
 									</div>
 							    </div>
 						   </div>
@@ -359,14 +360,14 @@ $est1=executeQuery("select * from estados","all");
 									<div class="row form-group" style='padding-top:8px;'> 
 										<div class="col-md-9">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Nome da empresa</label><BR>
-											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="">
+											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="<?=$ven3['nome_empresa']?>">
 										</div>
 										<div class="col-md-3">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo de site</label><BR>
 											<select name="modelo_site" id="modelo_site" class='form-control'>
-											    <option value="1">1</option>
-											    <option value="2">2</option>
-											    <option value="3">3</option>
+											    <option value="1" <? if ($ven3['modelo_site']=="1") echo "selected ";?>>1</option>
+											    <option value="2" <? if ($ven3['modelo_site']=="2") echo "selected ";?>>2</option>
+											    <option value="3" <? if ($ven3['modelo_site']=="3") echo "selected ";?>>3</option>
 											</select>
 										</div>
 
@@ -374,11 +375,11 @@ $est1=executeQuery("select * from estados","all");
 								    <div class="row form-group">
 										<div class="col-md-9">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Slogan</label><BR>
-											<input type="text" name="slogan" id="slogan" class="form-control f12" value="">
+											<input type="text" name="slogan" id="slogan" class="form-control f12" value="<?=$ven3['slogan']?>">
 										</div>
 										<div class="col-md-3">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
-											<input type="text" name="subdominio" id="subdominio" class="form-control f12" value="">
+											<input type="text" name="subdominio" id="subdominio" class="form-control f12" value="<?=$ven3['sudbominio']?>">
 										</div>
 									</div>
 						        </div>
@@ -421,7 +422,6 @@ $est1=executeQuery("select * from estados","all");
 												</div>
 										    </div>
 									    </form>
-										
 								   </div>
 							   </div>
 							   <div id="mensagem"></div>
@@ -468,30 +468,30 @@ $est1=executeQuery("select * from estados","all");
         <i class="fas fa-angle-up"></i>
     </a>
 
-		<!-- FastClick -->
-		<script src="../bootstrap/vendors/fastclick/lib/fastclick.js"></script>
-		<!-- NProgress -->
-		<script src="../bootstrap/vendors/nprogress/nprogress.js"></script>
-		<!-- iCheck -->
-		<script src="../bootstrap/vendors/iCheck/icheck.min.js"></script>
-		<!-- bootstrap-daterangepicker -->
-		<script src="../bootstrap/vendors/moment/min/moment.min.js"></script>
-		<script src="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-		<!-- bootstrap-datetimepicker -->    
-		<script src="../bootstrap/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-		<!-- Bootstrap Colorpicker -->
-		<script src="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
-		<!-- PNotify -->
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.js"></script>
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.buttons.js"></script>
-		<script src="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.js"></script>
-		<!-- Switchery -->
-		<script src="../bootstrap/vendors/switchery/dist/switchery.min.js"></script>
-		<!-- jquery.inputmask -->
-		<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-		
-		<!-- Custom Theme Scripts -->
-		<script src="../bootstrap/build/js/custom.min.js"></script>
+	<!-- FastClick -->
+	<script src="../bootstrap/vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="../bootstrap/vendors/nprogress/nprogress.js"></script>
+	<!-- iCheck -->
+	<script src="../bootstrap/vendors/iCheck/icheck.min.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script src="../bootstrap/vendors/moment/min/moment.min.js"></script>
+	<script src="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- bootstrap-datetimepicker -->    
+	<script src="../bootstrap/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Bootstrap Colorpicker -->
+	<script src="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+	<!-- PNotify -->
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.js"></script>
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.buttons.js"></script>
+	<script src="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+	<!-- Switchery -->
+	<script src="../bootstrap/vendors/switchery/dist/switchery.min.js"></script>
+	<!-- jquery.inputmask -->
+	<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+	
+	<!-- Custom Theme Scripts -->
+	<script src="../bootstrap/build/js/custom.min.js"></script>
 
 	<script src="../bootstrap/assets/plugins/shortenerUrl/jquery.urlshortener.js"></script>
 	<script src="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.min.js"></script>
@@ -507,12 +507,14 @@ $est1=executeQuery("select * from estados","all");
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	
-
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     
-    
+	 <!-- SweetAlert2 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+	
+	<!-- SweetAlert2 JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
