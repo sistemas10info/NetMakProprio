@@ -1,0 +1,61 @@
+
+@font-face {
+    font-family: "realestate-flaticon";
+    src: url("fonts/realestate-flaticon-1.eot");
+    src: url("fonts/realestate-flaticon-1.eot#iefix") format("embedded-opentype"), url("fonts/realestate-flaticon-1.woff") format("woff"), url("fonts/realestate-flaticon-1.ttf") format("truetype"), url("fonts/realestate-flaticon-1.svg") format("svg");
+    font-weight: normal;
+    font-style: normal
+}
+
+[class^="licon-"],
+[class*=" licon-"] {
+    font-family: realestate-flaticon;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    *margin-right: .3em
+}
+
+[class^="licon-"]:before,
+[class*=" licon-"]:before {
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none
+}
+
+.licon-banos:before {
+    content: "\f104"
+}
+
+.licon-superficie_cubierta:before,
+.licon-superficie_total:before {
+    content: "\f100"
+}
+
+.licon-antiguedad:before {
+    content: "\f106"
+}
+
+.licon-dormitorios:before {
+    content: "\f108"
+}
+
+.licon-ambientes:before {
+    content: "\f102"
+}
+
+.licon-ficha_precio:before {
+    content: "\f103"
+}
+
+.licon-medio-banos:before {
+    content: "\f105"
+}
+
+.licon-garages:before {
+    content: "\f107"
+}
+
+.licon-ficha_casa:before {
+    content: "\f101"
+}

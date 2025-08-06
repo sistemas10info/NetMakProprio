@@ -35,7 +35,7 @@ error_reporting(E_ALL);
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<? 
-			$arquivo = "../globais/admin/menu_lateral.php";
+			$arquivo = "../globais/admin/formatos/menu_lateral.php";
 			if (file_exists($arquivo)) {
 			    include($arquivo);
 			} else {
@@ -52,7 +52,7 @@ error_reporting(E_ALL);
             <!-- Main Content -->
             <div id="content">
 	 			<? 
-				$arquivo = "../globais/admin/menu_top.php";
+				$arquivo = "../globais/admin/formatos/menu_top.php";
 				if (file_exists($arquivo)) {
 				    include($arquivo);
 				} else {
