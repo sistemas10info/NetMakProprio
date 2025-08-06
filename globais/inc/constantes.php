@@ -13,6 +13,7 @@
 	define('MURAL_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/cw3/'.$Xsystem.'/files_mural/');
 	
 	define('FOLDER_UPLOAD', $_SERVER['DOCUMENT_ROOT'].'/cw3/'.$Xsystem.'/tmp_files/');
+	define('WEBSITE_UPLOAD', WEBSITE_ROOT.'/cw3/'.$Xsystem.'/tmp_files/');
 	
 	define('FOLDER_ROOT_ADMIN', $_SERVER['DOCUMENT_ROOT'].'/cw3/'.$Xsystem.'/painel_admin/');
 	define('FOLDER_ROOT_VENDEDOR', $_SERVER['DOCUMENT_ROOT'].'/cw3/'.$Xsystem.'/painel_vendedor/');

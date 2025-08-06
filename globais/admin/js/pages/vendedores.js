@@ -3,9 +3,25 @@
 			
 			//Para voltar o foco ao modal anterior
 			$(".modal-content").parent().parent().css("overflow", "auto");
-		
+
+			$('.summer_texto').summernote({
+				toolbar: [
+					// [groupName, [list of button]]
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['fontname', ['fontname']],
+					['fontsize', ['fontsize']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['height', ['height']],
+					['table', ['table']],
+				],
+				height: 300
+			});
 
 		});
+
+
+
 
 		// > Configuracoes iniciais da pagina **********************************************
 		
@@ -140,6 +156,8 @@ $('#formUploadLogo').on('submit', function (e) {
         return;
     }
 
+	$('#resultado_logo').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	
     $.ajax({
         url: '../globais/admin/json/vendedores/upload_logo.php', // PHP que irá processar
         type: 'POST',
@@ -151,11 +169,13 @@ $('#formUploadLogo').on('submit', function (e) {
 				response = JSON.parse(dataReturn);
 				mensagem = response.msg;
 				link = response.link;
+				imagem = response.imagem;
 			} catch (e) {
 				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 			}
 
 			console.log("Mensagem - Link : "+mensagem+" - "+link);
+			$('#resultado_logo').html(imagem);
 			
         },
         error: function () {

@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 			http_response_code(400);
 			$response['msg'] = 'Imagem formato inválido';
 			$response['link'] = "X";
+			$response['imagem']="X";
 			exit(json_encode($response));
         }
 
@@ -36,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
  			http_response_code(200);
 			$response['msg']="Arquivo enviado com sucesso...";
-			$response['link']=$pastaDestino . $nomeFinal;
+			$response['link']=WEBSITE_UPLOAD . $nomeFinal;
+			$response['imagem']="<img src='".$response['link']."' width='60px;'>";
 			exit(json_encode($response));
         } 
         else 
@@ -44,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             http_response_code(500);
 			$response['msg']="Erro 500...";
 			$response['link']="X";
+			$response['imagem']="X";
 			exit(json_encode($response));
         }
     } 

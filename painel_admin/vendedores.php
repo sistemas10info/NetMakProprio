@@ -6,6 +6,7 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }			
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +63,7 @@ if (file_exists($arquivo)) {
 		<link href="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 		
 		<!-- Custom Theme Style -->
-		<!-- <link href="../../build/css/custom.min.css" rel="stylesheet"> -->
+		<link href="../bootstrap/build/css/custom.min.css" rel="stylesheet">
 		
 		<!-- SELECT BOOTSTRAP -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
@@ -189,7 +190,7 @@ if (file_exists($arquivo)) {
 		<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
 		
 		<!-- Custom Theme Scripts -->
-		<script src="../../build/js/custom.min.js"></script>
+		<script src="../bootstrap/build/js/custom.min.js"></script>
 
 	<script src="../bootstrap/assets/plugins/shortenerUrl/jquery.urlshortener.js"></script>
 	<script src="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.min.js"></script>
@@ -200,8 +201,7 @@ if (file_exists($arquivo)) {
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
-	 <script src="../globais/admin/js/pages/vendedores.js">
-
+	<script src="../globais/admin/js/pages/vendedores.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -211,6 +211,8 @@ if (file_exists($arquivo)) {
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
+    
 
 
 </body>

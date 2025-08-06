@@ -37,6 +37,11 @@ $est1=executeQuery("select * from estados","all");
     <title>Painel Administrador</title>
 
     <!-- Custom fonts for this template-->
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -45,9 +50,54 @@ $est1=executeQuery("select * from estados","all");
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-	<!-- SELECT BOOTSTRAP -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    
+		<!-- Font Awesome -->
+		<link href="../bootstrap/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<!-- NProgress -->
+		<link href="../bootstrap/vendors/nprogress/nprogress.css" rel="stylesheet">
+		<!-- iCheck -->
+		<link href="../bootstrap/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+		<!-- bootstrap-daterangepicker -->
+		<link href="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+		<!-- bootstrap-datetimepicker -->
+		<link href="../bootstrap/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+		<!-- Bootstrap Colorpicker -->
+		<link href="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+		<!-- bootstrap-progressbar -->
+		<link href="../bootstrap/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+		<!-- JQVMap -->
+		<link href="../bootstrap/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+
+		<!-- Switchery -->
+		<link href="../bootstrap/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+
+		<link href="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.min.css" rel="stylesheet"> 
+		<link href="../bootstrap/assets/plugins/lightbox/css/lightbox.css" rel="stylesheet" />
+		<link href="../bootstrap/assets/plugins/summernote/summernote.css" rel="stylesheet">
+
+		<!-- Dropzone -->
+		<link href="../bootstrap/assets/plugins/dropzone/min/dropzone.min.css" rel="stylesheet" />
+
+		<!-- PNotify -->
+		<link href="../bootstrap/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+		<link href="../bootstrap/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+		<link href="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+		
+		<!-- Custom Theme Style -->
+		<link href="../bootstrap/build/css/custom.min.css" rel="stylesheet">
+		
+		<!-- SELECT BOOTSTRAP -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+	    <!-- Bootstrap core JavaScript-->
+	    <script src="vendor/jquery/jquery.min.js"></script>
+	    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	    <!-- Core plugin JavaScript-->
+	    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	    <!-- Custom scripts for all pages-->
+	    <script src="js/sb-admin-2.min.js"></script>
 
 </head>
 
@@ -207,15 +257,15 @@ $est1=executeQuery("select * from estados","all");
 										<input type="text" name="usuario" id="usuario" class="form-control f12" value="">
 									</div>
 									<div class="col-md-4">
-										<label class="control-label text-right f12" >Senha <a href="javascript:gerar_senha();"><i class='fas fa-close'></i></a></label><BR>
-										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control f12" value="" 
-													data-inputmask="'mask' : '999.999.999-99'" onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30">
+										<label class="control-label text-right f12" >Senha <a href="javascript:gerar_senha();"><i class='fas fa-refresh'></i></a></label><BR>
+										<input type="text" name="senha" id="senha" class="form-control f12" value="" maxlength="30">
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Estado</label><BR>
 										<select class="form-control f12" id="estado">
 										   <option value='0'>Rascunho</option>
-										   <option value='1'>Ativo</option>
+										   <option value='1'>Pendente</option>
+										   <option value='9'>Ativo</option>
 										</select>
 									</div>
 								</div>
@@ -286,47 +336,104 @@ $est1=executeQuery("select * from estados","all");
 					if (!empty($_GET['id']) or true)
 					{
 					?>
-	                    <div class='row card-body border-left-secondary shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
-							<div class='col-md-12 '>
+	                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
+							<div class='col-md-12'>
 							    <div style='padding:10px;'>
 								    <div class='text-center'>
 								    	<h3>Configuração do Site</h3>
 								    </div>
 							    </div>
-		
 								<div class="row form-group"> 
-									<form id="formUploadLogo" enctype="multipart/form-data" method="post">
-									    <input type='hidden' id="link_logo" value="">
-									    <div class='row'>
-											<div class="col-md-8">
-											    <div class="form-group">
-											      <label for="arquivo">Logomarca</label>
-											      <input type="file" name="logo" id="logo" class="form-control-file" required accept="image/*">
-											    </div>
-											</div>
-											<div class="col-md-2">	
-												<BR>
-												<button type="submit" class="btn btn-primary" >Enviar</button>
-											</div>
-									    </div>
-								    </form>
-									<div class="col-md-12">
-									  <form id="formUploadBanner" enctype="multipart/form-data" method="post">
-										    <div class="form-group">
-										      <label for="arquivo">Banner</label>
-										      <input type="file" name="banner" id="banner" class="form-control-file" required accept="image/*">
+									<div class="col-md-6">
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Quem somos:</label><BR>
+										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'></textarea>
+									</div>
+									<div class="col-md-6">
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Serviços prestados:</label><BR>
+										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'></textarea>
+									</div>
+							    </div>
+						   </div>
+						   <div class='row col-md-12'>
+						        <div class='col-md-6'>
+									<div class="row form-group" style='padding-top:8px;'> 
+										<div class="col-md-9">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Nome da empresa</label><BR>
+											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="">
+										</div>
+										<div class="col-md-3">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo de site</label><BR>
+											<select name="modelo_site" id="modelo_site" class='form-control'>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											</select>
+										</div>
+
+								    </div>
+								    <div class="row form-group">
+										<div class="col-md-9">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Slogan</label><BR>
+											<input type="text" name="slogan" id="slogan" class="form-control f12" value="">
+										</div>
+										<div class="col-md-3">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
+											<input type="text" name="subdominio" id="subdominio" class="form-control f12" value="">
+										</div>
+									</div>
+						        </div>
+						        <div class='col-md-6'>
+									<div class="row form-group"> 
+										<form id="formUploadLogo" enctype="multipart/form-data" method="post">
+										    <input type='hidden' id="link_logo" value="">
+										    <div class='row'>
+												<div class="col-md-6">
+												    <div class="form-group">
+												      <label for="arquivo" class='f16'>Logomarca</label>
+												      <input type="file" name="logo" id="logo" class="form-control-file" required accept="image/*">
+												    </div>
+												</div>
+												<div class="col-md-2">	
+													<BR>
+													<button type="submit" class="btn btn-primary" >Enviar</button>
+												</div>
+												<div class="col-md-4" id="resultado_logo" style='padding-top:25px;'>	
+												</div>
+	
 										    </div>
-										    <button type="submit" class="btn btn-primary" >Enviar</button>
-									  </form>									
+									    </form>
 									</div>
-									<div class="col-md-12">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Quem somos:</label><BR>
-										<textarea name="quem_somos" id="quem_somos" rows="5"></textarea>
-									</div>
-									<div id="mensagem"></div>
-								</div>
+									<div class="row form-group"> 
+										<form id="formUploadBanner" enctype="multipart/form-data" method="post">
+										    <input type='hidden' id="link_banner" value="">
+										    <div class='row'>
+												<div class="col-md-6">
+												    <div class="form-group">
+												      <label for="arquivo" class='f16'>Banner</label>
+												      <input type="file" name="banner" id="banner" class="form-control-file" required accept="image/*">
+												    </div>
+												</div>
+												<div class="col-md-2">	
+													<BR>
+													<button type="submit" class="btn btn-primary" >Enviar</button>
+												</div>
+												<div class="col-md-4" id="resultado_banner">	
+												</div>
+										    </div>
+									    </form>
+										
+								   </div>
+							   </div>
+							   <div id="mensagem"></div>
 							 </div>
+							 
 				        </div>
+
+						<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
+						  <a  class="btn btn-info btn-sm" href="javascript:salvar_site();">💾 SALVAR CONFIGURAÇÕES</a>&nbsp;
+						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='vendedores.php';">↩️ VOLTAR</button>&nbsp;
+						</div>
+				        
 				    <?
 				    }
 				    ?>	
@@ -361,24 +468,56 @@ $est1=executeQuery("select * from estados","all");
         <i class="fas fa-angle-up"></i>
     </a>
 
+		<!-- FastClick -->
+		<script src="../bootstrap/vendors/fastclick/lib/fastclick.js"></script>
+		<!-- NProgress -->
+		<script src="../bootstrap/vendors/nprogress/nprogress.js"></script>
+		<!-- iCheck -->
+		<script src="../bootstrap/vendors/iCheck/icheck.min.js"></script>
+		<!-- bootstrap-daterangepicker -->
+		<script src="../bootstrap/vendors/moment/min/moment.min.js"></script>
+		<script src="../bootstrap/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<!-- bootstrap-datetimepicker -->    
+		<script src="../bootstrap/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+		<!-- Bootstrap Colorpicker -->
+		<script src="../bootstrap/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+		<!-- PNotify -->
+		<script src="../bootstrap/vendors/pnotify/dist/pnotify.js"></script>
+		<script src="../bootstrap/vendors/pnotify/dist/pnotify.buttons.js"></script>
+		<script src="../bootstrap/vendors/pnotify/dist/pnotify.nonblock.js"></script>
+		<!-- Switchery -->
+		<script src="../bootstrap/vendors/switchery/dist/switchery.min.js"></script>
+		<!-- jquery.inputmask -->
+		<script src="../bootstrap/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+		
+		<!-- Custom Theme Scripts -->
+		<script src="../bootstrap/build/js/custom.min.js"></script>
 
+	<script src="../bootstrap/assets/plugins/shortenerUrl/jquery.urlshortener.js"></script>
+	<script src="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.min.js"></script>
+	<script src="../bootstrap/assets/plugins/bootgrid/jquery.bootgrid.fa.js" type="text/javascript"></script>
+	<script src="../bootstrap/assets/plugins/eModal/dist/eModal.js"></script>
+	<script src="../bootstrap/assets/plugins/jquery-maskmoney/jquery.maskMoney.min.js"></script>
+	<script src="../bootstrap/assets/plugins/lightbox/js/lightbox.min.js"></script>
+	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
+	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
+
+     <script src="../globais/admin/js/pages/vendedores.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+	
+
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+    
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-    <script src="../globais/admin/js/pages/vendedores.js">
     
-
 </body>
 
 </html>
 
-<script language=javascript>
-
-</script>
