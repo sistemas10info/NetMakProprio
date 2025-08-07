@@ -35,7 +35,7 @@ $est1=executeQuery("select * from estados","all");
     <meta name="author" content="">
 
     <title>Painel Administrador</title>
-
+    
     <!-- Custom fonts for this template-->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -334,7 +334,7 @@ $est1=executeQuery("select * from estados","all");
 					</form>
 					<HR>
 					<?
-					if (!empty($_GET['id']) or true)
+					if (!empty($_GET['id']))
 					{
 					?>
 	                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
@@ -501,7 +501,7 @@ $est1=executeQuery("select * from estados","all");
 	<script src="../bootstrap/assets/plugins/lightbox/js/lightbox.min.js"></script>
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
-
+	
      <script src="../globais/admin/js/pages/vendedores.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

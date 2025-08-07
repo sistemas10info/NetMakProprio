@@ -39,6 +39,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 			$response['msg']="Arquivo enviado com sucesso...";
 			$response['link']=WEBSITE_UPLOAD . $nomeFinal;
 			$response['imagem']="<img src='".$response['link']."' width='60px;'>";
+
+			$update=executeQuery("update vendedores 
+														set
+															 link_banner='".$response['link']."' 
+													    where 
+													    	id_key='".$_POST['id']."' limit 1");
+			if(@$update['error'])
+			{
+				http_response_code(400);
+				$response['msg'] = 'Erro ao update registro: ' . @$update['error'];
+				exit(json_encode($response));
+			}
+
 			exit(json_encode($response));
         } 
         else 

@@ -4,22 +4,67 @@
 			//Para voltar o foco ao modal anterior
 			$(".modal-content").parent().parent().css("overflow", "auto");
 
-			$('.summer_texto').summernote({
-				toolbar: [
-					// [groupName, [list of button]]
-					['style', ['bold', 'italic', 'underline', 'clear']],
-					['fontname', ['fontname']],
-					['fontsize', ['fontsize']],
-					['color', ['color']],
-					['para', ['ul', 'ol', 'paragraph']],
-					['height', ['height']],
-					['table', ['table']],
-				],
-				height: 300
-			});
+			  $('#quem_somos').summernote({
+			    height: 200,
+			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
+			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
+			    toolbar: [
+			      ['style', ['style']],
+			      ['font', ['bold', 'italic', 'underline', 'clear']],
+			      ['fontsize', ['fontsize']],
+			      ['fontname', ['fontname']],
+			      ['color', ['color']],
+			      ['para', ['ul', 'ol', 'paragraph']],
+			      ['height', ['height']],
+			      ['insert', ['picture', 'link', 'video']],
+			      ['view', ['fullscreen', 'codeview', 'help']]
+			    ],
+			    callbacks: {
+			      onImageUpload: function(files) {
+			        // Aqui você pode enviar as imagens via AJAX para o servidor
+			        // ou exibir diretamente (apenas para testes locais)
+			        for (let i = 0; i < files.length; i++) {
+			          const reader = new FileReader();
+			          reader.onload = function(e) {
+			            $('#quem_somos').summernote('insertImage', e.target.result, 'imagem');
+			          };
+			          reader.readAsDataURL(files[i]);
+			        }
+			      }
+			    }
+			  });
+
+			  $('#servicos_prestados').summernote({
+			    height: 200,
+			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
+			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
+			    toolbar: [
+			      ['style', ['style']],
+			      ['font', ['bold', 'italic', 'underline', 'clear']],
+			      ['fontsize', ['fontsize']],
+			      ['fontname', ['fontname']],
+			      ['color', ['color']],
+			      ['para', ['ul', 'ol', 'paragraph']],
+			      ['height', ['height']],
+			      ['insert', ['picture', 'link', 'video']],
+			      ['view', ['fullscreen', 'codeview', 'help']]
+			    ],
+			    callbacks: {
+			      onImageUpload: function(files) {
+			        // Aqui você pode enviar as imagens via AJAX para o servidor
+			        // ou exibir diretamente (apenas para testes locais)
+			        for (let i = 0; i < files.length; i++) {
+			          const reader = new FileReader();
+			          reader.onload = function(e) {
+			            $('#servicos_prestados').summernote('insertImage', e.target.result, 'imagem');
+			          };
+			          reader.readAsDataURL(files[i]);
+			        }
+			      }
+			    }
+			  });
 
 		});
-
 
 		// > Configuracoes iniciais da pagina **********************************************
 		
@@ -148,6 +193,8 @@ $('#formUploadLogo').on('submit', function (e) {
     var form = document.getElementById('formUploadLogo');
     var formData = new FormData(form);
 
+	formData.append('id', $('#id').val());
+	
     var file = $('#logo')[0].files[0];
     if (!file || !file.type.startsWith('image/')) {
         alert('Por favor, selecione uma imagem válida.');
@@ -188,6 +235,8 @@ $('#formUploadBanner').on('submit', function (e) {
 
     var form = document.getElementById('formUploadBanner');
     var formData = new FormData(form);
+    
+    formData.append('id', $('#id').val());
 
     var file = $('#banner')[0].files[0];
     if (!file || !file.type.startsWith('image/')) {
