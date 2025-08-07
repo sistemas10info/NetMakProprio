@@ -112,32 +112,23 @@ if (file_exists($arquivo)) {
 				    echo "Arquivo não encontrado: $arquivo";
 				}			
 				?>
-				
 				<!-- conteudo -->
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
-				    <div class='row' style='padding:10px;'>
+				    <div class='row' style='padding:5px;'>
 					    <div class='col-md-4'>
 					    	<h3>Vendedores</h3>
 					    </div>
-					    <div class='col-md-8 text-right'>
-							<a href="vendedores_edit.php" class="btn btn-primary btn-icon-split">
-							    <span class="icon text-white-50">
-							        +
-							    </span>
-							    <span class="text">Adicionar</span>
-							</a>				    
-					    </div>
 				    </div>
-					<table class="table-light table table-bordered table-striped table-hover bg-gray-500" id="table_veiculos_novos" >
-						
-						<tr class='f16 text-gray-700 bg-gray-400'>
-							<td class='text-center' width='10%'>Tumb</td>
-							<td width='40%'>Nome</td>
-							<td width='15%'>CPF/CNPJ</td>
-							<td width='30%'>Estado/Cidade</td>
-							<td width='5%'>Anuncios</td>
-						</tr>					
-						
+					<table class="table-light table table-bordered table-striped table-hover f12" id="table-vendedores" >
+						<thead>
+							<tr bgcolor='#D3D3D3'>
+								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
+								<th data-column-id="nome" data-align="left" data-header-align="left" data-width="50%;">Nome</th>
+								<th data-column-id="cpf_cnpj" data-align="center" data-header-align="center" data-width="20%;">CNPJ</th>
+								<th data-column-id="estado_cidade" data-align="center" data-header-align="center" data-width="30%;">Estado/Cidade</th>
+								<th data-column-id="estoque" data-align="right" data-header-align="right"  data-width="10%;">Anuncios</th>
+							</tr>
+						</thead>
 					</table>
 				</div>
 				

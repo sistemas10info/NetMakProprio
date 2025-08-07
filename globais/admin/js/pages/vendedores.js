@@ -85,9 +85,9 @@
 										}
 				},
 				ajax: true,
-				url: "../json/funcionarios/list.php",
+				url: "../globais/admin/json/vendedores/list.php",
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<button class=\"btn btn-primary\" id=\"btnAdicionar\">+</button></div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='vendedores_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
 				},
 				columnSelection : false,
 				ajaxSettings: {
@@ -368,3 +368,144 @@ $('#senha').show();
 $('#senha').val(resultado);
 
 }
+
+function salvar_site()
+{
+
+   Swal.fire({
+      title: 'Deseja salvar as configurações do site ?',
+      text: "",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) 
+      {
+ 		    $.ajax({
+	        url: '../globais/admin/json/vendedores/post_site.php', // PHP que irá processar
+	        type: 'POST',
+	        data: {
+	        			"id" : $('#id').val(),
+	        			"quem_somos" : $('#quem_somos').val(),
+	        			"servicos_prestados" : $('#servicos_prestados').val(),
+	        			"subdominio" : $('#subdominio').val(),
+	        			"nome_empresa" : $('#nome_empresa').val(),
+	        			"slogan" : $('#slogan').val(),
+	        			"modelo_site" : $('#modelo_site').val()
+	        },
+	        success: function (dataReturn) {
+				try {
+						response = JSON.parse(dataReturn);
+						mensagem = response.msg;
+						link = response.link;
+						imagem = response.imagem;
+				} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+				}
+	
+				window.location="vendedores_edit.php?id="+response.id;
+							
+	        },
+	        error: function (dataReturn) {
+	        
+					try {
+						response = JSON.parse(dataReturn.responseText);
+						mensagem = response.msg;
+					} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+					}
+	        
+			        Swal.fire(
+			          'Verifique as informações..',
+			          mensagem,
+			          'info'
+			        );
+	        }
+	        
+	      });
+
+        // Aqui você pode chamar uma função, enviar AJAX, etc.
+        // Exemplo: apagarRegistro();
+      } else {
+        // Ação se cancelar (opcional)
+        Swal.fire(
+          'Cancelado',
+          'Nenhuma alteração foi feita.',
+          'info'
+        );
+      }
+    });
+
+
+}
+
+
+$('#botao_lixeira').on('click', function(e) {
+
+	e.preventDefault();
+
+   Swal.fire({
+      title: 'Está seguro de enviar o vendedor para a lixeira ?',
+      text: "",
+      icon: 'danger',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) 
+      {
+ 		    $.ajax({
+	        url: '../globais/admin/json/vendedores/mover_vendedor_lixeira.php', // PHP que irá processar
+	        type: 'POST',
+	        data: {
+	        			"id" : $('#id').val()
+	        },
+	        success: function (dataReturn) {
+				try {
+						response = JSON.parse(dataReturn);
+						mensagem = response.msg;
+						link = response.link;
+						imagem = response.imagem;
+				} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+				}
+	
+				window.location="vendedores.php";
+							
+	        },
+	        error: function (dataReturn) {
+	        
+					try {
+						response = JSON.parse(dataReturn.responseText);
+						mensagem = response.msg;
+					} catch (e) {
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+					}
+	        
+			        Swal.fire(
+			          'Verifique as informações..',
+			          mensagem,
+			          'info'
+			        );
+	        }
+	        
+	      });
+
+        // Aqui você pode chamar uma função, enviar AJAX, etc.
+        // Exemplo: apagarRegistro();
+      } else {
+        // Ação se cancelar (opcional)
+        Swal.fire(
+          'Cancelado',
+          'Nenhuma alteração foi feita.',
+          'info'
+        );
+      }
+    });
+
+});

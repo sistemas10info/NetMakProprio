@@ -328,7 +328,7 @@ $est1=executeQuery("select * from estados","all");
 						  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
 						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='vendedores.php';">↩️ VOLTAR</button>&nbsp;
 						  <?
-						     if (!empty($_GET['id'])) echo '<button type="button" class="btn btn-danger btn-sm">🗑️ APAGAR</button>';
+						     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
 						   ?>
 						</div>
 					</form>
@@ -379,7 +379,7 @@ $est1=executeQuery("select * from estados","all");
 										</div>
 										<div class="col-md-3">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
-											<input type="text" name="subdominio" id="subdominio" class="form-control f12" value="<?=$ven3['sudbominio']?>">
+											<input type="text" name="subdominio" id="subdominio" class="form-control f12" autocomplete="off" value="<?=$ven3['subdominio']?>">
 										</div>
 									</div>
 						        </div>
