@@ -60,8 +60,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tabelas:</h6>
-                        <a class="collapse-item" href="categorias.php">Categorías</a>
-                        <a class="collapse-item" href="marcas_modelos.php">Marcas/Modelos</a>
+                        <a class="collapse-item" href="categorias.php">Categorías/Marcas</a>
                         <a class="collapse-item" href="usuarios.php">Usuários</a>
                     </div>
                 </div>
