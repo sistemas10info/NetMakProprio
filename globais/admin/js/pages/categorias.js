@@ -163,8 +163,8 @@ function apagar_registro(Xid_key,Xtipo)
       text: "Você não poderá revertir isso",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: 'blue',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: 'red',
+      cancelButtonColor: 'gray',
       confirmButtonText: 'Sim',
       cancelButtonText: 'Cancelar'
     }).then((result) => {

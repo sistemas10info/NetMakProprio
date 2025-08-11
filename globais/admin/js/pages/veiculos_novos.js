@@ -4,7 +4,7 @@
 			//Para voltar o foco ao modal anterior
 			$(".modal-content").parent().parent().css("overflow", "auto");
 
-			  $('#quem_somos').summernote({
+			  $('#descrip').summernote({
 			    height: 200,
 			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
 			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
@@ -34,54 +34,14 @@
 			    }
 			  });
 
-			  $('#servicos_prestados').summernote({
-			    height: 200,
-			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
-			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
-			    toolbar: [
-			      ['style', ['style']],
-			      ['font', ['bold', 'italic', 'underline', 'clear']],
-			      ['fontsize', ['fontsize']],
-			      ['fontname', ['fontname']],
-			      ['color', ['color']],
-			      ['para', ['ul', 'ol', 'paragraph']],
-			      ['height', ['height']],
-			      ['insert', ['picture', 'link', 'video']],
-			      ['view', ['fullscreen', 'codeview', 'help']]
-			    ],
-			    callbacks: {
-			      onImageUpload: function(files) {
-			        // Aqui você pode enviar as imagens via AJAX para o servidor
-			        // ou exibir diretamente (apenas para testes locais)
-			        for (let i = 0; i < files.length; i++) {
-			          const reader = new FileReader();
-			          reader.onload = function(e) {
-			            $('#servicos_prestados').summernote('insertImage', e.target.result, 'imagem');
-			          };
-			          reader.readAsDataURL(files[i]);
-			        }
-			      }
-			    }
-			  });
-			  
-			$(".maskCelular").inputmask({
-				mask: ['(99) 9999-9999', '(99) 99999-9999'],
-				keepStatic: true
-			});			  
-
-			$(".maskCEP").inputmask({
-				mask: ['99999-999'],
-				keepStatic: true
-			});			  
-
 		});
 
 		// > Configuracoes iniciais da pagina **********************************************
 		
 		// < configuracoes do Bootgrid *****************************************************
-		if ($("#table-vendedores").length)
+		if ($("#table-veiculos-novos").length)
 		{
-			var grid = $("#table-vendedores").bootgrid({
+			var grid = $("#table-veiculos-novos").bootgrid({
 				labels: {
 					noResults: "Não foi encontrado nenhum resultado!",
 					infos: "Mostrando {{ctx.start}} a {{ctx.end}} de {{ctx.total}} registros",
@@ -95,7 +55,7 @@
 										}
 				},
 				ajax: true,
-				url: "../globais/admin/json/vendedores/list.php",
+				url: "../globais/admin/json/veiculos_novos/list.php",
 				templates: {
 					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='vendedores_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
 				},
@@ -117,7 +77,7 @@
 				grid.find(".command-map").on("click", function(e)
 				{
 					//$('#id_key').val($(this).data("row-id"));
-					window.location="vendedores_edit.php?id="+($(this).data("row-id"));
+					window.location="veiculos_novos_edit.php?id="+($(this).data("row-id"));
 					//$('#ModalEditar').modal('show');
 	
 				}).end().find(".command-edit-planilhas").on("click", function(e)
@@ -134,67 +94,7 @@
 		$('[data-toggle="tooltip"]').tooltip();
 
 
-// < Submit do formulário editar ***************************************************************
-form = $('form[name=formGrupo]');
-btnEnviar = $('button[name=btnEnviarGrupo]');
 
-btnEnviar.click(function(e) {
-	formData = form.serializeArray();
-	//console.log(formData);
-		$.ajax({
-			url: WEBSITE + form.attr('action'),
-			data: formData,
-			method: 'POST',
-			beforeSend: function() {
-				btnEnviar.attr("disabled", "disabled");
-				btnEnviar.html("<i class='fa fa-spinner fa-spin fa-fw'></i> Aguarde...")
-			}
-		}).success(function(dataReturn) {
-
-			try {
-				response = JSON.parse(dataReturn);
-				mensagem = response.msg;
-				id_key = response.id_key;
-			} catch (e) {
-				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-			}
-
-			swal({
-				title: 'Sucesso!',
-				text: mensagem,
-				type: 'success',
-				showConfirmButton: false,
-				timer: 1500
-			})
-			btnEnviar.removeAttr("disabled");
-			btnEnviar.html("&nbsp;&nbsp;Salvar&nbsp;&nbsp;");
-			$('#ModalEditar').modal("hide");
-			//Carrega lista página
-			$('#table-grupos').bootgrid('reload');
-		}).fail(function(dataReturn) {
-
-			try {
-				response = JSON.parse(dataReturn.responseText);
-				mensagem = response.msg;
-			} catch (e) {
-				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-			}
-
-			swal({
-						position: 'top-right',
-						title: 'Ops, tivemos um problema',
-						text: mensagem,
-						type: 'warning',
-						showConfirmButton: false,
-						timer: 1500
-			})
-
-			btnEnviar.removeAttr("disabled");
-			btnEnviar.html("&nbsp;&nbsp;Salvar&nbsp;&nbsp;");
-
-		});
-});
-// > Submit do formulário editar ***************************************************************
 
 $('#formUploadLogo').on('submit', function (e) {
 

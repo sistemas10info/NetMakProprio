@@ -14,7 +14,10 @@ if (!isset($_GET['id']))
 }
 else
 {
-   $ven3=executeQuery("select * from vendedores where id_key='".$_GET['id']."' limit 1");
+   $ven3=executeQuery("select * from vendedores 
+   															where 
+   													  id_key='".$_GET['id']."' 
+   													  		limit 1");
    $Xtitulo="Editar vendedor";
 }
 
@@ -159,18 +162,18 @@ $est1=executeQuery("select * from estados","all");
 									<div class="col-md-3">
 										<label class="control-label text-right f12" >CNPJ</label><BR>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control f12" value="" 
-													data-inputmask="'mask' : '999.999.999-99'" onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=$ven3['cpf_cnpj']?>">
+													onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=$ven3['cpf_cnpj']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Telefône</label><BR>
-										<input type="text" name="telefone" id="telefone" class="form-control f12" value="<?=$ven3['telefone']?>">
+										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=$ven3['telefone']?>">
 									</div>
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Celular</label><BR>
-										<input type="text" name="celular" id="celular" class="form-control f12" value="<?=$ven3['celular']?>">
+										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=$ven3['celular']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Email</label><BR>
@@ -192,7 +195,7 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">CEP</label><BR>
-										<input type="text" name="cep" id="cep" class="form-control f12" value="<?=$ven3['cep']?>">
+										<input type="text" name="cep" id="cep" class="form-control f12 maskCEP" value="<?=$ven3['cep']?>" onblur="javascript:busca_cep();">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" >Rua</label><BR>
