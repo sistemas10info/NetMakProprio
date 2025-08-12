@@ -3,6 +3,8 @@
 			
 			//Para voltar o foco ao modal anterior
 			$(".modal-content").parent().parent().css("overflow", "auto");
+			
+			$('.maskMoneyBR').maskMoney();
 
 			  $('#descrip').summernote({
 			    height: 200,
@@ -33,9 +35,11 @@
 			      }
 			    }
 			  });
+			  
+			  
 
 		});
-
+		
 		// > Configuracoes iniciais da pagina **********************************************
 		
 		// < configuracoes do Bootgrid *****************************************************
@@ -51,13 +55,13 @@
 				},
 				formatters: {
 					"commands": function(column, row){
-						return"<img class=\"command-edit-planilhas\" data-row-id=\"" +  row.id + "\" data-title=\"Planilhas\" id=\"btnPlanilhas\" src=\"../img/checklist-icon.png\" width=\"30px\" height=\"30px\" title=\"Planilhas de EPI e ITENS emprestados\" style=\"cursor: pointer;\">" 
+						return"<img class=\"command-edit-planilhas\" data-row-id=\"" +  row.id + "\" data-title=\"Planilhas\" id=\"btnPlanilhas\" src=\"../img/checklist-icon.png\" width=\"30px\" height=\"30px\" title=\"Planilhas de Veículos\" style=\"cursor: pointer;\">" 
 										}
 				},
 				ajax: true,
 				url: "../globais/admin/json/veiculos_novos/list.php",
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='vendedores_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='veiculos_novos_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
 				},
 				columnSelection : false,
 				ajaxSettings: {
@@ -79,13 +83,6 @@
 					//$('#id_key').val($(this).data("row-id"));
 					window.location="veiculos_novos_edit.php?id="+($(this).data("row-id"));
 					//$('#ModalEditar').modal('show');
-	
-				}).end().find(".command-edit-planilhas").on("click", function(e)
-				{
-					//location.href="administradoras/edit.php?id_key="+$(this).data("row-id");
-					//$('#id_key').val($(this).data("row-id"));
-					editar_planilhas($(this).data("row-id"));
-					//$('#ModalEditar').modal('show');
 				});
 			});
 			// > configuracoes do Bootgrid *****************************************************
@@ -96,25 +93,34 @@
 
 
 
-$('#formUploadLogo').on('submit', function (e) {
+// $('#formUploadImagemSeo').on('submit', function (e) {
+
+$('#btnUploadImagemSeo').on('click', function (e) {
 
     e.preventDefault(); // evita o envio normal do formulário
 
-    var form = document.getElementById('formUploadLogo');
-    var formData = new FormData(form);
-
-	formData.append('id', $('#id').val());
+    // var form = document.getElementById('formUploadImagemSeo');
+    // var formData = new FormData(form);
+	var formData = new FormData();
 	
-    var file = $('#logo')[0].files[0];
+	// Adiciona o arquivo do input file (id="arquivo")
+	var arquivo = $('#link_seo')[0].files[0]; 
+	formData.append('link_seo', arquivo);
+	
+	// Adiciona o campo hidden (id="idRegistro")
+	formData.append('id', $('#id').val());
+	formData.append('titulo', $('#titulo').val());
+	
+    var file = $('#link_seo')[0].files[0];
     if (!file || !file.type.startsWith('image/')) {
         alert('Por favor, selecione uma imagem válida.');
         return;
     }
 
-	$('#resultado_logo').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	$('#resultado_link_seo').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
 	
     $.ajax({
-        url: '../globais/admin/json/vendedores/upload_logo.php', // PHP que irá processar
+        url: '../globais/admin/json/veiculos_novos/upload_seo.php', // PHP que irá processar
         type: 'POST',
         data: formData,
         processData: false,
@@ -130,11 +136,11 @@ $('#formUploadLogo').on('submit', function (e) {
 			}
 
 			console.log("Mensagem - Link : "+mensagem+" - "+link);
-			$('#resultado_logo').html(imagem);
+			$('#resultado_link_seo').html(imagem);
 			
         },
         error: function () {
-            $('#resultado').html('<div class="alert alert-danger">Erro no upload.</div>');
+            $('#resultado_link_seo').html('<div class="alert alert-danger">Erro no upload.</div>');
         }
     });
 });

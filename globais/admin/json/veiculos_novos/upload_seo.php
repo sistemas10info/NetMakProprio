@@ -10,10 +10,10 @@ if (file_exists($arquivo)) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
-    if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) 
+    if (isset($_FILES['link_seo']) && $_FILES['link_seo']['error'] === UPLOAD_ERR_OK) 
     {
-        $nomeTemp = $_FILES['logo']['tmp_name'];
-        $nomeFinal = "Logo_".buildIdKey(30).".".pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
+        $nomeTemp = $_FILES['link_seo']['tmp_name'];
+        $nomeFinal = "ImgSeo_".buildIdKey(30).".".pathinfo($_FILES['link_seo']['name'], PATHINFO_EXTENSION);
         // basename($_FILES['logo']['name']);
         $tipoMime = mime_content_type($nomeTemp);
 
@@ -35,14 +35,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
         if (move_uploaded_file($nomeTemp, $pastaDestino . $nomeFinal)) 
         {
+
+			// senão existir o ID do veiculo carrego novo.
+			if (empty($_POST['id']))
+			{
+				$_POST['id']=buildIdKey(30);
+				$insert = executeQuery("
+													INSERT INTO
+														veiculos
+													SET
+														id_key        	= '".$_POST['id']."',
+														titulo				= '".$_POST['titulo']."',
+														tipo='1'
+													");
+				
+				if(@$insert['error'])
+				{
+					http_response_code(400);
+					$response['msg'] = 'Erro ao inserir registro: ' . $insert['error'];
+					exit(json_encode($response));
+				}
+			
+			}
+
+        
  			http_response_code(200);
 			$response['msg']="Arquivo enviado com sucesso...";
 			$response['link']=WEBSITE_UPLOAD . $nomeFinal;
 			$response['imagem']="<img src='".$response['link']."' width='60px;'>";
 			
-			$update=executeQuery("update vendedores 
+			$update=executeQuery("update veiculos 
 														set
-															 link_logo='".$response['link']."' 
+															 link_seo='".$response['link']."' 
 													    where 
 													    	id_key='".$_POST['id']."' limit 1");
 			if(@$update['error'])
