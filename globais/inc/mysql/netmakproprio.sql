@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 11/08/2025 às 16:23
+-- Tempo de geração: 12/08/2025 às 13:06
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -193,11 +193,19 @@ CREATE TABLE `veiculos` (
   `id_key_marca` varchar(30) DEFAULT NULL,
   `id_key_modelo` varchar(30) DEFAULT NULL,
   `seo` longtext DEFAULT NULL,
-  `image_seo` varchar(256) DEFAULT NULL,
-  `comic` double(12,2) NOT NULL,
+  `link_seo` varchar(256) DEFAULT NULL,
+  `comic` double(12,2) DEFAULT NULL,
   `comic_fixa` varchar(1) NOT NULL DEFAULT 'N',
-  `apagado` int(1) NOT NULL DEFAULT 0 COMMENT '0=ativo | 1=apagado'
+  `apagado` int(1) NOT NULL DEFAULT 0 COMMENT '0=ativo | 1=apagado',
+  `estado` varchar(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `veiculos`
+--
+
+INSERT INTO `veiculos` (`interno`, `id_key`, `titulo`, `descrip`, `tipo`, `id_key_vendedor`, `preco`, `id_key_categoria`, `id_key_marca`, `id_key_modelo`, `seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`) VALUES
+(3, 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', 'Novo veículo', NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_Q8XASQERRZ2R1Q5RR1JOHXNO52WS9R.png', NULL, 'N', 0, '0');
 
 -- --------------------------------------------------------
 
@@ -258,7 +266,9 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`interno`, `id_key`, `nome`, `endereco`, `cep`, `email`, `telefone`, `celular`, `obs`, `nro`, `comple`, `cpf_cnpj`, `facebook`, `site`, `rg`, `razao_social`, `bairro`, `cidade`, `senha_acesso`, `codigo_int`, `fnac`, `uf`, `lat`, `longi`, `estado`, `comic`, `usuario`, `instagram`, `logo`, `capa`, `banner`, `foto`, `id_key_categorias`, `quem_somos`, `servicos_prestados`, `nome_empresa`, `slogan`, `modelo_site`, `rua`, `senha`, `altera_senha`, `link_logo`, `link_banner`, `subdominio`, `apagado`) VALUES
-(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', '', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', '', '', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 0);
+(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', '', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', '', '', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 0),
+(228, 'BP4RNBCCTSRVBBK3Q03TG4FH7UCBDS', NULL, NULL, '', '', '', '', '', '', '', '', '', '', NULL, 'Novo veículo', '', '', NULL, NULL, NULL, '', NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', '', 0, NULL, NULL, NULL, 0),
+(229, 'TVCOIK1E5JZUC52GUKLSYAE2TXTFGU', NULL, NULL, '', '', '', '', '', '', '', '', '', '', NULL, 'Novo veículo', '', '', NULL, NULL, NULL, '', NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', '', 0, NULL, NULL, NULL, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -363,13 +373,13 @@ ALTER TABLE `modelos`
 -- AUTO_INCREMENT de tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  MODIFY `interno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
