@@ -7,7 +7,7 @@
 			$('.maskMoneyBR').maskMoney();
 
 			  $('#descrip').summernote({
-			    height: 200,
+			    height: 300,
 			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
 			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
 			    toolbar: [
@@ -35,6 +35,55 @@
 			      }
 			    }
 			  });
+			  
+
+			$('#id_key_categoria').on('change', function() {
+			    var Xid_key_categoria = $(this).val();
+			
+			    if (Xid_key_categoria !== "--") {
+			        $.ajax({
+			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_marcas.php",
+			            type: 'POST',
+			            data: { 'id_key_categoria': Xid_key_categoria },
+			            dataType: 'json',
+			            success: function(response) {
+			            	console.log(response.marcas);
+			                $('#id_key_marca').find('option').not(':first').remove();
+			                $.each(response.marcas, function(index, marca) {
+			                    $('#id_key_marca').append('<option value="' + marca.id_key + '">' + marca.nome + '</option>');
+			                });
+			            },
+			            error: function() {
+			                alert('Erro ao carregar marcas.');
+			            }
+			        });
+			    } 
+			});
+
+			$('#id_key_marca').on('change', function() {
+			    var Xid_key_marca = $(this).val();
+			
+			    if (Xid_key_marca !== "--") {
+			        $.ajax({
+			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_modelos.php",
+			            type: 'POST',
+			            data: { 'id_key_categoria': $('#id_key_categoria').val(),
+			            		   'id_key_marca' : Xid_key_marca },
+			            dataType: 'json',
+			            success: function(response) {
+			            	console.log(response.modelos);
+			                $('#id_key_modelo').find('option').not(':first').remove();
+			                $.each(response.modelos, function(index, modelo) {
+			                    $('#id_key_modelo').append('<option value="' + modelo.id_key + '">' + modelo.nome + ' ('+modelo.anos+')</option>');
+			                });
+			            },
+			            error: function() {
+			                alert('Erro ao carregar modelos.');
+			            }
+			        });
+			    } 
+			});
+			  
 			  
 			  
 
@@ -145,50 +194,6 @@ $('#btnUploadImagemSeo').on('click', function (e) {
     });
 });
 
-$('#formUploadBanner').on('submit', function (e) {
-
-    e.preventDefault(); // evita o envio normal do formulário
-
-    var form = document.getElementById('formUploadBanner');
-    var formData = new FormData(form);
-    
-    formData.append('id', $('#id').val());
-
-    var file = $('#banner')[0].files[0];
-    if (!file || !file.type.startsWith('image/')) {
-        alert('Por favor, selecione uma imagem válida.');
-        return;
-    }
-
-	$('#resultado_baner').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
-	
-    $.ajax({
-        url: '../globais/admin/json/vendedores/upload_banner.php', // PHP que irá processar
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (dataReturn) {
-			try {
-				response = JSON.parse(dataReturn);
-				mensagem = response.msg;
-				link = response.link;
-				imagem = response.imagem;
-			} catch (e) {
-				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-			}
-
-			console.log("Mensagem - Link : "+mensagem+" - "+link);
-			$('#resultado_banner').html(imagem);
-			
-        },
-        error: function () {
-            $('#resultado').html('<div class="alert alert-danger">Erro no upload.</div>');
-        }
-    });
-});
-
-
 $('#FormVendedor').on('submit', function (e) {
 
     e.preventDefault(); // evita o envio normal do formulário
@@ -270,243 +275,87 @@ $('#FormVendedor').on('submit', function (e) {
 });
 
 
-function gerar_senha()
-{
+$('#btnUploadImagemSite').on('click', function (e) {
 
-$('#altera_senha').val(1);
-const letras = 'abcdefghijklmnopqrstuvwxyz';
-const numeros = '0123456789';
-let resultado = '';
+    e.preventDefault(); // evita o envio normal do formulário
 
-// Gerar 4 letras minúsculas
-for (let i = 0; i < 4; i++) {
-resultado += letras.charAt(Math.floor(Math.random() * letras.length));
-}
-
-// Gerar 4 números
-for (let i = 0; i < 4; i++) {
-resultado += numeros.charAt(Math.floor(Math.random() * numeros.length));
-}
-
-$('#senha').show();
-$('#senha').val(resultado);
-
-}
-
-function salvar_site()
-{
-
-   Swal.fire({
-      title: 'Deseja salvar as configurações do site ?',
-      text: "",
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: 'blue',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) 
-      {
- 		    $.ajax({
-	        url: '../globais/admin/json/vendedores/post_site.php', // PHP que irá processar
-	        type: 'POST',
-	        data: {
-	        			"id" : $('#id').val(),
-	        			"quem_somos" : $('#quem_somos').val(),
-	        			"servicos_prestados" : $('#servicos_prestados').val(),
-	        			"subdominio" : $('#subdominio').val(),
-	        			"nome_empresa" : $('#nome_empresa').val(),
-	        			"slogan" : $('#slogan').val(),
-	        			"modelo_site" : $('#modelo_site').val()
-	        },
-	        success: function (dataReturn) {
-				try {
-						response = JSON.parse(dataReturn);
-						mensagem = response.msg;
-						link = response.link;
-						imagem = response.imagem;
-				} catch (e) {
-						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-				}
+    // var form = document.getElementById('formUploadImagemSeo');
+    // var formData = new FormData(form);
+	var formData = new FormData();
 	
-				Swal.close();
-				
-		        Swal.fire(
-		          'Dados do site atualizados com sucesso..',
-		          '',
-		          'info'
-		        );
-
-				// window.location="vendedores_edit.php?id="+response.id;
-							
-	        },
-	        error: function (dataReturn) {
-	        
-					try {
-						response = JSON.parse(dataReturn.responseText);
-						mensagem = response.msg;
-					} catch (e) {
-						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-					}
-	        
-			        Swal.fire(
-			          'Verifique as informações..',
-			          mensagem,
-			          'info'
-			        );
-	        }
-	        
-	      });
-
-        // Aqui você pode chamar uma função, enviar AJAX, etc.
-        // Exemplo: apagarRegistro();
-      } else {
-        // Ação se cancelar (opcional)
-        Swal.fire(
-          'Cancelado',
-          'Nenhuma alteração foi feita.',
-          'info'
-        );
-      }
-    });
-
-
-}
-
-
-$('#botao_lixeira').on('click', function(e) {
-
-	e.preventDefault();
-
-   Swal.fire({
-      title: 'Está seguro de enviar o vendedor para a lixeira ?',
-      text: "",
-      icon: 'danger',
-      showCancelButton: true,
-      confirmButtonColor: 'blue',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) 
-      {
- 		    $.ajax({
-	        url: '../globais/admin/json/vendedores/mover_vendedor_lixeira.php', // PHP que irá processar
-	        type: 'POST',
-	        data: {
-	        			"id" : $('#id').val()
-	        },
-	        success: function (dataReturn) {
-				try {
-						response = JSON.parse(dataReturn);
-						mensagem = response.msg;
-						link = response.link;
-						imagem = response.imagem;
-				} catch (e) {
-						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-				}
+	// Adiciona o arquivo do input file (id="arquivo")
+	var arquivo = $('#imagem_site')[0].files[0]; 
+	formData.append('imagem_site', arquivo);
 	
-				window.location="vendedores.php";
-							
-	        },
-	        error: function (dataReturn) {
-	        
-					try {
-						response = JSON.parse(dataReturn.responseText);
-						mensagem = response.msg;
-					} catch (e) {
-						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-					}
-	        
-			        Swal.fire(
-			          'Verifique as informações..',
-			          mensagem,
-			          'info'
-			        );
-	        }
-	        
-	      });
+	// Adiciona o campo hidden (id="idRegistro")
+	formData.append('id', $('#id').val());
+	formData.append('titulo', $('#titulo').val());
+	
+    var file = $('#imagem_site')[0].files[0];
+    if (!file || !file.type.startsWith('image/')) {
+        alert('Por favor, selecione uma imagem válida.');
+        return;
+    }
 
-        // Aqui você pode chamar uma função, enviar AJAX, etc.
-        // Exemplo: apagarRegistro();
-      } else {
-        // Ação se cancelar (opcional)
-        Swal.fire(
-          'Cancelado',
-          'Nenhuma alteração foi feita.',
-          'info'
-        );
-      }
+	$('#resultado_imagem_site').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	
+    $.ajax({
+        url: '../globais/admin/json/veiculos_novos/upload_imagem_site.php', // PHP que irá processar
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (dataReturn) {
+			try {
+				response = JSON.parse(dataReturn);
+				mensagem = response.msg;
+			} catch (e) {
+				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+			}
+			
+			$('#lista_imagens_site').html(response.imagens_carrousel);
+			
+			$('#resultado_imagem_site').html(response.imagens);
+			
+        },
+        error: function () {
+            $('#resultado_imagem_site').html('<div class="alert alert-danger">Erro no upload.</div>');
+        }
     });
-
 });
 
 
-// Buscar CEP
-function busca_cep()
+function ver_imagem(Xid_key,Xid_key_origem)
 {
-	Xcep=$('#cep').val();
 
-	console.log("buscando cep: "+Xcep);
+	console.log(Xid_key+" - "+Xid_key_origem);
 
     $.ajax({
-			    url: WEBSITE + "../globais/admin/json/variados/busca_cep.php",
-			    type: 'POST',
-				data : { 'cep' : Xcep},
-				beforeSend: function() {
-				Swal.fire({
-				    title: 'Buscando CEP...',
-				    text: 'Aguarde enquanto finalizamos a operação.',
-				    icon: 'info',
-				    allowOutsideClick: false,  // impede fechar clicando fora
-				    showConfirmButton: false   // sem botão
-				});				
-		}
-	    ,success: function (dataReturn) {
+        url: '../globais/admin/json/veiculos_novos/load_imagens_carrousel.php', // PHP que irá processar
+        type: 'POST',
+        data: { 'id_key' : Xid_key,
+        		   'id_key_origem' : Xid_key_origem},
+        success: function (dataReturn) {
 			try {
-					response = JSON.parse(dataReturn);
-					mensagem = response.msg;
-					link = response.link;
-					imagem = response.imagem;
+				response = JSON.parse(dataReturn);
+				mensagem = response.msg;
 			} catch (e) {
-					mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 			}
 			
-			Swal.close();
-	
-			console.log("Response "+response);
+			$('#lista_imagens_site').html(response.imagens_carrousel);
+			$('#ModalImagensSite').modal('show');
 			
-			if(response.tipo == '2' || response.tipo == '1')
-			{
-				$('#uf').val(response.uf);
-				$('#cidade').val(response.cidade);
-				$('#rua').val(response.logradouro);
-				$('#bairro').val(response.bairro);
-				$('#nro').focus();
-			}
-						
-	    },
-	    error: function (dataReturn) {
-	    
-				try {
-					response = JSON.parse(dataReturn.responseText);
-					mensagem = response.msg;
-				} catch (e) {
-					mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-				}
-				
-				Swal.close();
-	    
-		        Swal.fire(
-		          'Verifique as informações..',
-		          mensagem,
-		          'info'
-		        );
-	    }
-	    
-	});
+        },
+        error: function () {
+	        Swal.fire(
+	          'Erro na leitura de imagens..',
+	          '',
+	          'warning'
+	        );
+        }
+    });
 
+	
 
 }
-//  > fim Buscar CEP

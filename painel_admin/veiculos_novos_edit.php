@@ -36,7 +36,7 @@ $cat1=executeQuery("select * from categorias ","all");
     <meta name="author" content="">
 
     <title>Painel Administrador</title>
-    
+
     <!-- Custom fonts for this template-->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -207,21 +207,21 @@ $cat1=executeQuery("select * from categorias ","all");
 						    	 <div class="row form-group">
 
 									<div class="col-md-3">
-										<label class="control-label text-right f12" >Comissão por venda</label><BR>
+										<label class="control-label text-right f12" >Comissão venda</label><BR>
 										<input type="text" name="comic" id="comic" class="form-control f12 maskMoneyBR text-right" value="<?=number_format(@$vei3['comic'],2)?>" >
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 									</div>									
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<label class="control-label text-right f12" >Comissão fixa</label><BR>
 										<select name="comic_fica" id="comic_fica" class="form-control f12">
 										   <option value="N">Não</option>
 										   <option value="S">Sim</option>
 										</select>
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-1">
 									</div>		
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<label class="control-label text-right f12" >Estado</label><BR>
 										<select class="form-control f12" id="estado" name="estado">
 										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
@@ -266,125 +266,36 @@ $cat1=executeQuery("select * from categorias ","all");
 						     </div>
 						</div>
 						
-						<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
-						  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
-						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='veiculos_novos.php';">↩️ VOLTAR</button>&nbsp;
-						  <?
-						     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
-						   ?>
-						</div>
-					</form>
-					<HR>
-					<?
-					if (!empty($_GET['id']))
-					{
-					?>
+						<HR>
 	                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
 							<div class='col-md-12'>
 							    <div style='padding:10px;'>
-								    <div class='text-center'>
-								    	<h3>Configuração do Site</h3>
+								    <div class='text-left'>
+								    	<h3>Imagens</h3>
 								    </div>
-							    </div>
-								<div class="row form-group"> 
-									<div class="col-md-6">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Quem somos:</label><BR>
-										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'><?=$vei3['quem_somos']?></textarea>
-									</div>
-									<div class="col-md-6">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Serviços prestados:</label><BR>
-										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'><?=$vei3['servicos_prestados']?></textarea>
-									</div>
 							    </div>
 						   </div>
-						   <div class='row col-md-12'>
-						        <div class='col-md-6'>
-									<div class="row form-group" style='padding-top:8px;'> 
-										<div class="col-md-9">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Nome da empresa</label><BR>
-											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="<?=$vei3['nome_empresa']?>">
-										</div>
-										<div class="col-md-3">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo de site</label><BR>
-											<select name="modelo_site" id="modelo_site" class='form-control'>
-											    <option value="1" <? if ($vei3['modelo_site']=="1") echo "selected ";?>>1</option>
-											    <option value="2" <? if ($vei3['modelo_site']=="2") echo "selected ";?>>2</option>
-											    <option value="3" <? if ($vei3['modelo_site']=="3") echo "selected ";?>>3</option>
-											</select>
-										</div>
-
-								    </div>
-								    <div class="row form-group">
-										<div class="col-md-9">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Slogan</label><BR>
-											<input type="text" name="slogan" id="slogan" class="form-control f12" value="<?=$vei3['slogan']?>">
-										</div>
-										<div class="col-md-3">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
-											<input type="text" name="subdominio" id="subdominio" class="form-control f12" autocomplete="off" value="<?=$vei3['subdominio']?>">
-										</div>
-									</div>
-						        </div>
-						        <div class='col-md-6'>
-									<div class="row form-group"> 
-										<form id="formUploadLogo" enctype="multipart/form-data" method="post">
-										    <input type='hidden' id="link_logo" value="">
-										    <div class='row'>
-												<div class="col-md-6">
-												    <div class="form-group">
-												      <label for="arquivo" class='f16'>Logomarca</label>
-												      <input type="file" name="logo" id="logo" class="form-control-file" required accept="image/*">
-												    </div>
-												</div>
-												<div class="col-md-2">	
-													<BR>
-													<button type="submit" class="btn btn-primary" >Enviar</button>
-												</div>
-												<div class="col-md-4" id="resultado_logo" style='padding-top:25px;'>	
-												</div>
-	
-										    </div>
-									    </form>
-									</div>
-									<div class="row form-group"> 
-										<form id="formUploadBanner" enctype="multipart/form-data" method="post">
-										    <input type='hidden' id="link_banner" value="">
-										    <div class='row'>
-												<div class="col-md-6">
-												    <div class="form-group">
-												      <label for="arquivo" class='f16'>Banner</label>
-												      <input type="file" name="banner" id="banner" class="form-control-file" required accept="image/*">
-												    </div>
-												</div>
-												<div class="col-md-2">	
-													<BR>
-													<button type="submit" class="btn btn-primary" >Enviar</button>
-												</div>
-												<div class="col-md-4" id="resultado_banner">	
-												</div>
-										    </div>
-									    </form>
-								   </div>
-							   </div>
-							   <div id="mensagem"></div>
-							 </div>
-							 
+						   <div class='col-md-12'> 
+							    <input type='hidden' id="link_logo" value="">
+								<div class="col-md-3">
+									<input type="file" name="imagem_site" id="imagem_site" class="form-control-file" required accept="image/*">
+								</div>
+								<div class="col-md-1">	
+									<button class="btn btn-primary" id="btnUploadImagemSite">Enviar</button>
+								</div>
+								<div class="col-md-8" id="resultado_imagem_site" style='padding-top:5px;'>	
+								</div>
+							</div>
 				        </div>
-
-						<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
-						  <a  class="btn btn-info btn-sm" href="javascript:salvar_site();">💾 SALVAR CONFIGURAÇÕES</a>&nbsp;
-						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='vendedores.php';">↩️ VOLTAR</button>&nbsp;
-						</div>
-				        
-				    <?
-				    }
-				    ?>	
-					
-					<!-- fim endereço -->
-
-				</div>
-				
-				<!-- Fim conteudo -->
+					</div>
+					<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
+					  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
+					  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='veiculos_novos.php';">↩️ VOLTAR</button>&nbsp;
+					  <?
+					     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
+					   ?>
+					</div>
+				</form>
 				
             </div>
             <!-- End of Main Content -->
@@ -465,3 +376,19 @@ $cat1=executeQuery("select * from categorias ","all");
 
 </html>
 
+<div class="modal fade" id="ModalImagensSite" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		  <div class="carousel-inner" id="lista_imagens_site">
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+		 	 <span class="carousel-control-prev-icon" aria-hidden="true"><<<</span>
+		 	 <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			 <span class="carousel-control-next-icon" aria-hidden="true">>>></span>
+			 <span class="sr-only">Next</span>
+		  </a>
+		</div>
+    </div>
+</div>
