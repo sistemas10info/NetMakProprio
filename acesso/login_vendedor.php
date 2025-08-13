@@ -1,3 +1,57 @@
+<?
+
+if (isset($_POST['email']))
+{
+    $Xverifica_login=false;
+	$arquivo = "../globais/inc/inc.php";
+	if (file_exists($arquivo)) {
+	    include($arquivo);
+	} else {
+	    echo "Arquivo não encontrado: $arquivo";
+	}
+	
+	$Xsenha=encrypt($_POST['senha'],1);
+	$log3=executeQuery("select interno,id_key,nome,nome_empresa,email,site,celular,telefone
+											 from vendedores 
+													where 
+														email='".$_POST['email']."' and senha='".$Xsenha."' 
+													limit 1");
+	if(@$log3['error'])
+	{
+		echo 'Erro login: ' . @$log3['error'];
+	}	
+	
+	if ($log3)
+	{
+	
+		$Xmensagem="<h4 class='text-success'>Email e senha corretos</h4>";
+		$_SESSION['tipo_login']="V";
+		$_SESSION['vendedor']=$log3;
+		$update=executeQuery("update vendedores 
+													set 
+														session_id='".session_id()."',
+														fult_login='".date('Y-m-d H:i')."', 
+														ult_ip_login='".getIp()."' 
+													where 
+														id_key='".$log3['id_key']."' 
+													limit 1");
+		if(@$update['error'])
+		{
+			echo 'Erro update: ' . @$update['error'];
+		}	
+		
+		header("Location: ../painel_vendedor/veiculos_usados.php");
+		exit;
+
+	}
+	else
+	{
+		$Xmensagem="<b class='text-danger'>Email e senha inválidos</b>";
+	}			
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -53,6 +107,9 @@
                     <!-- Botão Entrar -->
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                    </div>
+                    <div class="d-grid text-center">
+                        <?=$Xmensagem?>
                     </div>
                 </form>
 

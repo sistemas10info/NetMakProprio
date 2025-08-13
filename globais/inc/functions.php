@@ -1400,8 +1400,26 @@ function verificar_acesso()
 // aqui verificamos o acesso via session de usuarios
 // verificaremos se o session_id corresponde ao campo salvo dentro do usuario.
 // caso tenha suspeita vamos salvar o IP somando a tentativa, se tem tentativa > 5 enviamos para bloquieo.
-
-return true;
+if ($_SESSION['tipo_acesso']=="V")
+{
+     $ver3=executeQuery("select interno from vendedores 
+     													where 
+     														id_key='".$_SESSION['vendedor']['id_key']."' and 
+	 														session_id='".session_id()."' 
+	 														limit 1");
+	 if(@$ver3['error'])
+	 {
+	    echo 'Erro verificação: ' . @$ver3['error'];
+	 }	
+	 
+	 if (!$ver3)
+	 {
+		 add_suspeito("Login vendedor",getIp());
+		 return false;
+	 }
+	 else return true;
+}
+else return true;
 
 }
 
@@ -1410,6 +1428,46 @@ function bloquieo_ip($Xip)
 
 ///  buscamos dentro do banco de dados 
 /// bloqueamos e depois salvamos o dado dentro do arquivo data e hora do bloqueio.
+
+}
+
+
+function add_suspeito($Xlog,$Xip)
+{
+
+$ip3=executeQuery("select interno,logs from ips_suspeitos where ip='".getIp()."' limit 1");
+
+if(@$ip3['error'])
+{
+	echo 'Erro Busca IP: ' . @$ip3['error'];
+}	
+
+if (!$ip3)
+{
+     $insert=executeQuery("insert into ips_suspeitos set ip='".$Xip."' ");
+	 if(@$ip3['error'])
+	 {
+		echo 'Erro ADD IP: ' . @$insert['error'];
+	 }	
+	 $ip3['logs']="";
+	 $ip3['tentativas']=0;
+}
+
+$Xlogs=date('d/m/Y H:i')." - ".$Xlog."\n".$ip3['logs'];
+++$ip3['tentativas'];
+
+$update=executeQuery("update ips_suspeitos 
+													set
+														fecha_hora='".date('Y-m-d H:i')."',
+														tentativas='".$ip3['tentativas']."',
+														logs='".$ip3['logs']."' 
+													where 
+														ip='".$Xip."' 
+													limit 1");
+if(@$update['error'])
+{
+	echo 'Erro UPDATE IP: ' . @$update['error'];
+}	
 
 }
 

@@ -8,6 +8,8 @@
 	    error_reporting(E_ALL);	
     }
     
+    if (!isset($Xverifica_login)) $Xverifica_login=true;
+    
     // Carlos para querys grandes
     ini_set('memory_limit', '-1');
     
@@ -35,9 +37,11 @@
 	require_once 'functions.php';
 
 	// verifico o acesso se é suspeito 
-	$Xverifica=verificar_acesso();
-	
-	if (!$Xverifica) die('*-*');
+	if ($Xverifica_login)
+	{
+		$Xverifica=verificar_acesso();
+		if (!$Xverifica) die('*-*');
+	}
 	
 	// Tipo de agenda.
 	
