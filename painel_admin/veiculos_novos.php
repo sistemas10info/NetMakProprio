@@ -127,7 +127,7 @@ if (file_exists($arquivo)) {
 								<th data-column-id="categoria" data-align="center" data-header-align="center" data-width="10%;">Categoria</th>
 								<th data-column-id="marca" data-align="center" data-header-align="center" data-width="10%;">Marca</th>
 								<th data-column-id="modelo" data-align="center" data-header-align="center" data-width="10%;">Modelo</th>
-								<th data-column-id="imagens" data-align="right" data-header-align="right" data-width="15%;">Preço</th>
+								<th data-column-id="preco" data-align="right" data-header-align="right" data-width="15%;">Preço</th>
 								<th data-column-id="estado" data-align="right" data-header-align="center"  data-width="10%;">Estado</th>
 							</tr>
 						</thead>

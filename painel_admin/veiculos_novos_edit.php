@@ -251,7 +251,7 @@ $cat1=executeQuery("select * from categorias ","all");
 										<div class="col-md-6">
 										    <div class="form-group">
 										      <label for="arquivo" class="control-label text-right f14">Imagem</label>
-										      <input type="file" name="link_seo" id="link_seo" class="form-control-file" required accept="image/*">
+										      <input type="file" name="link_seo" id="link_seo" class="form-control-file" accept="image/*">
 										    </div>
 										</div>
 										<div class="col-md-2">	
@@ -278,7 +278,7 @@ $cat1=executeQuery("select * from categorias ","all");
 						   <div class='col-md-12'> 
 							    <input type='hidden' id="link_logo" value="">
 								<div class="col-md-3">
-									<input type="file" name="imagem_site" id="imagem_site" class="form-control-file" required accept="image/*">
+									<input type="file" name="imagem_site" id="imagem_site" class="form-control-file" accept="image/*">
 								</div>
 								<div class="col-md-1">	
 									<button class="btn btn-primary" id="btnUploadImagemSite">Enviar</button>
@@ -376,19 +376,22 @@ $cat1=executeQuery("select * from categorias ","all");
 
 </html>
 
-<div class="modal fade" id="ModalImagensSite" tabindex="-1" aria-hidden="true">
+<div class="modal fade sombra2" id="ModalImagensSite" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+		<div id="carouselExampleControls" class="carousel" data-ride="carousel">
 		  <div class="carousel-inner" id="lista_imagens_site">
 		  </div>
-		  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-		 	 <span class="carousel-control-prev-icon" aria-hidden="true"><<<</span>
-		 	 <span class="sr-only">Previous</span>
-		  </a>
-		  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-			 <span class="carousel-control-next-icon" aria-hidden="true">>>></span>
-			 <span class="sr-only">Next</span>
-		  </a>
 		</div>
     </div>
+	<div class="modal-footer">
+	  <a class="carousel-control-prev f24" href="#carouselExampleControls" role="button" data-slide="prev">
+	 	 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	 	 <span class="sr-only">Previo</span>
+	  </a>
+	  <a class="carousel-control-next f24" href="#carouselExampleControls" role="button" data-slide="next">
+		 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		 <span class="sr-only">Próximo</span>
+	  </a>
+	</div>
+
 </div>

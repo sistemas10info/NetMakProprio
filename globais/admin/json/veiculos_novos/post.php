@@ -2,7 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 
-$Xerror=true;
+$Xerror=false;
 $arquivo = "../../../inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
@@ -10,20 +10,20 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
+/*
+print_r($_POST);
+die();
+*/
+
 // <- Filtros *************************************************************************
 if (@$_POST['estado']=="9")
 {
-
     $Xmensagem="";
-    if (empty($_POST['razao_social'])) $Xmensagem.="Razao Social tem que estar preenchida<BR>";
-    if (empty($_POST['cep'])) $Xmensagem.="CEP tem que estar preenchido<BR>";
-    if (empty($_POST['rua'])) $Xmensagem.="Rua tem que estar preenchida<BR>";
-    if (empty($_POST['cidade'])) $Xmensagem.="Cidade tem que estar preenchida<BR>";
-    if (!validaCNPJ($_POST['cpf_cnpj'])) $Xmensagem.="CNPJ inválido<BR>";
-    if (empty($_POST['usuario'])) $Xmensagem.="Nome de usuário tem que estar preenchido<BR>";
-    if (empty($_POST['celular'])) $Xmensagem.="Nro de celular tem que estar preenchido<BR>";
-    if (!validar_email($_POST['email'])) $Xmensagem.="Email inválido<BR>";
-    if (!isset($_POST['id_key_categorias'])) $Xmensagem.="Precisa definir alguma categoria<BR>";
+    if (empty($_POST['titulo'])) $Xmensagem.="Titulo de anuncio deve estar preenchido<BR>";
+    if (empty($_POST['descrip'])) $Xmensagem.="Descrição do anuncio deve estar preenchido<BR>";
+    if ($_POST['id_key_categoria']=="--") $Xmensagem.="Categoria deve estar preenchida<BR>";
+    if ($_POST['id_key_marca']=="--") $Xmensagem.="Marca deve estar preenchida<BR>";
+    if ($_POST['id_key_modelo']=="--") $Xmensagem.="Modelo deve estar preenchido<BR>";
     
     if (!empty($Xmensagem))
     {
@@ -31,23 +31,8 @@ if (@$_POST['estado']=="9")
 		http_response_code(400);
 		$response['msg'] = $Xmensagem; 
 		exit(json_encode($response));
-     }
-     
+     }    
 }
-
-$Xid_key_categorias="";
-
-if (isset($_POST['id_key_categorias']))
-{
-	$Xid_key_categorias=implode("-",$_POST['id_key_categorias']);
-}
-
-if ($_POST['altera_senha']=="1")
-{
-     $Xsenha=encrypt($_POST['senha'],true);
-     $Xsql_senha=" senha = '".$Xsenha."', altera_senha='1', ";
-}
-else $Xsql_senha="";
 
 
 if (empty($_POST['id']))
@@ -55,7 +40,7 @@ if (empty($_POST['id']))
 	$_POST['id']=buildIdKey(30);
 	$insert = executeQuery("
 										INSERT INTO
-											vendedores
+											veiculos
 										SET
 											id_key        	= '".$_POST['id']."'
 										");
@@ -72,60 +57,35 @@ if (empty($_POST['id']))
 /*
 Array
 (
-    [id] => 
-    [razao_social] => Novo vendedor
-    [cpf_cnpj] => 
-    [telefone] => 
-    [celular] => 
-    [email] => 
-    [cep] => 
-    [rua] => 
-    [nro] => 
-    [comple] => 
-    [cidade] => 
-    [bairro] => 
-    [uf] => AC
-    [usuario] => 
-    [senha] => 
+    [id] => UEW052HKRR2ICFEFZXPT83JO5TBFV9
+    [titulo] => Novo veículo
+    [descrip] => 
+    [id_key_categoria] => --
+    [id_key_marca] => --
+    [id_key_modelo] => --
+    [preco] => 0.00
+    [comic] => 0.00
+    [comic_fica] => N
     [estado] => 0
-    [obs] => 
-    [site] => 
-    [instagram] => 
-    [facebook] => 
-    [quem_somos] => 
-    [servicos_prestados] => 
-    [nome_empresa] => 
-    [modelo_site] => 1
-    [slogan] => 
-    [subdominio] => 
+    [seo] => 
 )
 */
 
-$update = executeQuery("
-									update vendedores
+$Xpreco=str_replace(",","",$_POST['preco']);
+$update = executeQuery("update veiculos
 									    SET
-											razao_social		= '".@$_POST['razao_social']."',
-											cpf_cnpj			= '".@$_POST['cpf_cnpj']."',
-											telefone    	 		= '".((!empty(@$_POST['telefone']))      ? @$_POST['telefone']     : '')."',
-											celular    	 		= '".((!empty(@$_POST['celular']))      ? @$_POST['celular']     : '')."',
-											email    	 		= '".((!empty(@$_POST['email']))      ? @$_POST['email']     : '')."',
-											cep    	 		= '".((!empty(@$_POST['cep']))      ? @$_POST['cep']     : '')."',
-											rua    	 		= '".((!empty(@$_POST['rua']))      ? @$_POST['rua']     : '')."',
-											nro    	 		= '".((!empty(@$_POST['nro']))      ? @$_POST['nro']     : '')."',
-											comple	      	 		= '".((!empty(@$_POST['comple']))         ? @$_POST['comple']     : '')."',
-											cidade	      	 		= '".((!empty(@$_POST['cidade']))         ? @$_POST['cidade']     : '')."',
-											bairro	      	 		= '".((!empty(@$_POST['bairro']))         ? @$_POST['bairro']     : '')."',
-											uf	      	 		= '".((!empty(@$_POST['uf']))         ? @$_POST['uf']     : '')."',
-											usuario	      	 		= '".((!empty(@$_POST['usuario']))         ? @$_POST['usuario']     : '')."',
-											senha	      	 		= '".((!empty(@$_POST['senha']))         ? @$_POST['senha']     : '')."',
+									    	tipo='1',
+									    	id_key_vendedor='--',
+											titulo		= '".@$_POST['titulo']."',
+											descrip			= '".@$_POST['descrip']."',
+											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
+											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
+											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
+											preco    	 		= '".$Xpreco."',
+											comic    	 		= '".((!empty(@$_POST['comic']))      ? @$_POST['comic']     : '')."',
+											comic_fixa    	 		= '".((!empty(@$_POST['comic_fixa']))      ? @$_POST['comic_fixa']     : '')."',
 											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
-											obs	      	 		= '".((!empty(@$_POST['obs']))         ? @$_POST['obs']     : '')."',
-											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
-											site	      	 		= '".((!empty(@$_POST['site']))         ? @$_POST['site']     : '')."',
-											instagram	      	 		= '".((!empty(@$_POST['instagram']))         ? @$_POST['instagram']     : '')."',
-											".$Xsql_senha." 
-											facebook	      	 		= '".((!empty(@$_POST['facebook']))         ? @$_POST['facebook']     : '')."',
-											id_key_categorias = '".$Xid_key_categorias."' 
+											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."'
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 

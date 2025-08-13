@@ -138,8 +138,8 @@
 		}
 		
 		$('[data-toggle="tooltip"]').tooltip();
-
-
+		
+		load_imagens($('#id').val());
 
 
 // $('#formUploadImagemSeo').on('submit', function (e) {
@@ -194,11 +194,11 @@ $('#btnUploadImagemSeo').on('click', function (e) {
     });
 });
 
-$('#FormVendedor').on('submit', function (e) {
+$('#FormVeiculoNovo').on('submit', function (e) {
 
     e.preventDefault(); // evita o envio normal do formulário
 
-    var form = document.getElementById('FormVendedor');
+    var form = document.getElementById('FormVeiculoNovo');
     var formData = new FormData(form);
     
     console.log(formData);
@@ -216,7 +216,7 @@ $('#FormVendedor').on('submit', function (e) {
       if (result.isConfirmed) 
       {
  		    $.ajax({
-	        url: '../globais/admin/json/vendedores/post.php', // PHP que irá processar
+	        url: '../globais/admin/json/veiculos_novos/post.php', // PHP que irá processar
 	        type: 'POST',
 	        data: formData,
 	        processData: false,
@@ -325,10 +325,12 @@ $('#btnUploadImagemSite').on('click', function (e) {
 });
 
 
-function ver_imagem(Xid_key,Xid_key_origem)
+function ver_imagem(Xid_key,Xid_key_origem="")
 {
 
 	console.log(Xid_key+" - "+Xid_key_origem);
+	
+	Xid_key_origem=$('#id').val();
 
     $.ajax({
         url: '../globais/admin/json/veiculos_novos/load_imagens_carrousel.php', // PHP que irá processar
@@ -356,6 +358,167 @@ function ver_imagem(Xid_key,Xid_key_origem)
         }
     });
 
-	
+}
+
+function load_imagens(Xid_key_origem="")
+{
+
+if (Xid_key_origem !== "")
+{
+    $.ajax({
+        url: '../globais/admin/json/veiculos_novos/load_imagens_site.php', // PHP que irá processar
+        type: 'POST',
+        data: { 'id_key_origem' : Xid_key_origem },
+        success: function (dataReturn) {
+			try {
+				response = JSON.parse(dataReturn);
+				mensagem = response.msg;
+			} catch (e) {
+				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+			}
+			
+			$('#resultado_imagem_site').html(response.imagens);
+			
+        },
+        error: function () {
+            $('#resultado_imagem_site').html('<div class="alert alert-danger">Erro no upload.</div>');
+        }
+    });
+}
+else
+{
+     $('#resultado_imagem_site').html("");
+}
+
+}
+
+function apaga_imagem(Xid_key)
+{
+
+Swal.fire({
+  title: 'Tem certeza de apagar a imagem ?',
+  text: "Você não poderá reverte isto.",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: 'red',
+  cancelButtonColor: 'silver',
+  confirmButtonText: 'Sim',
+  cancelButtonText: 'Cancelar'
+}).then((result) => {
+  if (result.isConfirmed) 
+  {
+	 $.ajax({
+        url: '../globais/admin/json/veiculos_novos/apagar_imagem.php', // PHP que irá processar
+        type: 'POST',
+        data: { 'id_key' : Xid_key },
+        success: function (dataReturn) {
+			try {
+					response = JSON.parse(dataReturn);
+					mensagem = response.msg;
+					link = response.link;
+					imagem = response.imagem;
+			} catch (e) {
+					mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+			}
+			
+			Swal.close();
+			
+			load_imagens($('#id').val());
+						
+        },
+        error: function (dataReturn) {
+        
+				try {
+					response = JSON.parse(dataReturn.responseText);
+					mensagem = response.msg;
+				} catch (e) {
+					mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+				}
+        
+		        Swal.fire(
+		          'Verifique as informações..',
+		          mensagem,
+		          'info'
+		        );
+        }
+        
+      });
+
+    // Aqui você pode chamar uma função, enviar AJAX, etc.
+    // Exemplo: apagarRegistro();
+  } else {
+    // Ação se cancelar (opcional)
+    Swal.fire(
+      'Cancelado',
+      'A imagem não foi apagada...',
+      'info'
+    );
+  }
+});
+
+}
+
+function altera_titulo(Xid_key)
+{
+
+
+    Swal.fire({
+        title: 'Digite o titulo',
+        input: 'text',
+        inputPlaceholder: 'Insira o titulo aqui...',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Salvar',
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'O campo não pode estar vazio!';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let Xtitulo = result.value;
+
+			 $.ajax({
+		        url: '../globais/admin/json/veiculos_novos/altera_titulo.php', // PHP que irá processar
+		        type: 'POST',
+		        data: { 'id_key' : Xid_key,
+		        		   'titulo' : Xtitulo },
+		        success: function (dataReturn) {
+					try {
+							response = JSON.parse(dataReturn);
+							mensagem = response.msg;
+							link = response.link;
+							imagem = response.imagem;
+					} catch (e) {
+							mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+					}
+					
+					Swal.close();
+					
+					load_imagens($('#id').val());
+								
+		        },
+		        error: function (dataReturn) {
+		        
+						try {
+							response = JSON.parse(dataReturn.responseText);
+							mensagem = response.msg;
+						} catch (e) {
+							mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+						}
+		        
+				        Swal.fire(
+				          'Verifique as informações..',
+				          mensagem,
+				          'info'
+				        );
+		        }
+		        
+		    });
+        }
+    });
+
+
 
 }
