@@ -89,18 +89,15 @@
 			        });
 			    } 
 			});
-			  
-			  
-			  
 
 		});
 		
 		// > Configuracoes iniciais da pagina **********************************************
 		
 		// < configuracoes do Bootgrid *****************************************************
-		if ($("#table-veiculos-novos").length)
+		if ($("#table-veiculos-usados").length)
 		{
-			var grid = $("#table-veiculos-novos").bootgrid({
+			var grid = $("#table-veiculos-usados").bootgrid({
 				labels: {
 					noResults: "Não foi encontrado nenhum resultado!",
 					infos: "Mostrando {{ctx.start}} a {{ctx.end}} de {{ctx.total}} registros",
@@ -114,9 +111,9 @@
 										}
 				},
 				ajax: true,
-				url: "../globais/admin/json/veiculos_novos/list.php",
+				url: "../globais/vendedor/json/veiculos_usados/list.php",
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='veiculos_novos_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='veiculos_usados_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
 				},
 				columnSelection : false,
 				ajaxSettings: {
@@ -150,61 +147,11 @@
 
 // $('#formUploadImagemSeo').on('submit', function (e) {
 
-$('#btnUploadImagemSeo').on('click', function (e) {
+$('#FormVeiculoUsado').on('submit', function (e) {
 
     e.preventDefault(); // evita o envio normal do formulário
 
-    // var form = document.getElementById('formUploadImagemSeo');
-    // var formData = new FormData(form);
-	var formData = new FormData();
-	
-	// Adiciona o arquivo do input file (id="arquivo")
-	var arquivo = $('#link_seo')[0].files[0]; 
-	formData.append('link_seo', arquivo);
-	
-	// Adiciona o campo hidden (id="idRegistro")
-	formData.append('id', $('#id').val());
-	formData.append('titulo', $('#titulo').val());
-	
-    var file = $('#link_seo')[0].files[0];
-    if (!file || !file.type.startsWith('image/')) {
-        alert('Por favor, selecione uma imagem válida.');
-        return;
-    }
-
-	$('#resultado_link_seo').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
-	
-    $.ajax({
-        url: '../globais/admin/json/veiculos_novos/upload_seo.php', // PHP que irá processar
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (dataReturn) {
-			try {
-				response = JSON.parse(dataReturn);
-				mensagem = response.msg;
-				link = response.link;
-				imagem = response.imagem;
-			} catch (e) {
-				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
-			}
-
-			console.log("Mensagem - Link : "+mensagem+" - "+link);
-			$('#resultado_link_seo').html(imagem);
-			
-        },
-        error: function () {
-            $('#resultado_link_seo').html('<div class="alert alert-danger">Erro no upload.</div>');
-        }
-    });
-});
-
-$('#FormVeiculoNovo').on('submit', function (e) {
-
-    e.preventDefault(); // evita o envio normal do formulário
-
-    var form = document.getElementById('FormVeiculoNovo');
+    var form = document.getElementById('FormVeiculoUsado');
     var formData = new FormData(form);
     
     console.log(formData);
@@ -222,7 +169,7 @@ $('#FormVeiculoNovo').on('submit', function (e) {
       if (result.isConfirmed) 
       {
  		    $.ajax({
-	        url: '../globais/admin/json/veiculos_novos/post.php', // PHP que irá processar
+	        url: '../globais/vendedor/json/veiculos_usados/post.php', // PHP que irá processar
 	        type: 'POST',
 	        data: formData,
 	        processData: false,
@@ -320,8 +267,8 @@ $('#btnUploadImagemSite').on('click', function (e) {
 			}
 			
 			$('#lista_imagens_site').html(response.imagens_carrousel);
-			
 			$('#resultado_imagem_site').html(response.imagens);
+			$('#id').val(response.id);
 			
         },
         error: function () {

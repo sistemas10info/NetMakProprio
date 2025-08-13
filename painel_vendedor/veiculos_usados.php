@@ -1,4 +1,5 @@
 <?
+$Xerro=true;
 $arquivo = "../globais/inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
@@ -88,7 +89,7 @@ if (file_exists($arquivo)) {
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<? 
-			$arquivo = "../globais/admin/formatos/menu_lateral.php";
+			$arquivo = "../globais/vendedor/formatos/menu_lateral.php";
 			if (file_exists($arquivo)) {
 			    include($arquivo);
 			} else {
@@ -105,7 +106,7 @@ if (file_exists($arquivo)) {
             <!-- Main Content -->
             <div id="content">
 	 			<? 
-				$arquivo = "../globais/admin/formatos/menu_top.php";
+				$arquivo = "../globais/vendedor/formatos/menu_top.php";
 				if (file_exists($arquivo)) {
 				    include($arquivo);
 				} else {
@@ -116,10 +117,10 @@ if (file_exists($arquivo)) {
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
 				    <div class='row' style='padding:5px;'>
 					    <div class='col-md-4'>
-					    	<h3>Veículos novos</h3>
+					    	<h3>Veículos usados</h3>
 					    </div>
 				    </div>
-					<table class="table-light table table-bordered table-striped table-hover f12" id="table-veiculos-novos" >
+					<table class="table-light table table-bordered table-striped table-hover f12" id="table-veiculos-usados" >
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
@@ -194,7 +195,7 @@ if (file_exists($arquivo)) {
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
-	<script src="../globais/admin/js/pages/veiculos_novos.js">
+	<script src="../globais/vendedor/js/pages/veiculos_usados.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

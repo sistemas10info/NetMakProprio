@@ -320,8 +320,8 @@ $('#btnUploadImagemSite').on('click', function (e) {
 			}
 			
 			$('#lista_imagens_site').html(response.imagens_carrousel);
-			
 			$('#resultado_imagem_site').html(response.imagens);
+			$('#id').val(response.id);
 			
         },
         error: function () {

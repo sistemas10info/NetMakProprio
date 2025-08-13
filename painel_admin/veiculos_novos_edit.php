@@ -197,6 +197,7 @@ $cat1=executeQuery("select * from categorias ","all");
 										   			echo "<option value='".$cat3['id_key']."' ";
 										   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
 										   			echo ">".$cat3['nome']."</option>";
+										   		}
 										   ?>
 										</select>
 									</div>

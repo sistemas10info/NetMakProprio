@@ -105,6 +105,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 												      </div>';
 					
 					$Ximagens.='<div class="col-2" style="vertical-align:bottom; border-bottom:1px solid #DCDCDC;">
+					                        <div class="row well">
+					                            <div class="col-md-1 text-left">
+											    	<input type="radio" id="principal_'.$ima3['id_key'].'" name="principal" value="'.$ima3['id_key'].'" onclick="javascript:ver_principal();" '.$Xchecked.'>
+											    </div>
+											    <div class="col-md-8 text-left">
+							                    	<a href="javascript:altera_titulo(\''.$ima3['id_key'].'\',\''.$Xtitulo.'\');" id="titulo_'.$ima3['id_key'].'" class="f11">'.$Xtitulo.'</a>
+							                    </div>
+					                            <div class="col-md-2 text-right">
+											    	<a href="javascript:apaga_imagem(\''.$ima3['id_key'].'\');" class="f18"><i class="fa fa-trash"></i></a>
+											    </div>
+							                </div>
 								            <a href="javascript:ver_imagem(\''.$ima3['id_key'].'\',\''.$_POST['id'].'\');">
 								            	<img src="'.$ima3['link'].'" 
 									                 style="width:98%; padding:5px;"
@@ -113,9 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 									                 data-bs-target="#imagemModal" 
 									                 data-img="'.$ima3['link'].'">
 									          </a>
-									          <BR>
-											  <a href="javascript:apaga_imagem(\''.$ima3['id_key'].'\');" class="btn btn-default"><i class="fa fa-trash"></i></a>
-							                  <a href="javascript:altera_titulo(\''.$ima3['id_key'].'\');" id="titulo_'.$ima3['id_key'].'" class="btn btn-default">'.$Xtitulo.'</a>
 								        </div>';
 				}
 			}
@@ -123,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 			$Ximagens.="</div>";
             $response['imagens']=$Ximagens;
             $response['imagens_carrousel']=$Ximagens_carrousel;
+            $response['id']=$_POST['id'];
 			exit(json_encode($response));
         } 
         else 

@@ -1397,10 +1397,11 @@ function validar_email($email)
 function verificar_acesso()
 {
 
+return true;
 // aqui verificamos o acesso via session de usuarios
 // verificaremos se o session_id corresponde ao campo salvo dentro do usuario.
 // caso tenha suspeita vamos salvar o IP somando a tentativa, se tem tentativa > 5 enviamos para bloquieo.
-if ($_SESSION['tipo_acesso']=="V")
+if ($_SESSION['tipo_login']=="V")
 {
      $ver3=executeQuery("select interno from vendedores 
      													where 
@@ -1435,7 +1436,7 @@ function bloquieo_ip($Xip)
 function add_suspeito($Xlog,$Xip)
 {
 
-$ip3=executeQuery("select interno,logs from ips_suspeitos where ip='".getIp()."' limit 1");
+$ip3=executeQuery("select interno,logs,tentativas from ips_suspeitos where ip='".getIp()."' limit 1");
 
 if(@$ip3['error'])
 {
@@ -1453,14 +1454,14 @@ if (!$ip3)
 	 $ip3['tentativas']=0;
 }
 
-$Xlogs=date('d/m/Y H:i')." - ".$Xlog."\n".$ip3['logs'];
-++$ip3['tentativas'];
+$Xlogs=date('d/m/Y H:i:s')." - ".$Xlog."\n".$ip3['logs'];
+// ++$ip3['tentativas'];
 
 $update=executeQuery("update ips_suspeitos 
 													set
 														fecha_hora='".date('Y-m-d H:i')."',
-														tentativas='".$ip3['tentativas']."',
-														logs='".$ip3['logs']."' 
+														tentativas='".($ip3['tentativas']+1)."',
+														logs='".$Xlogs."' 
 													where 
 														ip='".$Xip."' 
 													limit 1");

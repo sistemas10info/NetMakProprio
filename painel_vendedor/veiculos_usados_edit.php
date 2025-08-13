@@ -1,10 +1,21 @@
 <?
+
+$Xerror=true;
 $arquivo = "../globais/inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
 } else {
     echo "Arquivo não encontrado: $arquivo";
 }
+
+$cab3=executeQuery("select id_key_categorias from vendedores 
+													where 
+														id_key='".$_SESSION['vendedor']['id_key']."' 
+													limit 1");
+$Xid_key_categorias=explode("-",$cab3['id_key_categorias']);	
+$Xbusca_categorias="(";
+for ($gg=0;$gg<count($Xid_key_categorias);$gg++) $Xbusca_categorias.="'".$Xid_key_categorias[$gg]."',";
+$Xbusca_categorias.="'XX')";
 
 if (!isset($_GET['id'])) 
 {
@@ -14,6 +25,7 @@ if (!isset($_GET['id']))
    $vei3['id_key_categoria']='--';
    $vei3['id_key_marca']='--';
    $vei3['id_key_modelo']='--';
+   $vei3['preco']=0.00;
 }
 else
 {
@@ -33,7 +45,7 @@ else
    												order by nome","all");
 }
 
-$cat1=executeQuery("select * from categorias ","all");
+$cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categorias,"all");
 			
 ?>
 <!DOCTYPE html>
@@ -47,7 +59,7 @@ $cat1=executeQuery("select * from categorias ","all");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Painel Administrador</title>
+    <title>Painel Vendedor</title>
 
     <!-- Custom fonts for this template-->
     <link
@@ -122,12 +134,12 @@ $cat1=executeQuery("select * from categorias ","all");
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 			<? 
-			$arquivo = "../globais/admin/formatos/menu_lateral.php";
+			$arquivo = "../globais/vendedor/formatos/menu_lateral.php";
 			if (file_exists($arquivo)) {
 			    include($arquivo);
 			} else {
 			    echo "Arquivo não encontrado: $arquivo";
-			}			
+			}		
 			?>
 			
         </ul>
@@ -139,12 +151,12 @@ $cat1=executeQuery("select * from categorias ","all");
             <!-- Main Content -->
             <div id="content">
 	 			<? 
-				$arquivo = "../globais/admin/formatos/menu_top.php";
+				$arquivo = "../globais/vendedor/formatos/menu_top.php";
 				if (file_exists($arquivo)) {
 				    include($arquivo);
 				} else {
 				    echo "Arquivo não encontrado: $arquivo";
-				}			
+				}		
 				?>
 				
 				<!-- conteudo -->
@@ -153,7 +165,7 @@ $cat1=executeQuery("select * from categorias ","all");
 				    	<h3><?=$Xtitulo?></h3>
 				    </div>
 			    </div>
-				<form name="FormVeiculoNovo" id="FormVeiculoNovo" method="post" action="../globais/admin/json/veiculos_novos/post.php">
+				<form name="FormVeiculoUsado" id="FormVeiculoUsado" method="post" action="../globais/vendedor/json/veiculos_usados/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
@@ -197,6 +209,7 @@ $cat1=executeQuery("select * from categorias ","all");
 										   			echo "<option value='".$cat3['id_key']."' ";
 										   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
 										   			echo ">".$cat3['nome']."</option>";
+										   		}
 										   ?>
 										</select>
 									</div>
@@ -242,66 +255,8 @@ $cat1=executeQuery("select * from categorias ","all");
 									</div>
 								</div>
 
-						    	 <div class="row form-group">
-
-									<div class="col-md-3">
-										<label class="control-label text-right f12" >Comissão venda</label><BR>
-										<input type="text" name="comic" id="comic" class="form-control f12 maskMoneyBR text-right" value="<?=number_format(@$vei3['comic'],2)?>" >
-									</div>
-									<div class="col-md-1">
-									</div>									
-									<div class="col-md-3">
-										<label class="control-label text-right f12" >Comissão fixa</label><BR>
-										<select name="comic_fica" id="comic_fica" class="form-control f12">
-										   <option value="N">Não</option>
-										   <option value="S">Sim</option>
-										</select>
-									</div>
-									<div class="col-md-1">
-									</div>		
-									<div class="col-md-4">
-										<label class="control-label text-right f12" >Estado</label><BR>
-										<select class="form-control f12" id="estado" name="estado">
-										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
-										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Publicado</option>
-										</select>
-									</div>									
-
-								</div>
-								
 						     </div>
 
-							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
-							    <div class='row' style='padding:10px;'>
-								    <div class='col-md-12'>
-								    	<h5>SEO</h5>
-								    </div>
-							    </div>
-								<div class="row form-group"> 
-									<div class="col-md-12">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Palavras chave</label><BR>
-										<textarea name="seo" id="seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['seo']?></textarea>
-									</div>
-						        </div>
-								<div class="row form-group"> 
-									<!-- <form id="formUploadImagemSeo" enctype="multipart/form-data" method="post"> -->
-									    <input type='hidden' id="Vlink_seo" value="">
-										<div class="col-md-6">
-										    <div class="form-group">
-										      <label for="arquivo" class="control-label text-right f14">Imagem</label>
-										      <input type="file" name="link_seo" id="link_seo" class="form-control-file" accept="image/*">
-										    </div>
-										</div>
-										<div class="col-md-2">	
-											<BR>
-											<button class="btn btn-primary" id="btnUploadImagemSeo">Enviar</button>
-										</div>
-										<div class="col-md-4" id="resultado_link_seo" style='padding-top:25px;'>	
-										</div>
-								   <!-- </form> -->
-								</div>
-						        
-						     </div>
 						</div>
 						
 						<HR>
@@ -328,7 +283,7 @@ $cat1=executeQuery("select * from categorias ","all");
 					</div>
 					<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
 					  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
-					  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='veiculos_novos.php';">↩️ VOLTAR</button>&nbsp;
+					  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='veiculos_usados.php';">↩️ VOLTAR</button>&nbsp;
 					  <?
 					     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
 					   ?>
@@ -393,7 +348,7 @@ $cat1=executeQuery("select * from categorias ","all");
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 	
-     <script src="../globais/admin/js/pages/veiculos_novos.js">
+     <script src="../globais/vendedor/js/pages/veiculos_usados.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

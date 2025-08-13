@@ -67,7 +67,7 @@ $XqueryCap ="SELECT
 					 	left join marcas on (marcas.id_key=veiculos.id_key_marca)
 					 	left join modelos on (modelos.id_key=veiculos.id_key_modelo)
 					 where 
-					 	veiculos.apagado=0 and veiculos.tipo='1' ".$Xwhere_busca."
+					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.id_key_vendedor='".$_SESSION['vendedor']['id_key']."' ".$Xwhere_busca."
 		    		ORDER BY 
 						".$Xorder_by." ".$Xlimit." ";
 
@@ -88,12 +88,12 @@ if ($cap1)
 	foreach ($cap1 as $cap3)
 	{
 		$cap3['id']=$cap3['id_key'];
-		$cap3['titulo']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."' class='f12b'>".$cap3['titulo']."</a>";
-		$cap3['categoria']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."'>".$cap3['Cnome']."</a>";
-		$cap3['marca']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."'>".$cap3['MAnome']."</a>";
-		$cap3['modelo']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."'>".$cap3['MOnome']."</a>";
-		$cap3['preco']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."' class='f12b'>".number_format(@$cap3['preco'],2)."</a>";
-		$cap3['estado']="<a href='veiculos_novos_edit.php?id=".$cap3['id_key']."' class='f12b'>".(($cap3['estado']=="0") ? "Rascunho" : "Publicado")."</a>";
+		$cap3['titulo']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."' class='f12b'>".$cap3['titulo']."</a>";
+		$cap3['categoria']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."'>".$cap3['Cnome']."</a>";
+		$cap3['marca']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."'>".$cap3['MAnome']."</a>";
+		$cap3['modelo']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."'>".$cap3['MOnome']."</a>";
+		$cap3['preco']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."' class='f12b'>".number_format(@$cap3['preco'],2)."</a>";
+		$cap3['estado']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."' class='f12b'>".(($cap3['estado']=="0") ? "Pendente" : "Publicado")."</a>";
 	    $Aresults[] = $cap3;
 	    ++$XnRows;
 	}

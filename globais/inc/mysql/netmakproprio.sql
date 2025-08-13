@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 12/08/2025 às 13:06
+-- Tempo de geração: 13/08/2025 às 21:28
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -98,10 +98,10 @@ INSERT INTO `estados` (`id`, `codigo_uf`, `uf`, `nome`) VALUES
 
 CREATE TABLE `imagens` (
   `interno` int(8) NOT NULL,
-  `id_key` varchar(30) NOT NULL,
+  `id_key` varchar(30) DEFAULT NULL,
   `titulo` varchar(120) DEFAULT NULL,
   `obs` longtext DEFAULT NULL,
-  `contador` int(3) NOT NULL,
+  `contador` int(3) NOT NULL DEFAULT 0,
   `link` varchar(256) DEFAULT NULL,
   `formato` varchar(3) NOT NULL DEFAULT 'jpg',
   `id_key_origem` varchar(30) DEFAULT NULL,
@@ -111,8 +111,27 @@ CREATE TABLE `imagens` (
   `tamanho_resize` varchar(32) DEFAULT NULL,
   `tipo_origem` varchar(2) DEFAULT NULL,
   `tipo` varchar(2) DEFAULT NULL,
-  `principal` varchar(256) DEFAULT NULL
+  `principal` varchar(2) DEFAULT 'xx'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `imagens`
+--
+
+INSERT INTO `imagens` (`interno`, `id_key`, `titulo`, `obs`, `contador`, `link`, `formato`, `id_key_origem`, `fecha_hora`, `link_minia`, `tamanho_original`, `tamanho_resize`, `tipo_origem`, `tipo`, `principal`) VALUES
+(1101556, '05AUNKGWIHJDR2H9KKE1DNM6B5IJXX', '---', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_KWNBBB4QFF7CH9FKW5KVPBLEYDFQFG.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:29:51', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101557, 'U26HVLXRB5B7QEM1QNHL9A3DZJ4DDP', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_DJ55TUXA3XXERVNCEFX4MQLBZC1V7L.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:39:45', NULL, NULL, NULL, NULL, NULL, 'on'),
+(1101559, '8H865TK5L5ZUFZAVGU2XJFF2LNRE1F', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_1B1VICYJ8C9VE73Y8MGRC52AKLJ6K3.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:39:45', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101561, 'W91G73CVEDALBJ2I87M8SRDDXVNJTQ', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_X4IIQ3RQ5TP2T28UK8WWIHDRRN5H5S.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:18:33', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101562, 'FMW4YU6I47NCI6LKDFBJ9VEC93CF1X', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_V76IPK91B76XK6D5E3OKA97FKIDQOE.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:18:51', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101563, 'E0G997R1KMWP2P94TW97OFTWZMQCDW', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_OXPMK82USEZUMO2VPNRKCZRTJC6LV8.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:29:31', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101568, 'S1V0RJTVBG290XXXU2X3XW44YZVRXY', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_SNE2BPNAKUTMAJXYBGQM5FEEKDKRD4.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:18:49', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101570, 'T3BKUNUX0J9EREKRMKYIQ6LHZ1GVTP', 'Teste', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_7HJTCPL6DBUTXL7TCWMOL1KNLQ8E34.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:02:10', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101576, '64DKW8ACWF77F51RQRPQKK1GKO70UB', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_137S77C8S0SF9B142YUGBKKZCG74WL.png', 'png', 'RSU8OIPLL4HSMIA8B4MLBYQKO97R0Q', '2025-08-13 18:51:24', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101577, 'QF61A0TYYT2HWA2U6ULPONXKFIKWVG', 'teste', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_2TXYUB4178BRN04JRYSJQI47DEGFTW.png', 'png', '7GFTJJ9QTXTQUZADIV3FDQG7263MUP', '2025-08-13 18:54:49', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101579, 'J6C22VTXD8K1Y5GNRRQQV5K9S3O2YK', 'teste', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_PGOV34952YFTRHIO7UKZUXCCF88V5T.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-13 19:00:00', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101580, 'AX5MNZ9LRV25VTQPPTE1VTC65VLYRZ', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_8ZSKW3ZUAYQPA9EK0P3I8PVUSJ8F3X.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-13 18:59:55', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101581, 'MFUP7DO44T80I3N5XZYCMR5RDCT13Y', 'teste 2', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_VN3PQFTNQV9VY3NTNFTHFGJGQ126EB.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-13 19:01:17', NULL, NULL, NULL, NULL, NULL, 'xx');
 
 -- --------------------------------------------------------
 
@@ -126,8 +145,16 @@ CREATE TABLE `ips_suspeitos` (
   `fecha_hora` timestamp NULL DEFAULT NULL,
   `tentativas` int(5) DEFAULT NULL,
   `estado` varchar(1) DEFAULT NULL COMMENT 'X = bloqueado',
-  `fecha_hora_bloqueio` datetime DEFAULT NULL
+  `fecha_hora_bloqueio` datetime DEFAULT NULL,
+  `logs` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `ips_suspeitos`
+--
+
+INSERT INTO `ips_suspeitos` (`interno`, `ip`, `fecha_hora`, `tentativas`, `estado`, `fecha_hora_bloqueio`, `logs`) VALUES
+(1, '::1', '2025-08-13 17:34:00', 20, NULL, NULL, '13/08/2025 14:34:22 - Login vendedor\n13/08/2025 14:34:16 - Login vendedor\n13/08/2025 14:24:47 - Login vendedor\n13/08/2025 14:07:29 - Login vendedor\n13/08/2025 14:07:29 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:06 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n13/08/2025 14:05 - Login vendedor\n');
 
 -- --------------------------------------------------------
 
@@ -205,7 +232,12 @@ CREATE TABLE `veiculos` (
 --
 
 INSERT INTO `veiculos` (`interno`, `id_key`, `titulo`, `descrip`, `tipo`, `id_key_vendedor`, `preco`, `id_key_categoria`, `id_key_marca`, `id_key_modelo`, `seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`) VALUES
-(3, 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', 'Novo veículo', NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_Q8XASQERRZ2R1Q5RR1JOHXNO52WS9R.png', NULL, 'N', 0, '0');
+(3, 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', 'Empilhadeira X4 22 - Excelente opção de compra ', '<p>teste<br>gostei do negocio..<br>para mim tudo certo..<br><br></p>', 1, '--', 120000.00, '--', '--', '--', 'Teste do sistema teste', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_Q8XASQERRZ2R1Q5RR1JOHXNO52WS9R.png', 0.00, '', 0, ''),
+(4, 'FRLQ4S1Q7I60AN29U1FKZQRHH7W0Q4', NULL, NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 0, '0'),
+(5, 'RSU8OIPLL4HSMIA8B4MLBYQKO97R0Q', 'Novo veículo', NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 0, '0'),
+(6, '7GFTJJ9QTXTQUZADIV3FDQG7263MUP', 'Novo veículo', NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 0, '0'),
+(7, '5S1FW162CPVVA6IDHU42TQYVKT83GE', 'Novo veículo', NULL, 1, '--', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'N', 0, '0'),
+(8, 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', 'Linda empilhadeira.', '<p>teste do sistema..<br><br><br></p>', 2, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', 12000.00, '--', '--', '--', NULL, NULL, NULL, 'N', 0, '');
 
 -- --------------------------------------------------------
 
@@ -258,17 +290,18 @@ CREATE TABLE `vendedores` (
   `link_logo` varchar(256) DEFAULT NULL,
   `link_banner` varchar(256) DEFAULT NULL,
   `subdominio` varchar(30) DEFAULT NULL,
-  `apagado` int(1) NOT NULL DEFAULT 0
+  `apagado` int(1) NOT NULL DEFAULT 0,
+  `session_id` varchar(256) DEFAULT NULL,
+  `fult_login` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `ult_ip_login` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `vendedores`
 --
 
-INSERT INTO `vendedores` (`interno`, `id_key`, `nome`, `endereco`, `cep`, `email`, `telefone`, `celular`, `obs`, `nro`, `comple`, `cpf_cnpj`, `facebook`, `site`, `rg`, `razao_social`, `bairro`, `cidade`, `senha_acesso`, `codigo_int`, `fnac`, `uf`, `lat`, `longi`, `estado`, `comic`, `usuario`, `instagram`, `logo`, `capa`, `banner`, `foto`, `id_key_categorias`, `quem_somos`, `servicos_prestados`, `nome_empresa`, `slogan`, `modelo_site`, `rua`, `senha`, `altera_senha`, `link_logo`, `link_banner`, `subdominio`, `apagado`) VALUES
-(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', '', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', '', '', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 0),
-(228, 'BP4RNBCCTSRVBBK3Q03TG4FH7UCBDS', NULL, NULL, '', '', '', '', '', '', '', '', '', '', NULL, 'Novo veículo', '', '', NULL, NULL, NULL, '', NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', '', 0, NULL, NULL, NULL, 0),
-(229, 'TVCOIK1E5JZUC52GUKLSYAE2TXTFGU', NULL, NULL, '', '', '', '', '', '', '', '', '', '', NULL, 'Novo veículo', '', '', NULL, NULL, NULL, '', NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, '', '', 0, NULL, NULL, NULL, 0);
+INSERT INTO `vendedores` (`interno`, `id_key`, `nome`, `endereco`, `cep`, `email`, `telefone`, `celular`, `obs`, `nro`, `comple`, `cpf_cnpj`, `facebook`, `site`, `rg`, `razao_social`, `bairro`, `cidade`, `senha_acesso`, `codigo_int`, `fnac`, `uf`, `lat`, `longi`, `estado`, `comic`, `usuario`, `instagram`, `logo`, `capa`, `banner`, `foto`, `id_key_categorias`, `quem_somos`, `servicos_prestados`, `nome_empresa`, `slogan`, `modelo_site`, `rua`, `senha`, `altera_senha`, `link_logo`, `link_banner`, `subdominio`, `apagado`, `session_id`, `fult_login`, `ult_ip_login`) VALUES
+(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', 'sistemas10.info@gmail.com', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', '', '<p>teste<br>sdsds<br>sdsdasdasdasdas<br>dsaasdasdasdasd</p>', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', 'LBccVw1QX1I=', 1, NULL, NULL, 'pedrinho', 0, '6qf7ddq8e7kchdl353gn22esco', '2025-08-13 15:21:00', '::1');
 
 --
 -- Índices para tabelas despejadas
@@ -349,13 +382,13 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de tabela `imagens`
 --
 ALTER TABLE `imagens`
-  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1101526;
+  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1101582;
 
 --
 -- AUTO_INCREMENT de tabela `ips_suspeitos`
 --
 ALTER TABLE `ips_suspeitos`
-  MODIFY `interno` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `interno` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `marcas`
@@ -373,7 +406,7 @@ ALTER TABLE `modelos`
 -- AUTO_INCREMENT de tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  MODIFY `interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `interno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `vendedores`

@@ -11,11 +11,19 @@ if (isset($_POST['email']))
 	}
 	
 	$Xsenha=encrypt($_POST['senha'],1);
-	$log3=executeQuery("select interno,id_key,nome,nome_empresa,email,site,celular,telefone
-											 from vendedores 
-													where 
-														email='".$_POST['email']."' and senha='".$Xsenha."' 
-													limit 1");
+	$log3=executeQuery("select interno,
+											 id_key,
+											 nome,
+											 nome_empresa,
+											 email,
+											 site,
+											 celular,
+											 telefone,
+											 id_key_categorias
+										from vendedores 
+											where 
+												email='".$_POST['email']."' and senha='".$Xsenha."' 
+											limit 1");
 	if(@$log3['error'])
 	{
 		echo 'Erro login: ' . @$log3['error'];
@@ -23,7 +31,6 @@ if (isset($_POST['email']))
 	
 	if ($log3)
 	{
-	
 		$Xmensagem="<h4 class='text-success'>Email e senha corretos</h4>";
 		$_SESSION['tipo_login']="V";
 		$_SESSION['vendedor']=$log3;
@@ -42,7 +49,6 @@ if (isset($_POST['email']))
 		
 		header("Location: ../painel_vendedor/veiculos_usados.php");
 		exit;
-
 	}
 	else
 	{
@@ -89,6 +95,7 @@ if (isset($_POST['email']))
         <!-- Lado do Formulário -->
         <div class="col-md-6 d-flex align-items-center justify-content-center">
             <div class="login-box w-100 p-4">
+                <div class='text-center'><img src='img/logo_netmak.webp' width='300px;'></div>
                 <h3 class="text-center mb-4">Acesso ao Sistema</h3>
 
                 <form action="login_vendedor.php" method="POST">
