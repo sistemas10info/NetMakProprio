@@ -31,6 +31,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tabelas:</h6>
                         <a class="collapse-item" href="veiculos_novos.php">Veiculos novos</a>
+                        <a class="collapse-item" href="produtos.php">Produtos</a>
                         <a class="collapse-item" href="vendedores.php">Vendedores</a>
                     </div>
                 </div>

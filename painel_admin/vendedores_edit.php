@@ -23,6 +23,8 @@ else
 
 $cat1=executeQuery("select * from categorias ","all");
 
+$cap1=executeQuery("select * from categorias_produtos ","all");
+
 $est1=executeQuery("select * from estados","all");
 			
 ?>
@@ -275,7 +277,7 @@ $est1=executeQuery("select * from estados","all");
 								</div>
 	
 								<div class="row form-group"> 
-									<div class="col-md-5">
+									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Categorias habilitadas</label><BR>
 										<select name="id_key_categorias[]" id="id_key_categorias"  multiple class="form-control  f14">
 										<?
@@ -288,7 +290,21 @@ $est1=executeQuery("select * from estados","all");
 										?>
 										</select>
 									</div>
-									<div class="col-md-7">
+									<div class="col-md-6">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Categorias de produtos habilitados</label><BR>
+										<select name="id_key_categorias_produtos[]" id="id_key_categorias_produtos"  multiple class="form-control  f14">
+											<option value="--" <? if (str_contains(@$ven3['id_key_categorias_produtos'], "--")) echo " selected ";?>>** Sem categorias habilitadas</option>
+										<?
+										foreach ($cap1 as $cap3)
+										{
+											echo "<option value='".$cap3['id_key']."' ";
+											if (str_contains(@$ven3['id_key_categorias_produtos'], $cap3['id_key'])) echo " selected ";
+											echo ">".$cap3['nome']."</option>";
+										}
+										?>
+										</select>
+									</div>
+									<div class="col-md-12" style="margin-top:10px;">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Observações</label><BR>
 										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'><?=$ven3['obs']?></textarea>
 									</div>

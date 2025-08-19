@@ -10,21 +10,22 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-if (!empty($_POST['id']))
+if (!empty($_POST['id_key']))
 {
 	$delete = executeQuery("delete from 
-												veiculos
+												imagens
 											where
-												id_key='".$_POST['id']."' limit 1");
+												id_key='".$_POST['id_key']."' limit 1");
 	if(@$delete['error'])
 	{
 		http_response_code(400);
 		$response['msg'] = 'Erro ao deletar registro: ' . $delete['error'];
 		exit(json_encode($response));
 	}
+
 }
 
 http_response_code(200);
-$response['msg']    = 'Veículo apagado com sucesso..';
+$response['msg']    = 'Imagem apagada com sucesso..';
 $response['id_key'] = $_POST['id_key'];
 exit(json_encode($response));

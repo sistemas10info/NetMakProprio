@@ -24,6 +24,7 @@ if (@$_POST['estado']=="9")
     if (empty($_POST['celular'])) $Xmensagem.="Nro de celular tem que estar preenchido<BR>";
     if (!validar_email($_POST['email'])) $Xmensagem.="Email inválido<BR>";
     if (!isset($_POST['id_key_categorias'])) $Xmensagem.="Precisa definir alguma categoria<BR>";
+    if (!isset($_POST['id_key_categorias_produtos'])) $Xmensagem.="Precisa definir alguma categoria de produtos<BR>";
     
     if (!empty($Xmensagem))
     {
@@ -36,10 +37,16 @@ if (@$_POST['estado']=="9")
 }
 
 $Xid_key_categorias="";
+$Xid_key_categorias_produtos="";
 
 if (isset($_POST['id_key_categorias']))
 {
 	$Xid_key_categorias=implode("-",$_POST['id_key_categorias']);
+}
+
+if (isset($_POST['id_key_categorias_produtos']))
+{
+	$Xid_key_categorias_produtos=implode("-",$_POST['id_key_categorias_produtos']);
 }
 
 if ($_POST['altera_senha']=="1")
@@ -125,7 +132,8 @@ $update = executeQuery("
 											instagram	      	 		= '".((!empty(@$_POST['instagram']))         ? @$_POST['instagram']     : '')."',
 											".$Xsql_senha." 
 											facebook	      	 		= '".((!empty(@$_POST['facebook']))         ? @$_POST['facebook']     : '')."',
-											id_key_categorias = '".$Xid_key_categorias."' 
+											id_key_categorias = '".$Xid_key_categorias."',
+											id_key_categorias_produtos = '".$Xid_key_categorias_produtos."' 
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 

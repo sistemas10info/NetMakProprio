@@ -115,90 +115,22 @@ if (file_exists($arquivo)) {
 				<!-- conteudo -->
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
 				    <div class='row' style='padding:5px;'>
-				    	<input type="hidden" id="id_key_categoria" value="">
-				    	<input type="hidden" id="id_key_marca" value="">
-				    	<div class='col-md-12 well'>
-				    	     <h3>Veículos</h3>
-				    	</div>
-					    <div class='col-md-3'>
-					    	<h2>Categorias</h2>
-							<table class="table-light table table-bordered table-striped table-hover f12">
-								<thead>
-									<tr bgcolor='#D3D3D3'>
-										<th width="90%;"><a href='javascript:add_categoria();' class='f18'>+</a> Nome</th>
-										<th width="10%;" class='text-center'>...</th>
-									</tr>
-								</thead>
-								<?
-								$cat1=executeQuery("select * from categorias order by nome","all");
-								if(@$cat1['error'])
-								{
-									die('Erro busca: ' . @$cap1['error']);
-								}
-								if ($cat1)
-								{
-								    foreach ($cat1 as $cat3)
-								    {
-										echo "<tr>
-												  <td><i class='fa fa-arrow-right categorias'  id='categoria_".$cat3['id_key']."' 
-												  			style='display:none;'>
-												  		 </i> <a href='javascript:ver_marcas(\"".$cat3['id_key']."\");'>".$cat3['nome']."</a></td>
-												  <td class='text-center'><a href='javascript:apagar_registro(\"".$cat3['id_key']."\",\"categorias\");'><i class='fa fa-trash'></i></a></td>
-												</tr>";
-								    }
-								}
-								?>
-							</table>
-					    </div>
 					    <div class='col-md-4'>
-					    	<h2>Marcas</h2>
-					    	<div id="div_marcas">
-					    	</div>
-					    </div>
-					    <div class='col-md-5'>
-					    	<h2>Modelos</h2>
-					    	<div id="div_modelos">
-					    	</div>
+					    	<h3>Produtos</h3>
 					    </div>
 				    </div>
-
-					<!-- categorias marca -->
-				    <div class='row' style='padding:5px; border-top:1px solid silver;'>
-				    	<input type="hidden" id="id_key_categoria" value="">
-				    	<input type="hidden" id="id_key_marca" value="">
-				    	<div class='col-md-12 well'>
-				    	     <h3>Produtos</h3>
-				    	</div>
-					    <div class='col-md-3'>
-					    	<h2>Categorias</h2>
-							<table class="table-light table table-bordered table-striped table-hover f12">
-								<thead>
-									<tr bgcolor='#D3D3D3'>
-										<th width="90%;"><a href='javascript:add_categoria_marca();' class='f18'>+</a> Nome</th>
-										<th width="10%;" class='text-center'>...</th>
-									</tr>
-								</thead>
-								<?
-								$cat1=executeQuery("select * from categorias_produtos order by nome","all");
-								if(@$cat1['error'])
-								{
-									die('Erro busca: ' . @$cap1['error']);
-								}
-								if ($cat1)
-								{
-								    foreach ($cat1 as $cat3)
-								    {
-										echo "<tr>
-												  <td>".$cat3['nome']."</td>
-												  <td class='text-center'><a href='javascript:apagar_registro(\"".$cat3['id_key']."\",\"categorias_produtos\");'><i class='fa fa-trash'></i></a></td>
-												</tr>";
-								    }
-								}
-								?>
-							</table>
-					    </div>
-				    </div>
-
+					<table class="table-light table table-bordered table-striped table-hover f12" id="table-produtos" >
+						<thead>
+							<tr bgcolor='#D3D3D3'>
+								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
+								<th data-column-id="titulo" data-align="left" data-header-align="left" data-width="45%;">Produto</th>
+								<th data-column-id="categoria" data-align="center" data-header-align="center" data-width="10%;">Categoria</th>
+								<th data-column-id="preco" data-align="center" data-header-align="center" data-width="10%;">Preço</th>
+								<th data-column-id="preco_oferta" data-align="center" data-header-align="center" data-width="10%;">Preço Oferta</th>
+								<th data-column-id="estado" data-align="right" data-header-align="center"  data-width="10%;">Estado</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
 				
 				<!-- Fim conteudo -->
@@ -261,13 +193,7 @@ if (file_exists($arquivo)) {
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
-	 <!-- SweetAlert2 CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-	
-	<!-- SweetAlert2 JS -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-
-	<script src="../globais/admin/js/pages/categorias.js">
+	<script src="../globais/admin/js/pages/produtos.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -278,9 +204,6 @@ if (file_exists($arquivo)) {
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     
-    
-
-
 </body>
 
 </html>

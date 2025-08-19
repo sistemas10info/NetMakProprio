@@ -192,6 +192,9 @@ function apagar_registro(Xid_key,Xtipo)
 			        case "categorias":
 			            window.location="categorias.php";
 			            break;
+			        case "categorias_marcas":
+			            window.location="categorias.php";
+			            break;
 			        case "marcas":
 			            ver_marcas($('#id_key_categoria').val());
 			            break;
@@ -232,3 +235,41 @@ function apagar_registro(Xid_key,Xtipo)
     });
 
 }
+
+
+function add_categoria_marca() 
+{
+    Swal.fire({
+        title: 'Digite a categoria da marca',
+        input: 'text',
+        inputLabel: 'Categoria',
+        inputPlaceholder: 'Escreva aqui...',
+        showCancelButton: true,
+        confirmButtonText: 'Salvar',
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'O campo não pode estar vazio!';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const texto = result.value;
+
+            // Envia via AJAX para salvar
+            $.ajax({
+                url: '../globais/admin/json/categorias/salvar_categoria_marca.php',
+                type: 'POST',
+                data: { 'nome' : texto },
+                success: function(response) {
+                    Swal.fire('Salvo!', 'A categoria foi salva com sucesso.', 'success');
+                    window.location="categorias.php";
+                },
+                error: function() {
+                    Swal.fire('Erro!', 'Houve um erro ao salvar o texto.', 'error');
+                }
+            });
+        }
+    });
+}
+
