@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 19/08/2025 às 15:44
+-- Tempo de geração: 19/08/2025 às 16:14
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -286,7 +286,10 @@ CREATE TABLE `usuarios` (
   `estado` varchar(1) DEFAULT '1' COMMENT '\r\n1=on | x=off',
   `nivel` int(1) DEFAULT 2 COMMENT '1:admin - 2:usuario',
   `altera_senha` int(1) NOT NULL DEFAULT 0 COMMENT '0=nao - 1=sim',
-  `avatar` varchar(256) DEFAULT NULL
+  `avatar` varchar(256) DEFAULT NULL,
+  `site` varchar(256) DEFAULT NULL,
+  `instagram` varchar(256) DEFAULT NULL,
+  `facebook` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

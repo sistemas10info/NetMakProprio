@@ -139,7 +139,7 @@ else
 				    	<h3><?=$Xtitulo?></h3>
 				    </div>
 			    </div>
-				<form name="FormVendedor" id="FormVendedor" method="post" action="../globais/admin/json/vendedores/post.php">
+				<form name="FormUsuario" id="FormUsuario" method="post" action="../globais/admin/json/usuarios/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
@@ -181,62 +181,6 @@ else
 
 							<!-- endereço -->
 							
-							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
-							    <div class='row' style='padding:10px;'>
-								    <div class='col-md-12'>
-								    	<h5>Endereço</h5>
-								    </div>
-							    </div>
-	
-								<div class="row form-group"> 
-									<div class="col-md-2">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">CEP</label><BR>
-										<input type="text" name="cep" id="cep" class="form-control f12 maskCEP" value="<?=$ven3['cep']?>" onblur="javascript:busca_cep();">
-									</div>
-									<div class="col-md-6">
-										<label class="control-label text-right f12" >Rua</label><BR>
-										<input type="text" name="rua" id="rua" class="form-control f12" value="<?=$ven3['rua']?>">
-									</div>
-									<div class="col-md-2">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Nro</label><BR>
-										<input type="text" name="nro" id="nro" class="form-control f12" value="<?=$ven3['nro']?>">
-									</div>
-
-									<div class="col-md-2">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Complemento</label><BR>
-										<input type="text" name="comple" id="comple" class="form-control f12" value="<?=$ven3['comple']?>">
-									</div>
-
-								</div>
-	
-								<div class="row form-group"> 
-									<div class="col-md-4">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Cidade</label><BR>
-										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=$ven3['cidade']?>">
-									</div>
-									<div class="col-md-4">
-										<label class="control-label text-right f12" >Bairro</label><BR>
-										<input type="text" name="bairro" id="bairro" class="form-control f12" value="<?=$ven3['bairro']?>">
-									</div>
-									<div class="col-md-4">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Estado</label><BR>
-										<select name="uf" id="uf" class="form-control f12">
-										<?
-										foreach ($est1 as $est3)
-										{
-											 echo "<option value='".$est3['uf']."' ";
-											 if ($est3['uf']==@$ven3['uf']) echo " selected ";
-											 echo ">".$est3['nome']."</option>";
-										}
-										?>
-										</select>
-									</div>
-
-
-								</div>
-
-							    
-							</div>
 							
 							<!-- fim endereço -->
 
@@ -267,42 +211,7 @@ else
 										   <option value='1' <? if ($ven3['estado']=="1") echo "selected ";?>>Pendente</option>
 										   <option value='9' <? if ($ven3['estado']=="9") echo "selected ";?>>Ativo</option>
 										</select>
-									</div>
-								</div>
-	
-								<div class="row form-group"> 
-									<div class="col-md-6">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Categorias habilitadas</label><BR>
-										<select name="id_key_categorias[]" id="id_key_categorias"  multiple class="form-control  f14">
-										<?
-										foreach ($cat1 as $cat3)
-										{
-											echo "<option value='".$cat3['id_key']."' ";
-											if (str_contains(@$ven3['id_key_categorias'], $cat3['id_key'])) echo " selected ";
-											echo ">".$cat3['nome']."</option>";
-										}
-										?>
-										</select>
-									</div>
-									<div class="col-md-6">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Categorias de produtos habilitados</label><BR>
-										<select name="id_key_categorias_produtos[]" id="id_key_categorias_produtos"  multiple class="form-control  f14">
-											<option value="--" <? if (str_contains(@$ven3['id_key_categorias_produtos'], "--")) echo " selected ";?>>** Sem categorias habilitadas</option>
-										<?
-										foreach ($cap1 as $cap3)
-										{
-											echo "<option value='".$cap3['id_key']."' ";
-											if (str_contains(@$ven3['id_key_categorias_produtos'], $cap3['id_key'])) echo " selected ";
-											echo ">".$cap3['nome']."</option>";
-										}
-										?>
-										</select>
-									</div>
-									<div class="col-md-12" style="margin-top:10px;">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Observações</label><BR>
-										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'><?=$ven3['obs']?></textarea>
-									</div>
-
+									</div>									
 								</div>
 
 						     </div>
@@ -339,117 +248,12 @@ else
 						
 						<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
 						  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
-						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='vendedores.php';">↩️ VOLTAR</button>&nbsp;
+						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='usuarios.php';">↩️ VOLTAR</button>&nbsp;
 						  <?
 						     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
 						   ?>
 						</div>
 					</form>
-					<HR>
-					<?
-					if (!empty($_GET['id']))
-					{
-					?>
-	                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
-							<div class='col-md-12'>
-							    <div style='padding:10px;'>
-								    <div class='text-center'>
-								    	<h3>Configuração do Site</h3>
-								    </div>
-							    </div>
-								<div class="row form-group"> 
-									<div class="col-md-6">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Quem somos:</label><BR>
-										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'><?=$ven3['quem_somos']?></textarea>
-									</div>
-									<div class="col-md-6">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Serviços prestados:</label><BR>
-										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'><?=$ven3['servicos_prestados']?></textarea>
-									</div>
-							    </div>
-						   </div>
-						   <div class='row col-md-12'>
-						        <div class='col-md-6'>
-									<div class="row form-group" style='padding-top:8px;'> 
-										<div class="col-md-9">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Nome da empresa</label><BR>
-											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="<?=$ven3['nome_empresa']?>">
-										</div>
-										<div class="col-md-3">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo de site</label><BR>
-											<select name="modelo_site" id="modelo_site" class='form-control'>
-											    <option value="1" <? if ($ven3['modelo_site']=="1") echo "selected ";?>>1</option>
-											    <option value="2" <? if ($ven3['modelo_site']=="2") echo "selected ";?>>2</option>
-											    <option value="3" <? if ($ven3['modelo_site']=="3") echo "selected ";?>>3</option>
-											</select>
-										</div>
-
-								    </div>
-								    <div class="row form-group">
-										<div class="col-md-9">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Slogan</label><BR>
-											<input type="text" name="slogan" id="slogan" class="form-control f12" value="<?=$ven3['slogan']?>">
-										</div>
-										<div class="col-md-3">
-											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
-											<input type="text" name="subdominio" id="subdominio" class="form-control f12" autocomplete="off" value="<?=$ven3['subdominio']?>">
-										</div>
-									</div>
-						        </div>
-						        <div class='col-md-6'>
-									<div class="row form-group"> 
-										<form id="formUploadLogo" enctype="multipart/form-data" method="post">
-										    <input type='hidden' id="link_logo" value="">
-										    <div class='row'>
-												<div class="col-md-6">
-												    <div class="form-group">
-												      <label for="arquivo" class='f16'>Logomarca</label>
-												      <input type="file" name="logo" id="logo" class="form-control-file" required accept="image/*">
-												    </div>
-												</div>
-												<div class="col-md-2">	
-													<BR>
-													<button type="submit" class="btn btn-primary" >Enviar</button>
-												</div>
-												<div class="col-md-4" id="resultado_logo" style='padding-top:25px;'>	
-												</div>
-	
-										    </div>
-									    </form>
-									</div>
-									<div class="row form-group"> 
-										<form id="formUploadBanner" enctype="multipart/form-data" method="post">
-										    <input type='hidden' id="link_banner" value="">
-										    <div class='row'>
-												<div class="col-md-6">
-												    <div class="form-group">
-												      <label for="arquivo" class='f16'>Banner</label>
-												      <input type="file" name="banner" id="banner" class="form-control-file" required accept="image/*">
-												    </div>
-												</div>
-												<div class="col-md-2">	
-													<BR>
-													<button type="submit" class="btn btn-primary" >Enviar</button>
-												</div>
-												<div class="col-md-4" id="resultado_banner">	
-												</div>
-										    </div>
-									    </form>
-								   </div>
-							   </div>
-							   <div id="mensagem"></div>
-							 </div>
-							 
-				        </div>
-
-						<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
-						  <a  class="btn btn-info btn-sm" href="javascript:salvar_site();">💾 SALVAR CONFIGURAÇÕES</a>&nbsp;
-						  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='vendedores.php';">↩️ VOLTAR</button>&nbsp;
-						</div>
-				        
-				    <?
-				    }
-				    ?>	
 					
 					<!-- fim endereço -->
 
