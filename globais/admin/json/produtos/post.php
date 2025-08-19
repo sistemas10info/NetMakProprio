@@ -22,8 +22,6 @@ if (@$_POST['estado']=="9")
     if (empty($_POST['titulo'])) $Xmensagem.="Titulo de anuncio deve estar preenchido<BR>";
     if (empty($_POST['descrip'])) $Xmensagem.="Descrição do anuncio deve estar preenchido<BR>";
     if ($_POST['id_key_categoria']=="--") $Xmensagem.="Categoria deve estar preenchida<BR>";
-    if ($_POST['id_key_marca']=="--") $Xmensagem.="Marca deve estar preenchida<BR>";
-    if ($_POST['id_key_modelo']=="--") $Xmensagem.="Modelo deve estar preenchido<BR>";
     
     if (!empty($Xmensagem))
     {
@@ -40,7 +38,7 @@ if (empty($_POST['id']))
 	$_POST['id']=buildIdKey(30);
 	$insert = executeQuery("
 										INSERT INTO
-											veiculos
+											produtos
 										SET
 											id_key        	= '".$_POST['id']."'
 										");
@@ -54,34 +52,17 @@ if (empty($_POST['id']))
 
 }
 
-/*
-Array
-(
-    [id] => UEW052HKRR2ICFEFZXPT83JO5TBFV9
-    [titulo] => Novo veículo
-    [descrip] => 
-    [id_key_categoria] => --
-    [id_key_marca] => --
-    [id_key_modelo] => --
-    [preco] => 0.00
-    [comic] => 0.00
-    [comic_fica] => N
-    [estado] => 0
-    [seo] => 
-)
-*/
 
 $Xpreco=str_replace(",","",$_POST['preco']);
-$update = executeQuery("update veiculos
+$Xpreco_oferta=str_replace(",","",$_POST['preco_oferta']);
+$update = executeQuery("update produtos
 									    SET
 									    	tipo='1',
-									    	id_key_vendedor='--',
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
-											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
-											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
 											preco    	 		= '".$Xpreco."',
+											preco_oferta   = '".$Xpreco_oferta."',
 											comic    	 		= '".((!empty(@$_POST['comic']))      ? @$_POST['comic']     : '')."',
 											comic_fixa    	 		= '".((!empty(@$_POST['comic_fixa']))      ? @$_POST['comic_fixa']     : '')."',
 											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
@@ -97,7 +78,7 @@ if(@$update['error'])
 }
 
 http_response_code(200);
-$response['msg']    = 'Seu vendedor foi cadastrado.';
+$response['msg']    = 'Seu produto foi cadastrado.';
 $response['id'] = $_POST['id'];
 
 exit(json_encode($response));

@@ -20,7 +20,7 @@ if (empty($_POST['id']))
 }
 
 $update = executeQuery("
-									update vendedores
+									update produtos
 									    SET
 											apagado			= '1'
 									   WHERE
@@ -34,7 +34,7 @@ if(@$update['error'])
 }
 
 http_response_code(200);
-$response['msg']    = 'Vendedor movido para lixeira.....';
+$response['msg']    = 'Produto movido para lixeira.....';
 $response['id'] = $_POST['id'];
 
 exit(json_encode($response));
