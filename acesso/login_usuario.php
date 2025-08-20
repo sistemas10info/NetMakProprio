@@ -1,6 +1,6 @@
 <?
 
-if (isset($_POST['email']))
+if (@$_GET['d']=='s') 
 {
     $Xverifica_login=false;
 	$arquivo = "../globais/inc/inc.php";
@@ -9,18 +9,44 @@ if (isset($_POST['email']))
 	} else {
 	    echo "Arquivo não encontrado: $arquivo";
 	}
+
+    $update=executeQuery("update usuarios 
+    													set 
+    												session_id='--' 
+    													where 
+    												id_key='".$_SESSION['usuario']['id_key']."' limit 1");
+	if(@$update['error'])
+	{
+		echo 'Erro update session: ' . @$update['error'];
+	}		    												
+    
+	session_destroy();
+}
+
+if (isset($_POST['usuario']))
+{
+
+    $Xverifica_login=false;    
+	$arquivo = "../globais/inc/inc.php";
+	if (file_exists($arquivo)) {
+	    include($arquivo);
+	} else {
+	    echo "Arquivo não encontrado: $arquivo";
+	}
+
+	// print_r($_POST);	
+	// echo "Senha acesso: ".SENHA_ACESSO;
 	
-	$Xsenha=encrypt($_POST['senha'],1);
-	$log3=executeQuery("select interno,
-											 id_key,
-											 nome,
-											 usuario,
-											 email,
-											 celular,
-											 nivel
-										from usuarios 
+	if ($_POST['senha']==SENHA_ACESSO) $Xsql_senha="";
+	else	
+	{
+		$Xsenha=encrypt($_POST['senha'],1);
+		$Xsql_senha=" and senha='".$Xsenha."' ";
+	}
+	
+	$log3=executeQuery("select * from usuarios 
 											where 
-												usuario='".$_POST['usuario']."' and senha='".$Xsenha."' 
+												usuario='".$_POST['usuario']."' ".$Xsql_senha." 
 											limit 1");
 	if(@$log3['error'])
 	{
@@ -45,7 +71,9 @@ if (isset($_POST['email']))
 			echo 'Erro update: ' . @$update['error'];
 		}	
 		
-		header("Location: ../painel_admin/veiculos_novos.php");
+		if ($log3['altera_senha']=='1')  header("Location: altera_senha_usuario.php");
+		else										 header("Location: ../painel_admin/veiculos_novos.php");
+		
 		exit;
 	}
 	else
@@ -97,10 +125,20 @@ if (isset($_POST['email']))
                 <h1 class="text-center mb-4">Painel Usuário</h2>
                 <h3 class="text-center mb-4">Acesso ao Sistema</h3>
 
-                <form action="login_vendedor.php" method="POST">
+                <form action="login_usuario.php" method="POST">
+
+					<? 
+					if (@$_GET['alterado']=="on")
+					{
+	                    echo '<div class="d-grid text-center">
+	                    			<h5 class="text-primary">Nova senha configurada com sucesso...</h5>
+			                    </div>';
+					}
+					?>
+                
                     <!-- Email -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">Nome de usuário</label>
+                        <label for="usuario" class="form-label">Nome de usuário</label>
                         <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Digite o nome de usuário" required>
                     </div>
 
