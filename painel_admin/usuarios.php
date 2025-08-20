@@ -123,10 +123,10 @@ if (file_exists($arquivo)) {
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
-								<th data-column-id="usuario" data-align="left" data-header-align="left" data-width="50%;">Usuário</th>
 								<th data-column-id="nome" data-align="left" data-header-align="left" data-width="50%;">Nome</th>
-								<th data-column-id="celular" data-align="left" data-header-align="left" data-width="50%;">Celular</th>
-								<th data-column-id="nivel" data-align="center" data-header-align="center" data-width="20%;">Nivel</th>
+								<th data-column-id="usuario" data-align="left" data-header-align="left" data-width="20%;">Usuário</th>
+								<th data-column-id="celular" data-align="left" data-header-align="left" data-width="20%;">Celular</th>
+								<th data-column-id="nivel" data-align="center" data-header-align="center" data-width="10%;">Nivel</th>
 							</tr>
 						</thead>
 					</table>

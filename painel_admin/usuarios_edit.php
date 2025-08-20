@@ -5,16 +5,16 @@ if (file_exists($arquivo)) {
 } else {
     echo "Arquivo não encontrado: $arquivo";
 }
-
+ 
 if (!isset($_GET['id'])) 
 {
-   $ven3=[];
-   $ven3['razao_social']="Novo usuário";
+   $usu3=[];
+   $usu3['nome']="Novo usuário";
    $Xtitulo="Novo usuário";
 }
 else
 {
-   $ven3=executeQuery("select * from usuarios 
+   $usu3=executeQuery("select * from usuarios 
    															where 
    													  id_key='".$_GET['id']."' 
    													  		limit 1");
@@ -151,29 +151,36 @@ else
 							    </div>
 	
 								<div class="row form-group"> 
-									<div class="col-md-9">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Razão Social</label><BR>
-										<input type="text" name="razao_social" id="razao_social" class="form-control f12" value="<?=$ven3['razao_social']?>">
+									<div class="col-md-7">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Nome completo</label><BR>
+										<input type="text" name="nome" id="nome" class="form-control f12" value="<?=@$usu3['nome']?>">
 									</div>
 									<div class="col-md-3">
-										<label class="control-label text-right f12" >CNPJ</label><BR>
+										<label class="control-label text-right f12" >CPF/CNPJ</label><BR>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control f12" value="" 
-													onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=$ven3['cpf_cnpj']?>">
+													onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=@$usu3['cpf_cnpj']?>">
+									</div>
+									<div class="col-md-2">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Nivel</label><BR>
+										<select name="nivel" class="form-control" id="nivel" name="nivel">
+										   <option value="1" <? if (@$usu3['nivel']=="1") echo "selected "; ?>>Admin</option>
+										   <option value="2" <? if (@$usu3['nivel']=="2") echo "selected "; ?>>Usúario</option>
+										</select>
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Telefône</label><BR>
-										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=$ven3['telefone']?>">
+										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=@$usu3['telefone']?>">
 									</div>
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Celular</label><BR>
-										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=$ven3['celular']?>">
+										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=@$usu3['celular']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Email</label><BR>
-										<input type="text" name="email" id="email" class="form-control f12" value="<?=$ven3['email']?>">
+										<input type="text" name="email" id="email" class="form-control f12" value="<?=@$usu3['email']?>">
 									</div>
 								</div>
 							    
@@ -185,36 +192,6 @@ else
 							<!-- fim endereço -->
 
 							<!-- configuração do site -->
-							
-						</div>
-						<div class='col-md-5'>
-							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
-							    <div class='row' style='padding:10px;'>
-								    <div class='col-md-12'>
-								    	<h5>Dados de acesso</h5>
-								    </div>
-							    </div>
-								<div class="row form-group"> 
-									<div class="col-md-4">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Nome de Usuário</label><BR>
-										<input type="text" name="usuario" id="usuario" class="form-control f12" value="<?=$ven3['usuario']?>">
-									</div>
-									<div class="col-md-4">
-									    <input type="hidden" id="altera_senha" name="altera_senha" value="0">
-										<label class="control-label text-right f12" >Senha <a href="javascript:gerar_senha();"><i class='fas fa-refresh'></i></a></label><BR>
-										<input type="text" name="senha" id="senha" class="form-control f12" value="" maxlength="30" style='display:none;' readonly>
-									</div>
-									<div class="col-md-4">
-										<label class="control-label text-right f12" >Estado</label><BR>
-										<select class="form-control f12" id="estado" name="estado">
-										   <option value='0' <? if ($ven3['estado']=="0") echo "selected ";?>>Rascunho</option>
-										   <option value='1' <? if ($ven3['estado']=="1") echo "selected ";?>>Pendente</option>
-										   <option value='9' <? if ($ven3['estado']=="9") echo "selected ";?>>Ativo</option>
-										</select>
-									</div>									
-								</div>
-
-						     </div>
 
 							<div class='card-body border-left-warning shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
 							    <div class='row' style='padding:10px;'>
@@ -225,24 +202,83 @@ else
 								<div class="row form-group"> 
 									<div class="col-md-12">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Site</label><BR>
-										<input type="text" name="site" id="site" class="form-control f12" value="<?=$ven3['site']?>">
+										<input type="text" name="site" id="site" class="form-control f12" value="<?=@$usu3['site']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Instagram</label><BR>
-										<input type="text" name="instagram" id="instagram" class="form-control f12" value="<?=$ven3['instagram']?>">
+										<input type="text" name="instagram" id="instagram" class="form-control f12" value="<?=@$usu3['instagram']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Facebook</label><BR>
-										<input type="text" name="facebook" id="facebook" class="form-control f12" value="<?=$ven3['facebook']?>">
+										<input type="text" name="facebook" id="facebook" class="form-control f12" value="<?=@$usu3['facebook']?>">
 									</div>
 								</div>
 	
 								<!-- fim redes sociais -->
 	
 							</div>
+
+							
+						</div>
+						<div class='col-md-5'>
+						
+							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
+								<div class="row form-group"> 
+									<!-- <form id="formUploadImagemSeo" enctype="multipart/form-data" method="post"> -->
+									    <input type='hidden' id="Vlink_avatar" name="Vlink_avatar" value="<?=@$usu3['link_avatar']?>">
+									    <div class='text-center col-md-12' style='margin-bottom:20px;'>
+									    	<h3>Avatar</h3>
+									    </div>
+										<div class="col-md-8">
+										    <div class="form-group">
+ 										       <input type="file" name="link_avatar" id="link_avatar" class="form-control-file" accept="image/*">
+										    </div>
+										</div>
+										<div class="col-md-4 text-right">	
+											<button class="btn btn-primary" id="btnUploadImagemAvatar">Enviar</button>
+										</div>
+										<div class="col-md-12 text-center" id="resultado_link_avatar" style='padding-top:25px;'>	
+											<?
+											if (@$usu3['link_avatar']) echo "<img src='".$usu3['link_avatar']."' class='rounded-circle img-profile' style='width:120px !important;'>";
+											else							   echo "<img src='../globais/images/nophoto.jpeg' style='width:120px !important;' class='rounded-circle img-profile'>";
+											?>
+										</div>
+								   <!-- </form> -->
+								</div>
+							</div>
+						
+							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
+							    <div class='row' style='padding:10px;'>
+								    <div class='col-md-12'>
+								    	<h5>Dados de acesso</h5>
+								    </div>
+							    </div>
+								<div class="row form-group"> 
+									<div class="col-md-4">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Nome de Usuário</label><BR>
+										<input type="text" name="usuario" id="usuario" class="form-control f12" value="<?=@$usu3['usuario']?>">
+									</div>
+									<div class="col-md-4">
+									    <input type="hidden" id="altera_senha" name="altera_senha" value="0">
+										<label class="control-label text-right f12" >Senha <a href="javascript:gerar_senha();"><i class='fas fa-refresh'></i></a></label><BR>
+										<input type="text" name="senha" id="senha" class="form-control f12" value="" maxlength="30" style='display:none;' readonly>
+									</div>
+									<div class="col-md-4">
+										<label class="control-label text-right f12" >Estado</label><BR>
+										<select class="form-control f12" id="estado" name="estado">
+										   <option value='0' <? if (@$usu3['estado']=="0") echo "selected ";?>>Rascunho</option>
+										   <option value='1' <? if (@$usu3['estado']=="1") echo "selected ";?>>Pendente</option>
+										   <option value='9' <? if (@$usu3['estado']=="9") echo "selected ";?>>Ativo</option>
+										</select>
+									</div>									
+								</div>
+
+						     </div>
+						     
+
 
 						</div>
 						

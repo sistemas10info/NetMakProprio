@@ -20,7 +20,7 @@ if (empty($_POST['id']))
 }
 
 $update = executeQuery("
-									update vendedores
+									update usuarios
 									    SET
 											apagado			= '1'
 									   WHERE

@@ -1397,11 +1397,11 @@ function validar_email($email)
 function verificar_acesso()
 {
 
-return true;
+// return true;
 // aqui verificamos o acesso via session de usuarios
 // verificaremos se o session_id corresponde ao campo salvo dentro do usuario.
 // caso tenha suspeita vamos salvar o IP somando a tentativa, se tem tentativa > 5 enviamos para bloquieo.
-if ($_SESSION['tipo_login']=="V")
+if (@$_SESSION['tipo_login']=="V")
 {
      $ver3=executeQuery("select interno from vendedores 
      													where 
@@ -1410,7 +1410,7 @@ if ($_SESSION['tipo_login']=="V")
 	 														limit 1");
 	 if(@$ver3['error'])
 	 {
-	    echo 'Erro verificação: ' . @$ver3['error'];
+	    echo 'Erro verificação vendedor: ' . @$ver3['error'];
 	 }	
 	 
 	 if (!$ver3)
@@ -1420,7 +1420,26 @@ if ($_SESSION['tipo_login']=="V")
 	 }
 	 else return true;
 }
-else return true;
+elseif (@$_SESSION['tipo_login']=="U")
+{
+     $ver3=executeQuery("select interno from usuarios 
+     													where 
+     														id_key='".$_SESSION['usuario']['id_key']."' and 
+	 														session_id='".session_id()."' 
+	 														limit 1");
+	 if(@$ver3['error'])
+	 {
+	    echo 'Erro verificação usuário: ' . @$ver3['error'];
+	 }	
+	 
+	 if (!$ver3)
+	 {
+		 add_suspeito("Login usuario",getIp());
+		 return false;
+	 }
+	 else return true;
+}
+else return false;
 
 }
 

@@ -251,7 +251,7 @@ $('#botao_lixeira').on('click', function(e) {
 						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 				}
 	
-				window.location="vendedores.php";
+				window.location="usuarios.php";
 							
 	        },
 	        error: function (dataReturn) {
@@ -284,4 +284,77 @@ $('#botao_lixeira').on('click', function(e) {
       }
     });
 
+});
+
+
+$('#btnUploadImagemAvatar').on('click', function (e) {
+
+    e.preventDefault(); // evita o envio normal do formulário
+
+    // var form = document.getElementById('formUploadImagemSeo');
+    // var formData = new FormData(form);
+	var formData = new FormData();
+	
+	// Adiciona o arquivo do input file (id="arquivo")
+	var arquivo = $('#link_avatar')[0].files[0]; 
+	formData.append('link_avatar', arquivo);
+	
+	// Adiciona o campo hidden (id="idRegistro")
+	formData.append('id', $('#id').val());
+	formData.append('nome', $('#nome').val());
+	
+    var file = $('#link_avatar')[0].files[0];
+    if (!file || !file.type.startsWith('image/')) {
+        alert('Por favor, selecione uma imagem válida.');
+        return;
+    }
+
+	$('#resultado_link_avatar').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	
+    $.ajax({
+        url: '../globais/admin/json/usuarios/upload_avatar.php', // PHP que irá processar
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (dataReturn) {
+			try {
+				response = JSON.parse(dataReturn);
+				mensagem = response.msg;
+				link = response.link;
+				imagem = response.imagem;
+			} catch (e) {
+				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+			}
+
+			console.log("Mensagem - Link : "+mensagem+" - "+link);
+			$('#Vlink_avatar').val(link);
+			$('#resultado_link_avatar').html(imagem);
+			
+        },
+        error: function () {
+            $('#resultado_link_avatar').html('<div class="alert alert-danger">Erro no upload.</div>');
+        }
+    });
+});
+
+
+$('#usuario').on('focus', function () {
+    // pega o valor do campo #nome
+    if ($(this).val()==='')
+	    {
+	    // pega o valor do campo #nome
+	    var nome = $('#nome').val().trim();
+	
+	    if (nome.length > 0) {
+	        // separa todas as palavras
+	        var palavras = nome.split(/\s+/);
+	
+	        // pega a primeira e a última
+	        var primeiraUltima = palavras[0] + '.' + palavras[palavras.length - 1];
+	
+	        // coloca em minúsculas
+	        $(this).val(primeiraUltima.toLowerCase());
+	    }	
+    }
 });

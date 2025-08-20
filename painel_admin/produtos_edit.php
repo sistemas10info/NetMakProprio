@@ -193,13 +193,13 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 						        </div>
 								<div class="row form-group"> 
 									<div class="col-md-4">
-										<label class="control-label text-right f12 col-md-12" >Preço de venda</label><BR>
+										<label class="control-label f12 col-md-12">Preço de venda</label><BR>
 										<input type="text" name="preco" id="preco" class="form-control f12b maskMoneyBR text-right" value="<?=number_format(@$pro3['preco'],2)?>" >
 									</div>
 									<div class="col-md-4">
 									</div>
 									<div class="col-md-4">
-										<label class="control-label text-right f12 col-md-12" >Preço de oferta</label><BR>
+										<label class="control-label f12 col-md-12">Preço de oferta</label><BR>
 										<input type="text" name="preco_oferta" id="preco_oferta" class="form-control f12b maskMoneyBR text-right" value="<?=number_format(@$pro3['preco_oferta'],2)?>" >
 									</div>
 									

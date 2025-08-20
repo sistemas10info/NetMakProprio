@@ -61,7 +61,8 @@ else
 // echo "Busca: ".$Xwhere_busca;
 
 $XqueryCap ="SELECT 
-						usuarios.id_key,usuarios.nome,usuarios.usuario
+						usuarios.id_key,usuarios.nome,usuarios.usuario,
+						usuarios.celular,usuarios.nivel,usuarios.link_avatar
 					 from usuarios 
 					 where 
 					 	usuarios.apagado=0 ".$Xwhere_busca."
@@ -85,9 +86,15 @@ if ($cap1)
 	foreach ($cap1 as $cap3)
 	{
 		$cap3['id']=$cap3['id_key'];
-		$cap3['nome']="<a href='usuarios_edit.php?id=".$cap3['id_key']."' class='f12b'>".$cap3['nome']."</a>";
+		$cap3['nome']=($cap3['nome']) ? $cap3['nome'] : "--";
+		
+		$cap3['link_avatar']=($cap3['link_avatar']) ? $cap3['link_avatar'] : "../globais/images/nophoto.jpeg";
+		
+		$cap3['foto']="<img src='".$cap3['link_avatar']."' class='rounded-circle img-profile' style='width:30px !important;'>";
+		$cap3['nome']="<a href='usuarios_edit.php?id=".$cap3['id_key']."' class='f12b'>".$cap3['foto']." ".$cap3['nome']."</a>";
 		$cap3['usuario']="<a href='usuarios_edit.php?id=".$cap3['id_key']."'>".$cap3['usuario']."</a>";
 		$cap3['celular']="<a href='usuarios_edit.php?id=".$cap3['id_key']."'>".$cap3['celular']."</a>";
+		$cap3['nivel']="<a href='usuarios_edit.php?id=".$cap3['id_key']."'>".(($cap3['nivel']=='1') ? "Admin" : "Usuário")."</a>";
 	    $Aresults[] = $cap3;
 	    ++$XnRows;
 	}

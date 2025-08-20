@@ -159,27 +159,27 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-9">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Razão Social</label><BR>
-										<input type="text" name="razao_social" id="razao_social" class="form-control f12" value="<?=$ven3['razao_social']?>">
+										<input type="text" name="razao_social" id="razao_social" class="form-control f12" value="<?=@$ven3['razao_social']?>">
 									</div>
 									<div class="col-md-3">
 										<label class="control-label text-right f12" >CNPJ</label><BR>
 										<input type="text" name="cpf_cnpj" id="cpf_cnpj" class="form-control f12" value="" 
-													onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=$ven3['cpf_cnpj']?>">
+													onblur="javascript: verifica_cpf_cnpj(this.value);" maxlength="30" value="<?=@$ven3['cpf_cnpj']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Telefône</label><BR>
-										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=$ven3['telefone']?>">
+										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=@$ven3['telefone']?>">
 									</div>
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Celular</label><BR>
-										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=$ven3['celular']?>">
+										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=@$ven3['celular']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Email</label><BR>
-										<input type="text" name="email" id="email" class="form-control f12" value="<?=$ven3['email']?>">
+										<input type="text" name="email" id="email" class="form-control f12" value="<?=@$ven3['email']?>">
 									</div>
 								</div>
 							    
@@ -197,20 +197,20 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">CEP</label><BR>
-										<input type="text" name="cep" id="cep" class="form-control f12 maskCEP" value="<?=$ven3['cep']?>" onblur="javascript:busca_cep();">
+										<input type="text" name="cep" id="cep" class="form-control f12 maskCEP" value="<?=@$ven3['cep']?>" onblur="javascript:busca_cep();">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" >Rua</label><BR>
-										<input type="text" name="rua" id="rua" class="form-control f12" value="<?=$ven3['rua']?>">
+										<input type="text" name="rua" id="rua" class="form-control f12" value="<?=@$ven3['rua']?>">
 									</div>
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Nro</label><BR>
-										<input type="text" name="nro" id="nro" class="form-control f12" value="<?=$ven3['nro']?>">
+										<input type="text" name="nro" id="nro" class="form-control f12" value="<?=@$ven3['nro']?>">
 									</div>
 
 									<div class="col-md-2">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Complemento</label><BR>
-										<input type="text" name="comple" id="comple" class="form-control f12" value="<?=$ven3['comple']?>">
+										<input type="text" name="comple" id="comple" class="form-control f12" value="<?=@$ven3['comple']?>">
 									</div>
 
 								</div>
@@ -218,11 +218,11 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Cidade</label><BR>
-										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=$ven3['cidade']?>">
+										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=@$ven3['cidade']?>">
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Bairro</label><BR>
-										<input type="text" name="bairro" id="bairro" class="form-control f12" value="<?=$ven3['bairro']?>">
+										<input type="text" name="bairro" id="bairro" class="form-control f12" value="<?=@$ven3['bairro']?>">
 									</div>
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Estado</label><BR>
@@ -259,7 +259,7 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-4">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Nome de Usuário</label><BR>
-										<input type="text" name="usuario" id="usuario" class="form-control f12" value="<?=$ven3['usuario']?>">
+										<input type="text" name="usuario" id="usuario" class="form-control f12" value="<?=@$ven3['usuario']?>">
 									</div>
 									<div class="col-md-4">
 									    <input type="hidden" id="altera_senha" name="altera_senha" value="0">
@@ -306,7 +306,7 @@ $est1=executeQuery("select * from estados","all");
 									</div>
 									<div class="col-md-12" style="margin-top:10px;">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Observações</label><BR>
-										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'><?=$ven3['obs']?></textarea>
+										<textarea  name="obs" id="obs" class="form-control  f12" rows='4'><?=@$ven3['obs']?></textarea>
 									</div>
 
 								</div>
@@ -322,18 +322,18 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-12">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Site</label><BR>
-										<input type="text" name="site" id="site" class="form-control f12" value="<?=$ven3['site']?>">
+										<input type="text" name="site" id="site" class="form-control f12" value="<?=@$ven3['site']?>">
 									</div>
 								</div>
 	
 								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Instagram</label><BR>
-										<input type="text" name="instagram" id="instagram" class="form-control f12" value="<?=$ven3['instagram']?>">
+										<input type="text" name="instagram" id="instagram" class="form-control f12" value="<?=@$ven3['instagram']?>">
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Facebook</label><BR>
-										<input type="text" name="facebook" id="facebook" class="form-control f12" value="<?=$ven3['facebook']?>">
+										<input type="text" name="facebook" id="facebook" class="form-control f12" value="<?=@$ven3['facebook']?>">
 									</div>
 								</div>
 	
@@ -366,11 +366,11 @@ $est1=executeQuery("select * from estados","all");
 								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Quem somos:</label><BR>
-										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'><?=$ven3['quem_somos']?></textarea>
+										<textarea name="quem_somos" id="quem_somos" class='summer_texto form-control'><?=@$ven3['quem_somos']?></textarea>
 									</div>
 									<div class="col-md-6">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Serviços prestados:</label><BR>
-										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'><?=$ven3['servicos_prestados']?></textarea>
+										<textarea name="servicos_prestados" id="servicos_prestados" class='summer_texto form-control'><?=@$ven3['servicos_prestados']?></textarea>
 									</div>
 							    </div>
 						   </div>
@@ -379,7 +379,7 @@ $est1=executeQuery("select * from estados","all");
 									<div class="row form-group" style='padding-top:8px;'> 
 										<div class="col-md-9">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Nome da empresa</label><BR>
-											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="<?=$ven3['nome_empresa']?>">
+											<input type="text" name="nome_empresa" id="nome_empresa" class="form-control f12" value="<?=@$ven3['nome_empresa']?>">
 										</div>
 										<div class="col-md-3">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo de site</label><BR>
@@ -394,11 +394,11 @@ $est1=executeQuery("select * from estados","all");
 								    <div class="row form-group">
 										<div class="col-md-9">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Slogan</label><BR>
-											<input type="text" name="slogan" id="slogan" class="form-control f12" value="<?=$ven3['slogan']?>">
+											<input type="text" name="slogan" id="slogan" class="form-control f12" value="<?=@$ven3['slogan']?>">
 										</div>
 										<div class="col-md-3">
 											<label class="control-label text-right f12" for="Fcpf_cnpj">Subdominio</label><BR>
-											<input type="text" name="subdominio" id="subdominio" class="form-control f12" autocomplete="off" value="<?=$ven3['subdominio']?>">
+											<input type="text" name="subdominio" id="subdominio" class="form-control f12" autocomplete="off" value="<?=@$ven3['subdominio']?>">
 										</div>
 									</div>
 						        </div>

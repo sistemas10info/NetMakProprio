@@ -14,15 +14,13 @@ if (isset($_POST['email']))
 	$log3=executeQuery("select interno,
 											 id_key,
 											 nome,
-											 nome_empresa,
+											 usuario,
 											 email,
-											 site,
 											 celular,
-											 telefone,
-											 id_key_categorias
-										from vendedores 
+											 nivel
+										from usuarios 
 											where 
-												email='".$_POST['email']."' and senha='".$Xsenha."' 
+												usuario='".$_POST['usuario']."' and senha='".$Xsenha."' 
 											limit 1");
 	if(@$log3['error'])
 	{
@@ -31,10 +29,10 @@ if (isset($_POST['email']))
 	
 	if ($log3)
 	{
-		$Xmensagem="<h4 class='text-success'>Email e senha corretos</h4>";
-		$_SESSION['tipo_login']="V";
-		$_SESSION['vendedor']=$log3;
-		$update=executeQuery("update vendedores 
+		$Xmensagem="<h4 class='text-success'>Nome de usuário e senha corretos</h4>";
+		$_SESSION['tipo_login']="U";
+		$_SESSION['usuario']=$log3;
+		$update=executeQuery("update usuarios 
 													set 
 														session_id='".session_id()."',
 														fult_login='".date('Y-m-d H:i')."', 
@@ -47,12 +45,12 @@ if (isset($_POST['email']))
 			echo 'Erro update: ' . @$update['error'];
 		}	
 		
-		header("Location: ../painel_vendedor/veiculos_usados.php");
+		header("Location: ../painel_admin/veiculos_novos.php");
 		exit;
 	}
 	else
 	{
-		$Xmensagem="<b class='text-danger'>Email e senha inválidos</b>";
+		$Xmensagem="<b class='text-danger'>Usuário e senha inválidos</b>";
 	}			
 
 }
@@ -96,14 +94,14 @@ if (isset($_POST['email']))
         <div class="col-md-6 d-flex align-items-center justify-content-center">
             <div class="login-box w-100 p-4">
                 <div class='text-center'><img src='img/logo_netmak.webp' width='300px;'></div>
-                <h1 class="text-center mb-4">Painel Vendedor</h2>
+                <h1 class="text-center mb-4">Painel Usuário</h2>
                 <h3 class="text-center mb-4">Acesso ao Sistema</h3>
 
                 <form action="login_vendedor.php" method="POST">
                     <!-- Email -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                        <label for="email" class="form-label">Nome de usuário</label>
+                        <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Digite o nome de usuário" required>
                     </div>
 
                     <!-- Senha -->
