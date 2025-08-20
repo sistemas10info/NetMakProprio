@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 19/08/2025 às 16:14
+-- Tempo de geração: 20/08/2025 às 18:36
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -281,6 +281,7 @@ CREATE TABLE `usuarios` (
   `sobrenome` varchar(120) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `celular` varchar(30) DEFAULT NULL,
+  `telefone` varchar(60) DEFAULT NULL,
   `obs` longtext DEFAULT NULL,
   `fult_log` varchar(20) DEFAULT NULL,
   `estado` varchar(1) DEFAULT '1' COMMENT '\r\n1=on | x=off',
@@ -289,8 +290,34 @@ CREATE TABLE `usuarios` (
   `avatar` varchar(256) DEFAULT NULL,
   `site` varchar(256) DEFAULT NULL,
   `instagram` varchar(256) DEFAULT NULL,
-  `facebook` varchar(256) DEFAULT NULL
+  `facebook` varchar(256) DEFAULT NULL,
+  `cpf_cnpj` varchar(20) DEFAULT NULL,
+  `link_avatar` varchar(256) DEFAULT NULL,
+  `apagado` int(1) NOT NULL DEFAULT 0 COMMENT '0=on - 1=apagado',
+  `session_id` varchar(256) DEFAULT NULL,
+  `fult_login` datetime DEFAULT NULL,
+  `ult_ip_login` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`interno`, `id_key`, `usuario`, `senha`, `nome`, `sobrenome`, `email`, `celular`, `telefone`, `obs`, `fult_log`, `estado`, `nivel`, `altera_senha`, `avatar`, `site`, `instagram`, `facebook`, `cpf_cnpj`, `link_avatar`, `apagado`, `session_id`, `fult_login`, `ult_ip_login`) VALUES
+(1, 'VWDIHN5RCU9DF1YMIN1SPYZEY2YWPK', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_EFDCEMNKJEMEV1G5YFJ652AMVU7OIY.png', 1, NULL, NULL, NULL),
+(2, 'PURBMKC47CM3N0PL3QU11H4QLUXFBV', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_YG4R7XL61ZH13QK53T640VDXI47VIM.png', 1, NULL, NULL, NULL),
+(3, 'A1P3507YOA8Y9Q11BSRYDXLAF46MY3', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MLE8PGGFTGPSPML4IZGTKWJJC7MJD2.png', 1, NULL, NULL, NULL),
+(4, 'MW26GPD930GRIRWRDTRIBX5WMCEDMU', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_J8HUJDYYNGV0BC9ZLV9FQH5MGOFYA5.png', 1, NULL, NULL, NULL),
+(5, 'QB4TY2WC0SKL4QKR3HSAQCU9QD0X12', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_I88E7WK2BT4APUX7I1L9BHZO22HJ85.png', 1, NULL, NULL, NULL),
+(6, 'CKH9T1EGN1F2DZAFO18SIBVH5XA1ZM', NULL, NULL, 'undefined', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_Y4H6QSA5O24EG0AKXFFJBEBB2GJ84Y.png', 1, NULL, NULL, NULL),
+(7, 'LTG37K8KTX1MBEMN9G7P4660NV7HHR', NULL, NULL, 'Carlos Alonso', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_HX114ISHN2TEHY0URHZALVYG58OHFC.png', 1, NULL, NULL, NULL),
+(8, 'LW4WKPWS0H31FRN824EE3HH14UYTU8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+(9, '9LCGVOQR07YXUKR3KRXPNSVF954IKR', NULL, NULL, 'Carlos Alonso', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_BQHI04IZDCG7AJK6ZOQD4F9ARYJBTB.png', 1, NULL, NULL, NULL),
+(10, 'L7DJ02EEN1C8E9LGUD2EWUFCDFL5SE', NULL, NULL, 'Novo usuário', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_60IMKFA5E5V1T18DJ8FIU4BBTXM1QV.png', 1, NULL, NULL, NULL),
+(11, '3B9AYBYTLLV7TV11K9ZZNEM4I1MT3Z', NULL, NULL, 'Carlos Alonso', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MXRATF3XSR8V24UX64YA2I5JWJPB9T.png', 1, NULL, NULL, NULL),
+(12, 'NI2FZJ3MAEO3KEAV4HK619GGPM3W20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+(13, 'OY7D5QMT63IYWA7EB1RV7PY1ASWHFF', 'carlos.alonso', '', 'Carlos Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 99980-0801', '', '', NULL, '', 1, 1, NULL, '', 'planetaprogramador', '', '', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MXRATF3XSR8V24UX64YA2I5JWJPB9T.png', 0, NULL, NULL, NULL),
+(14, 'NKDIKSHUYDY7BOSJV8IK9DCHIXFA0Y', 'carlos.alonso2', 'NAIERwBTX14=', 'Carlos Gabriel Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 9998-0801', '', '', NULL, '', 2, 1, NULL, '', '', '', '', '', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -388,7 +415,7 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`interno`, `id_key`, `nome`, `endereco`, `cep`, `email`, `telefone`, `celular`, `obs`, `nro`, `comple`, `cpf_cnpj`, `facebook`, `site`, `rg`, `razao_social`, `bairro`, `cidade`, `senha_acesso`, `codigo_int`, `fnac`, `uf`, `lat`, `longi`, `estado`, `comic`, `usuario`, `instagram`, `logo`, `capa`, `banner`, `foto`, `id_key_categorias`, `id_key_categorias_produtos`, `quem_somos`, `servicos_prestados`, `nome_empresa`, `slogan`, `modelo_site`, `rua`, `senha`, `altera_senha`, `link_logo`, `link_banner`, `subdominio`, `apagado`, `session_id`, `fult_login`, `ult_ip_login`) VALUES
-(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', 'sistemas10.info@gmail.com', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', 'O53J95OU62ZN6ME8SPS0ZM4BBNBIBE', '', '<p>teste<br>sdsds<br>sdsdasdasdasdas<br>dsaasdasdasdasd</p>', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 0, '6qf7ddq8e7kchdl353gn22esco', '2025-08-19 09:00:48', '::1');
+(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', 'sistemas10.info@gmail.com', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', 'O53J95OU62ZN6ME8SPS0ZM4BBNBIBE', '', '<p>teste<br>sdsds<br>sdsdasdasdasdas<br>dsaasdasdasdasd</p>', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 1, '6qf7ddq8e7kchdl353gn22esco', '2025-08-20 11:07:26', '::1');
 
 --
 -- Índices para tabelas despejadas
@@ -539,7 +566,7 @@ ALTER TABLE `slugs`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `interno` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `interno` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `veiculos`
