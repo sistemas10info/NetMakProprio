@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 20/08/2025 às 18:36
+-- Tempo de geração: 25/08/2025 às 16:40
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -138,12 +138,12 @@ CREATE TABLE `imagens` (
 --
 
 INSERT INTO `imagens` (`interno`, `id_key`, `titulo`, `obs`, `contador`, `link`, `formato`, `id_key_origem`, `fecha_hora`, `link_minia`, `tamanho_original`, `tamanho_resize`, `tipo_origem`, `tipo`, `principal`) VALUES
-(1101556, '05AUNKGWIHJDR2H9KKE1DNM6B5IJXX', '---', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_KWNBBB4QFF7CH9FKW5KVPBLEYDFQFG.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-19 11:42:11', NULL, NULL, NULL, NULL, NULL, 'on'),
-(1101557, 'U26HVLXRB5B7QEM1QNHL9A3DZJ4DDP', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_DJ55TUXA3XXERVNCEFX4MQLBZC1V7L.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-19 11:42:10', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101556, '05AUNKGWIHJDR2H9KKE1DNM6B5IJXX', '---', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_KWNBBB4QFF7CH9FKW5KVPBLEYDFQFG.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-25 14:35:05', NULL, NULL, NULL, NULL, NULL, 'on'),
+(1101557, 'U26HVLXRB5B7QEM1QNHL9A3DZJ4DDP', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_DJ55TUXA3XXERVNCEFX4MQLBZC1V7L.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-25 12:15:36', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101559, '8H865TK5L5ZUFZAVGU2XJFF2LNRE1F', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_1B1VICYJ8C9VE73Y8MGRC52AKLJ6K3.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:39:45', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101561, 'W91G73CVEDALBJ2I87M8SRDDXVNJTQ', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_X4IIQ3RQ5TP2T28UK8WWIHDRRN5H5S.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:18:33', NULL, NULL, NULL, NULL, NULL, 'xx'),
-(1101562, 'FMW4YU6I47NCI6LKDFBJ9VEC93CF1X', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_V76IPK91B76XK6D5E3OKA97FKIDQOE.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-19 11:42:08', NULL, NULL, NULL, NULL, NULL, 'xx'),
-(1101563, 'E0G997R1KMWP2P94TW97OFTWZMQCDW', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_OXPMK82USEZUMO2VPNRKCZRTJC6LV8.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-19 11:42:11', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101562, 'FMW4YU6I47NCI6LKDFBJ9VEC93CF1X', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_V76IPK91B76XK6D5E3OKA97FKIDQOE.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-25 12:33:36', NULL, NULL, NULL, NULL, NULL, 'xx'),
+(1101563, 'E0G997R1KMWP2P94TW97OFTWZMQCDW', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_OXPMK82USEZUMO2VPNRKCZRTJC6LV8.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-25 14:35:05', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101568, 'S1V0RJTVBG290XXXU2X3XW44YZVRXY', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_SNE2BPNAKUTMAJXYBGQM5FEEKDKRD4.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:18:49', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101570, 'T3BKUNUX0J9EREKRMKYIQ6LHZ1GVTP', 'Teste', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_7HJTCPL6DBUTXL7TCWMOL1KNLQ8E34.png', 'png', 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', '2025-08-13 12:02:10', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101576, '64DKW8ACWF77F51RQRPQKK1GKO70UB', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_137S77C8S0SF9B142YUGBKKZCG74WL.png', 'png', 'RSU8OIPLL4HSMIA8B4MLBYQKO97R0Q', '2025-08-13 18:51:24', NULL, NULL, NULL, NULL, NULL, 'xx'),
@@ -151,8 +151,8 @@ INSERT INTO `imagens` (`interno`, `id_key`, `titulo`, `obs`, `contador`, `link`,
 (1101579, 'J6C22VTXD8K1Y5GNRRQQV5K9S3O2YK', 'teste', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_PGOV34952YFTRHIO7UKZUXCCF88V5T.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-14 12:38:38', NULL, NULL, NULL, NULL, NULL, 'on'),
 (1101580, 'AX5MNZ9LRV25VTQPPTE1VTC65VLYRZ', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_8ZSKW3ZUAYQPA9EK0P3I8PVUSJ8F3X.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-13 18:59:55', NULL, NULL, NULL, NULL, NULL, 'xx'),
 (1101581, 'MFUP7DO44T80I3N5XZYCMR5RDCT13Y', 'teste 2', NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_VN3PQFTNQV9VY3NTNFTHFGJGQ126EB.png', 'png', 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', '2025-08-13 19:01:17', NULL, NULL, NULL, NULL, NULL, 'xx'),
-(1101582, 'S8H4JAO84FVR7PO0HGYBQ27ZO2VT3Y', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_JZA6BUDZ270K1PF7I83MPEM01WGYE2.png', 'png', 'NT4M580KKSTFFT8PB958OIWI7UBBFH', '2025-08-19 12:59:02', NULL, NULL, NULL, NULL, NULL, 'xx'),
-(1101583, 'EHJQRKUUHMS4P1I46VTTZMOZYSI6TB', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_DTZTOREK5YETABC5XR5IPYO7I6GY8O.png', 'png', 'NT4M580KKSTFFT8PB958OIWI7UBBFH', '2025-08-19 12:59:02', NULL, NULL, NULL, NULL, NULL, 'on');
+(1101582, 'S8H4JAO84FVR7PO0HGYBQ27ZO2VT3Y', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_JZA6BUDZ270K1PF7I83MPEM01WGYE2.png', 'png', 'NT4M580KKSTFFT8PB958OIWI7UBBFH', '2025-08-20 19:01:29', NULL, NULL, NULL, NULL, NULL, 'on'),
+(1101583, 'EHJQRKUUHMS4P1I46VTTZMOZYSI6TB', NULL, NULL, 0, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSite_DTZTOREK5YETABC5XR5IPYO7I6GY8O.png', 'png', 'NT4M580KKSTFFT8PB958OIWI7UBBFH', '2025-08-20 19:01:29', NULL, NULL, NULL, NULL, NULL, 'xx');
 
 -- --------------------------------------------------------
 
@@ -234,6 +234,7 @@ CREATE TABLE `produtos` (
   `id_key` varchar(30) DEFAULT NULL,
   `titulo` varchar(256) DEFAULT NULL,
   `descrip` longtext DEFAULT NULL,
+  `especifica` longtext DEFAULT NULL,
   `tipo` int(1) NOT NULL DEFAULT 1 COMMENT '1=novo - 2=usado',
   `preco` double(12,2) DEFAULT NULL,
   `preco_oferta` double(12,2) DEFAULT NULL,
@@ -243,15 +244,17 @@ CREATE TABLE `produtos` (
   `comic` double(12,2) DEFAULT NULL,
   `comic_fixa` varchar(1) NOT NULL DEFAULT 'N',
   `apagado` int(1) NOT NULL DEFAULT 0 COMMENT '0=ativo | 1=apagado',
-  `estado` varchar(1) DEFAULT '0'
+  `estado` varchar(1) DEFAULT '0',
+  `descrip_seo` varchar(256) DEFAULT NULL,
+  `titulo_seo` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produtos` (`interno`, `id_key`, `titulo`, `descrip`, `tipo`, `preco`, `preco_oferta`, `id_key_categoria`, `seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`) VALUES
-(3, 'NT4M580KKSTFFT8PB958OIWI7UBBFH', 'Amortecedor', '<p>teste</p>', 1, 123.50, 0.00, '--', '', NULL, 0.00, '', 0, '');
+INSERT INTO `produtos` (`interno`, `id_key`, `titulo`, `descrip`, `especifica`, `tipo`, `preco`, `preco_oferta`, `id_key_categoria`, `seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`, `descrip_seo`, `titulo_seo`) VALUES
+(3, 'NT4M580KKSTFFT8PB958OIWI7UBBFH', 'Amortecedor', '<p>teste</p>', NULL, 1, 123.50, 0.00, '--', '', NULL, 0.00, '', 0, '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -262,8 +265,10 @@ INSERT INTO `produtos` (`interno`, `id_key`, `titulo`, `descrip`, `tipo`, `preco
 CREATE TABLE `slugs` (
   `interno` int(6) NOT NULL,
   `id_key` varchar(30) DEFAULT NULL,
-  `palavra` varchar(40) DEFAULT NULL,
-  `link` varchar(256) DEFAULT NULL
+  `slug` varchar(40) DEFAULT NULL,
+  `link` varchar(256) DEFAULT NULL,
+  `tipo_pagina` varchar(1) DEFAULT NULL COMMENT '1=vei.novos-2=vei.usados-3=loja vendedor',
+  `id_key_origem` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -316,8 +321,8 @@ INSERT INTO `usuarios` (`interno`, `id_key`, `usuario`, `senha`, `nome`, `sobren
 (10, 'L7DJ02EEN1C8E9LGUD2EWUFCDFL5SE', NULL, NULL, 'Novo usuário', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_60IMKFA5E5V1T18DJ8FIU4BBTXM1QV.png', 1, NULL, NULL, NULL),
 (11, '3B9AYBYTLLV7TV11K9ZZNEM4I1MT3Z', NULL, NULL, 'Carlos Alonso', NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MXRATF3XSR8V24UX64YA2I5JWJPB9T.png', 1, NULL, NULL, NULL),
 (12, 'NI2FZJ3MAEO3KEAV4HK619GGPM3W20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 2, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-(13, 'OY7D5QMT63IYWA7EB1RV7PY1ASWHFF', 'carlos.alonso', '', 'Carlos Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 99980-0801', '', '', NULL, '', 1, 1, NULL, '', 'planetaprogramador', '', '', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MXRATF3XSR8V24UX64YA2I5JWJPB9T.png', 0, NULL, NULL, NULL),
-(14, 'NKDIKSHUYDY7BOSJV8IK9DCHIXFA0Y', 'carlos.alonso2', 'NAIERwBTX14=', 'Carlos Gabriel Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 9998-0801', '', '', NULL, '', 2, 1, NULL, '', '', '', '', '', 0, NULL, NULL, NULL);
+(13, 'OY7D5QMT63IYWA7EB1RV7PY1ASWHFF', 'carlos.alonso', 'Lx1FAwQ=', 'Carlos Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 99980-0801', '', '', NULL, '', 1, 0, NULL, '', 'planetaprogramador', '', '', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgAvatar_MXRATF3XSR8V24UX64YA2I5JWJPB9T.png', 0, 'sdnbjfi0356ju7nn3efd0v8mie', '2025-08-25 09:52:00', '::1'),
+(14, 'NKDIKSHUYDY7BOSJV8IK9DCHIXFA0Y', 'carlos.alonso2', 'Lx1FAwQ=', 'Carlos Gabriel Alonso', NULL, 'sistemas10.info@gmail.com', '(47) 9998-0801', '', '', NULL, '', 2, 0, NULL, '', '', '', '', '', 0, '--', '2025-08-20 14:30:00', '::1');
 
 -- --------------------------------------------------------
 
@@ -330,6 +335,7 @@ CREATE TABLE `veiculos` (
   `id_key` varchar(30) DEFAULT NULL,
   `titulo` varchar(256) DEFAULT NULL,
   `descrip` longtext DEFAULT NULL,
+  `especifica` longtext DEFAULT NULL,
   `tipo` int(1) NOT NULL DEFAULT 1 COMMENT '1=novo - 2=usado',
   `id_key_vendedor` varchar(30) NOT NULL DEFAULT '--',
   `preco` double(12,2) DEFAULT NULL,
@@ -337,6 +343,8 @@ CREATE TABLE `veiculos` (
   `id_key_marca` varchar(30) DEFAULT NULL,
   `id_key_modelo` varchar(30) DEFAULT NULL,
   `seo` longtext DEFAULT NULL,
+  `descrip_seo` longtext DEFAULT NULL,
+  `titulo_seo` varchar(256) DEFAULT NULL,
   `link_seo` varchar(256) DEFAULT NULL,
   `comic` double(12,2) DEFAULT NULL,
   `comic_fixa` varchar(1) NOT NULL DEFAULT 'N',
@@ -348,9 +356,9 @@ CREATE TABLE `veiculos` (
 -- Despejando dados para a tabela `veiculos`
 --
 
-INSERT INTO `veiculos` (`interno`, `id_key`, `titulo`, `descrip`, `tipo`, `id_key_vendedor`, `preco`, `id_key_categoria`, `id_key_marca`, `id_key_modelo`, `seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`) VALUES
-(3, 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', 'Empilhadeira X4 22 - Excelente opção de compra ', '<p>teste<br>gostei do negocio..<br>para mim tudo certo..<br><br></p>', 1, '--', 120000.00, '--', '--', '--', 'Teste do sistema teste', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_Q8XASQERRZ2R1Q5RR1JOHXNO52WS9R.png', 0.00, '', 0, ''),
-(8, 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', 'Linda empilhadeira.', '<p>teste do sistema..<br><br><br></p>', 2, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', 12000.00, '--', '--', '--', NULL, NULL, NULL, 'N', 0, '');
+INSERT INTO `veiculos` (`interno`, `id_key`, `titulo`, `descrip`, `especifica`, `tipo`, `id_key_vendedor`, `preco`, `id_key_categoria`, `id_key_marca`, `id_key_modelo`, `seo`, `descrip_seo`, `titulo_seo`, `link_seo`, `comic`, `comic_fixa`, `apagado`, `estado`) VALUES
+(3, 'UEW052HKRR2ICFEFZXPT83JO5TBFV9', 'Empilhadeira X4 22 - Excelente opção de compra ', '<p>teste<br>gostei do negocio..<br>para mim tudo certo..<br><br></p>', '<p>Teste de especificações.<br>Porque funciona ok o quebra linha.<br><br>Att.<br><br></p>', 1, '--', 120000.00, '--', '--', '--', 'Teste do sistema teste', 'Descrip SEO', 'titulo SEO', 'https://localhost//cw3/NetMakProprio/tmp_files/ImgSeo_Q8XASQERRZ2R1Q5RR1JOHXNO52WS9R.png', 0.00, '', 0, ''),
+(8, 'H0BUWHDBOCMNKP73VZB1TV0JSXU6PM', 'Linda empilhadeira.', '<p>teste do sistema..<br><br><br></p>', NULL, 2, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', 12000.00, '--', '--', '--', NULL, NULL, NULL, NULL, NULL, 'N', 0, '');
 
 -- --------------------------------------------------------
 
@@ -407,7 +415,7 @@ CREATE TABLE `vendedores` (
   `apagado` int(1) NOT NULL DEFAULT 0,
   `session_id` varchar(256) DEFAULT NULL,
   `fult_login` datetime DEFAULT NULL ON UPDATE current_timestamp(),
-  `ult_ip_login` varchar(20) NOT NULL
+  `ult_ip_login` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -415,7 +423,8 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`interno`, `id_key`, `nome`, `endereco`, `cep`, `email`, `telefone`, `celular`, `obs`, `nro`, `comple`, `cpf_cnpj`, `facebook`, `site`, `rg`, `razao_social`, `bairro`, `cidade`, `senha_acesso`, `codigo_int`, `fnac`, `uf`, `lat`, `longi`, `estado`, `comic`, `usuario`, `instagram`, `logo`, `capa`, `banner`, `foto`, `id_key_categorias`, `id_key_categorias_produtos`, `quem_somos`, `servicos_prestados`, `nome_empresa`, `slogan`, `modelo_site`, `rua`, `senha`, `altera_senha`, `link_logo`, `link_banner`, `subdominio`, `apagado`, `session_id`, `fult_login`, `ult_ip_login`) VALUES
-(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', 'sistemas10.info@gmail.com', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', 'O53J95OU62ZN6ME8SPS0ZM4BBNBIBE', '', '<p>teste<br>sdsds<br>sdsdasdasdasdas<br>dsaasdasdasdasd</p>', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 1, '6qf7ddq8e7kchdl353gn22esco', '2025-08-20 11:07:26', '::1');
+(227, '2IZY9VJDBRT849HIOXHA3ME84X0BIA', NULL, NULL, '88330-272', 'sistemas10.info@gmail.com', '(47) 99980-0801', '(47) 99980-0801', '', '512', 'sala 02', '', '', '', NULL, 'Carlos Gabriel Alonso', 'Centro', 'Balneário Camboriú', NULL, NULL, NULL, 'SC', NULL, NULL, '1', NULL, '', '', NULL, NULL, NULL, NULL, '34123213123123-VUFVKDZ4KK23ZEI8T7P1LYUHO6B8OG', 'O53J95OU62ZN6ME8SPS0ZM4BBNBIBE', '', '<p>teste<br>sdsds<br>sdsdasdasdasdas<br>dsaasdasdasdasd</p>', 'Carlos Alonso Testes', 'Sempre com o cliente', '2', 'Rua 3300', '', 1, NULL, NULL, 'pedrinho', 1, '6qf7ddq8e7kchdl353gn22esco', '2025-08-20 11:07:26', '::1'),
+(230, '4K5AU27VMI2K1ULF2OSK93K1ANTJ1X', NULL, NULL, '88330-063', 'sistemas10.info@gmail.com', '', '(47) 9998-0801', '', '', '', '00885004973', '', '', NULL, 'Carlos Alonso', '', '', NULL, NULL, NULL, 'SC', NULL, NULL, '', NULL, 'carlos.alonso', '', NULL, NULL, NULL, NULL, '34123213123123', '--', NULL, NULL, NULL, NULL, NULL, '', 'Kh0EVAFUUFc=', 1, NULL, NULL, NULL, 0, 'sdnbjfi0356ju7nn3efd0v8mie', '2025-08-25 09:42:00', '::1');
 
 --
 -- Índices para tabelas despejadas
@@ -578,7 +587,7 @@ ALTER TABLE `veiculos`
 -- AUTO_INCREMENT de tabela `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `interno` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

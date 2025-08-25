@@ -6,8 +6,8 @@
 			
 			$('.maskMoneyBR').maskMoney();
 
-			  $('#descrip').summernote({
-			    height: 300,
+			  $('.summer_texto').summernote({
+			    height: 430,
 			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
 			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
 			    toolbar: [
@@ -41,6 +41,7 @@
 			      }
 			    }
 			  });
+			  
 			  
 
 			$('#id_key_categoria').on('change', function() {

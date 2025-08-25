@@ -185,7 +185,23 @@ $cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categoria
 								<div class="row form-group"> 
 									<div class="col-md-12">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR>
-										<textarea name="descrip" id="descrip" class='summer_texto form-control'><?=@$vei3['descrip']?></textarea>
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+										  <li class="nav-item">
+										    <a class="nav-link active" id="descrip-tab" data-toggle="tab" href="#descrip" role="tab" aria-controls="descrip" aria-selected="true">Descrição</a>
+										  </li>
+										  <li class="nav-item">
+										    <a class="nav-link" id="especifica-tab" data-toggle="tab" href="#especifica" role="tab" aria-controls="especifica" aria-selected="false">Especificações</a>
+										  </li>
+										</ul>
+										
+										<div class="tab-content mt-3" id="myTabContent">
+										  <div class="tab-pane fade show active" id="descrip" role="tabpanel" aria-labelledby="descrip-tab">
+										       <textarea id="descripText" name="descrip" class="form-control summer_texto"><?=@$vei3['descrip']?></textarea>
+										  </div>
+										  <div class="tab-pane fade" id="especifica" role="tabpanel" aria-labelledby="especifica-tab">
+										        <textarea id="especificaText" name="especifica" class="form-control summer_texto"><?=@$vei3['especifica']?></textarea>
+										  </div>
+										</div>
 									</div>
 								</div>
 							</div>

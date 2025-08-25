@@ -78,6 +78,7 @@ $update = executeQuery("update veiculos
 									    	id_key_vendedor='--',
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
+											especifica			= '".@$_POST['especifica']."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
 											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
 											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
@@ -85,7 +86,9 @@ $update = executeQuery("update veiculos
 											comic    	 		= '".((!empty(@$_POST['comic']))      ? @$_POST['comic']     : '')."',
 											comic_fixa    	 		= '".((!empty(@$_POST['comic_fixa']))      ? @$_POST['comic_fixa']     : '')."',
 											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
-											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."'
+											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."',
+											descrip_seo	      	 		= '".((!empty(@$_POST['descrip_seo']))         ? @$_POST['descrip_seo']     : '')."',
+											titulo_seo	      	 		= '".((!empty(@$_POST['titulo_seo']))         ? @$_POST['titulo_seo']     : '')."'
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 

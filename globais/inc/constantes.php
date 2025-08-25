@@ -28,6 +28,8 @@
 	define('ID_KEY_WHATSAPP', '--');
 
 	define('WEBSITE', WEBSITE_ROOT.'cw3/'.$Xsystem.'/painel_admin/');
+	
+	define('WEBSITE_EMPRESA', 'https://netmak.com.br/');
 	define('CHAVE_CRIPTOGRAFIA', 'Net34effd');
 	
 	define('EMAIL_NOREPLY', 'no-reply@web.com');

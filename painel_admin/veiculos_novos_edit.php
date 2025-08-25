@@ -166,14 +166,30 @@ $cat1=executeQuery("select * from categorias ","all");
 	
 								<div class="row form-group"> 
 									<div class="col-md-12">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Título</label><BR>
-										<input type="text" name="titulo" id="titulo" class="form-control f12" value="<?=$vei3['titulo']?>">
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Título</label><BR>
+										<input type="text" name="titulo" id="titulo" class="form-control f12" value="<?=@$vei3['titulo']?>">
 									</div>
 								</div>
 								<div class="row form-group"> 
 									<div class="col-md-12">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR>
-										<textarea name="descrip" id="descrip" class='summer_texto form-control'><?=@$vei3['descrip']?></textarea>
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+										  <li class="nav-item">
+										    <a class="nav-link active" id="descrip-tab" data-toggle="tab" href="#descrip" role="tab" aria-controls="descrip" aria-selected="true">Descrição</a>
+										  </li>
+										  <li class="nav-item">
+										    <a class="nav-link" id="especifica-tab" data-toggle="tab" href="#especifica" role="tab" aria-controls="especifica" aria-selected="false">Especificações</a>
+										  </li>
+										</ul>
+										
+										<div class="tab-content mt-3" id="myTabContent">
+										  <div class="tab-pane fade show active" id="descrip" role="tabpanel" aria-labelledby="descrip-tab">
+										       <textarea id="descripText" name="descrip" class="form-control summer_texto"><?=@$vei3['descrip']?></textarea>
+										  </div>
+										  <div class="tab-pane fade" id="especifica" role="tabpanel" aria-labelledby="especifica-tab">
+										        <textarea id="especificaText" name="especifica" class="form-control summer_texto"><?=@$vei3['especifica']?></textarea>
+										  </div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -273,19 +289,37 @@ $cat1=executeQuery("select * from categorias ","all");
 						     </div>
 
 							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
-							    <div class='row' style='padding:10px;'>
-								    <div class='col-md-12'>
-								    	<h5>SEO</h5>
-								    </div>
-							    </div>
-								<div class="row form-group"> 
-									<div class="col-md-12">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Palavras chave</label><BR>
-										<textarea name="seo" id="seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['seo']?></textarea>
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+								  <li class="nav-item">
+								    <a class="nav-link active f16" id="seo-tab" data-toggle="tab" href="#seotab" role="tab" aria-controls="seotab" aria-selected="true">SEO</a>
+								  </li>
+								  <li class="nav-item">
+								    <a class="nav-link f16" id="slug-tab" data-toggle="tab" href="#slugtab" role="tab" aria-controls="slug" aria-selected="false">Slug</a>
+								  </li>
+								</ul>
+
+								<div class="tab-content mt-3" id="myTabContent">
+								  <div class="tab-pane fade show active" id="seotab" role="tabpanel" aria-labelledby="seo-tab">
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Título</label><BR>
+											<input type="text" name="titulo_seo" id="titulo_seo" class="form-control f12" value="<?=@$vei3['titulo_seo']?>">
+										</div>
 									</div>
-						        </div>
-								<div class="row form-group"> 
-									<!-- <form id="formUploadImagemSeo" enctype="multipart/form-data" method="post"> -->
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Descrição</label><BR>
+											<textarea name="descrip_seo" id="descrip_seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['descrip_seo']?></textarea>
+										</div>
+							        </div>
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Palavras chave</label><BR>
+											<textarea name="seo" id="seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['seo']?></textarea>
+										</div>
+							        </div>
+									<div class="row form-group"> 
+										<!-- <form id="formUploadImagemSeo" enctype="multipart/form-data" method="post"> -->
 									    <input type='hidden' id="Vlink_seo" value="">
 										<div class="col-md-6">
 										    <div class="form-group">
@@ -299,9 +333,28 @@ $cat1=executeQuery("select * from categorias ","all");
 										</div>
 										<div class="col-md-4" id="resultado_link_seo" style='padding-top:25px;'>	
 										</div>
-								   <!-- </form> -->
+									   <!-- </form> -->
+									</div>
+								  </div>
+								  <div class="tab-pane fade" id="slugtab" role="tabpanel" aria-labelledby="slug-tab">
+										<div class="row form-group"> 
+											<div class="col-md-8">
+												<label class="control-label text-right f12" for="Fcpf_cnpj">Nome do Slug</label><BR>
+												<input type="text" name="slug" id="slug" class="form-control f12" value="<?=@$vei3['slug']?>">
+											</div>
+											<div class="col-md-2">	
+												<BR>
+												<a class="btn btn-default btn-xs" id="btnVerificaSlug">Verificar</a>
+											</div>
+										</div>								  
+								        <i class='text-justify'>Os slugs tornam os links mais curtos, <b>(amigáveis)</b> claros e fáceis de lembrar, além de ajudarem no SEO (otimização para buscadores).<BR>Assim, em vez de um link técnico ou com parâmetros, você terá um endereço direto e agradável de compartilhar.</i>
+
+										<div class="text-center f14" id="resultado_slug" style="margin-top:20px;">
+										</div>								  
+
+								        
+								  </div>
 								</div>
-						        
 						     </div>
 						</div>
 						

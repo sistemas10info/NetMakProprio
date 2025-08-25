@@ -6,8 +6,8 @@
 			
 			$('.maskMoneyBR').maskMoney();
 
-			  $('#descrip').summernote({
-			    height: 300,
+			  $('.summer_texto').summernote({
+			    height: 430,
 			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
 			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
 			    toolbar: [
@@ -641,3 +641,72 @@ $('#botao_lixeira').on('click', function(e) {
 
 });
 
+
+$('#btnVerificaSlug').on('click', function (e) {
+
+    e.preventDefault(); // evita o envio normal do formulário
+    
+    if ($('#id').val() === "")
+    {
+        Swal.fire(
+          'Atenção...',
+          'Para verificar o Slug precisa salvar o veículo.',
+          'info'
+        );
+        return ;
+    }
+
+    if ($('#slug').val().length < 3)
+    {
+        Swal.fire(
+          'Atenção...',
+          'O Slug precisa ter mais de 3 caracteres.',
+          'info'
+        );
+        return ;
+    }
+
+    let valor = $('#slug').val();
+    let regex = /^[a-zA-Z0-9\-_]*$/; // apenas letras, números, hífen e underscore
+
+    if (!regex.test(valor)) 
+    {
+        // Opcional: alerta discreto no console
+        Swal.fire(
+          'Atenção...',
+          'Caracteres inválidos. Só são permitidos letras, números, - e _',
+          'info'
+        );
+        return;
+    }    
+    
+    // var form = document.getElementById('formUploadImagemSeo');
+    // var formData = new FormData(form);
+	$('#resultado_slug').html('<div class="col-md-12 text-center"><BR><BR><img src="../global/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+	
+    $.ajax({
+        url: '../globais/admin/json/variados/verifica_slug.php', // PHP que irá processar
+        type: 'POST',
+        data: {
+	        		'id_key' : $('#id').val(),
+	        		'slug' : $('#slug').val(),
+	        		'tipo' : '1'
+        },
+        success: function (dataReturn) {
+			try {
+				response = JSON.parse(dataReturn);
+				mensagem = response.msg;
+				link = response.link;
+				imagem = response.imagem;
+			} catch (e) {
+				mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+			}
+
+			$('#resultado_slug').html("Página do veículo<BR>"+link);
+			
+        },
+        error: function () {
+            $('#resultado_slug').html('<div class="alert alert-danger">Slug indisponível...</div>');
+        }
+    });
+});
