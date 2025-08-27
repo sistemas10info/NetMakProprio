@@ -32,7 +32,6 @@ if (@$_POST['estado']=="9")
      }    
 }
 
-
 if (empty($_POST['id']))
 {
 	$_POST['id']=buildIdKey(30);
@@ -52,6 +51,21 @@ if (empty($_POST['id']))
 
 }
 
+$ver3=executeQuery("select interno from slugs where slug='".$_POST['slug']."' and id_key_origem<>'".$_POST['id']."' limit 1");
+
+if(@$ver3['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao busca slug: ' . @$ver3['error'];
+	exit(json_encode($response));
+}
+
+if($ver3)
+{
+	http_response_code(400);
+	$response['msg'] = 'Verifique que o slug ".$_POST'['slug']."' já existe para outra pagina";
+	exit(json_encode($response));
+}
 
 $Xpreco=str_replace(",","",$_POST['preco']);
 $Xpreco_oferta=str_replace(",","",$_POST['preco_oferta']);
@@ -60,6 +74,7 @@ $update = executeQuery("update produtos
 									    	tipo='1',
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
+											slug			= '".@$_POST['slug']."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
 											preco    	 		= '".$Xpreco."',
 											preco_oferta   = '".$Xpreco_oferta."',
@@ -77,8 +92,47 @@ if(@$update['error'])
 	exit(json_encode($response));
 }
 
+$slu3=executeQuery("select interno from slugs where id_key_origem='".$_POST['id']."' limit 1");
+
+if(@$slu3['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao update registro: ' . @$slu3['error'];
+	exit(json_encode($response));
+}
+
+if (!$slu3)
+{
+
+	$insert=executeQuery("insert into slugs 
+												set 
+													id_key='".buildIdKey(30)."',
+													id_key_origem='".$_POST['id']."',
+													tipo_pagina='4' ");
+	if(@$insert['error'])
+	{
+		http_response_code(400);
+		$response['msg'] = 'Erro ao insert registro: ' . @$insert['error'];
+		exit(json_encode($response));
+	}
+
+}
+
+$update=executeQuery("update slugs 
+											set 
+												slug='".$_POST['slug']."' 
+											where 
+												id_key_origem='".$_POST['id']."' and 
+												tipo_pagina='4' ");
+if(@$update['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao update slug: ' . @$update['error'];
+	exit(json_encode($response));
+}
+
 http_response_code(200);
-$response['msg']    = 'Seu produto foi cadastrado.';
+$response['msg']    = 'Seu veículo foi cadastrado.';
 $response['id'] = $_POST['id'];
 
 exit(json_encode($response));

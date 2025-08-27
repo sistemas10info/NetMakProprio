@@ -114,44 +114,56 @@ if (file_exists($arquivo)) {
 				?>
 				<!-- conteudo -->
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
-					<!-- categorias marca -->
-				    <div class='row' style='padding:5px; border-top:1px solid silver;'>
+				    <div style='padding:5px;'>
 				    	<input type="hidden" id="id_key_categoria" value="">
 				    	<input type="hidden" id="id_key_marca" value="">
-				    	<div class='col-md-12 well'>
-				    	     <h3>Categorias de Produtos</h3>
+				    	<div class='row'>
+				    	     <div class='col-md-12 text-center'>
+					    	     <h3>Configuração de linhas, categorias, marcas e modelos</h3>
+					    	 </div>
 				    	</div>
-					    <div class='col-md-3'>
-							<table class="table-light table table-bordered table-striped table-hover f12">
-								<thead>
-									<tr bgcolor='#D3D3D3'>
-										<th width="90%;"><a href='javascript:add_categoria_marca();' class='f18'>+</a> Nome</th>
-										<th width="10%;" class='text-center'>...</th>
-									</tr>
-								</thead>
-								<?
-								$cat1=executeQuery("select * from categorias_produtos order by nome","all");
-								if(@$cat1['error'])
-								{
-									die('Erro busca: ' . @$cap1['error']);
-								}
-								if ($cat1)
-								{
-								    foreach ($cat1 as $cat3)
-								    {
-										echo "<tr>
-												  <td>".$cat3['nome']."</td>
-												  <td class='text-center'><a href='javascript:apagar_registro(\"".$cat3['id_key']."\",\"categorias_produtos\");'><i class='fa fa-trash'></i></a></td>
-												</tr>";
-								    }
-								}
-								?>
-							</table>
-					    </div>
+				    	<BR<
+				    	<div class='row' style='padding-left:300px; padding-right:300px;'>
+							<div class="col-md-10 text-center" >
+								<select id="id_key_linha" class="form-control f16">
+									<option value="xx">Selecione a linha</option>
+									<?
+									$lin1=executeQuery("select * from linhas order by nome","all");
+									if(@$lin1['error'])
+									{
+										die('Erro busca linha: ' . @$lin1['error']);
+									}
+									if ($lin1)
+									{
+									    foreach ($lin1 as $lin3) echo "<option value='".$lin3['id_key']."'>".$lin3['nome']."</option>";
+									}
+									?>
+								</select>
+							</div>
+							<div class='col-md-2 text-center'>
+								<a href="javascript:ver_categorias();" class="btn btn-sm btn-primary">Buscar</a>
+							</div>
+				    	</div>
+				    	<BR>
+				    	<div class='row resultado'>
+						    <div class='col-md-3'>
+						    	<h2>Categorias</h2>
+						    	<div id="div_categorias">
+						    	</div>
+						    </div>
+						    <div class='col-md-4'>
+						    	<h2>Marcas</h2>
+						    	<div id="div_marcas">
+						    	</div>
+						    </div>
+						    <div class='col-md-5'>
+						    	<h2>Modelos</h2>
+						    	<div id="div_modelos">
+						    	</div>
+						    </div>
+				    	</div>
 				    </div>
 
-				</div>
-				
 				<!-- Fim conteudo -->
 				
             </div>
@@ -218,7 +230,7 @@ if (file_exists($arquivo)) {
 	<!-- SweetAlert2 JS -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 
-	<script src="../globais/admin/js/pages/categorias.js">
+	<script src="../globais/admin/js/pages/linhas.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -21,9 +21,9 @@ else
    $Xtitulo="Editar vendedor";
 }
 
-$cat1=executeQuery("select * from categorias ","all");
+$lin1=executeQuery("select * from linhas ","all");
 
-$cap1=executeQuery("select * from categorias_produtos ","all");
+$cat1=executeQuery("select * from categorias_produtos ","all");
 
 $est1=executeQuery("select * from estados","all");
 			
@@ -278,14 +278,14 @@ $est1=executeQuery("select * from estados","all");
 	
 								<div class="row form-group"> 
 									<div class="col-md-6">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Categorias habilitadas</label><BR>
-										<select name="id_key_categorias[]" id="id_key_categorias"  multiple class="form-control  f14">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Linhas habilitadas</label><BR>
+										<select name="id_key_linhas[]" id="id_key_linhas"  multiple class="form-control  f14">
 										<?
-										foreach ($cat1 as $cat3)
+										foreach ($lin1 as $lin3)
 										{
-											echo "<option value='".$cat3['id_key']."' ";
-											if (str_contains(@$ven3['id_key_categorias'], $cat3['id_key'])) echo " selected ";
-											echo ">".$cat3['nome']."</option>";
+											echo "<option value='".$lin3['id_key']."' ";
+											if (str_contains(@$ven3['id_key_linhas'], $lin3['id_key'])) echo " selected ";
+											echo ">".$lin3['nome']."</option>";
 										}
 										?>
 										</select>
@@ -295,11 +295,11 @@ $est1=executeQuery("select * from estados","all");
 										<select name="id_key_categorias_produtos[]" id="id_key_categorias_produtos"  multiple class="form-control  f14">
 											<option value="--" <? if (str_contains(@$ven3['id_key_categorias_produtos'], "--")) echo " selected ";?>>** Sem categorias habilitadas</option>
 										<?
-										foreach ($cap1 as $cap3)
+										foreach ($cat1 as $cat3)
 										{
-											echo "<option value='".$cap3['id_key']."' ";
-											if (str_contains(@$ven3['id_key_categorias_produtos'], $cap3['id_key'])) echo " selected ";
-											echo ">".$cap3['nome']."</option>";
+											echo "<option value='".$cat3['id_key']."' ";
+											if (str_contains(@$ven3['id_key_categorias_produtos'], $cat3['id_key'])) echo " selected ";
+											echo ">".$cat3['nome']."</option>";
 										}
 										?>
 										</select>

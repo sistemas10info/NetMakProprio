@@ -11,6 +11,7 @@ if (!isset($_GET['id']))
    $vei3=[];
    $vei3['titulo']="Novo veículo";
    $Xtitulo="Novo Veículo";
+   $vei3['id_key_linha']='--';
    $vei3['id_key_categoria']='--';
    $vei3['id_key_marca']='--';
    $vei3['id_key_modelo']='--';
@@ -22,18 +23,25 @@ else
    													  id_key='".$_GET['id']."' 
    													  		limit 1");
    $Xtitulo="Editar Veículo";
+   $cat1=executeQuery("select * from categorias 
+   												where
+   												   id_key_linha='".$vei3['id_key_linha']."' 
+   												order by nome","all");
+
    $mar1=executeQuery("select * from marcas 
    												where
-   												   id_key_categoria='".$vei3['id_key_categoria']."' 
+   												   id_key_categoria='".$vei3['id_key_categoria']."' and 
+   												   id_key_linha='".$vei3['id_key_linha']."' 
    												order by nome","all");
    $mod1=executeQuery("select * from modelos 
    												where 
    													id_key_categoria='".$vei3['id_key_categoria']."' and 
-   													id_key_marca='".$vei3['id_key_marca']."' 
+   													id_key_marca='".$vei3['id_key_marca']."' and
+   													id_key_linha='".$vei3['id_key_linha']."' 
    												order by nome","all");
 }
 
-$cat1=executeQuery("select * from categorias ","all");
+$lin1=executeQuery("select * from linhas ","all");
 			
 ?>
 <!DOCTYPE html>
@@ -203,17 +211,36 @@ $cat1=executeQuery("select * from categorias ","all");
 								    </div>
 							    </div>
 								<div class="row form-group"> 
+									<div class="col-md-12">
+										<label class="control-label text-right f14b" for="Fcpf_cnpj">Linha</label><BR>
+										<select class="form-control f12" id="id_key_linha" name="id_key_linha">
+										   <option value="--">Selecione a linha</option>
+										   <?
+										   		foreach ($lin1 as $lin3) 
+										   		{
+										   			echo "<option value='".$lin3['id_key']."' ";
+										   			if ($vei3['id_key_linha']==$lin3['id_key']) echo "selected ";
+										   			echo ">".$lin3['nome']."</option>";
+										   		}
+										   ?>
+										</select>
+									</div>
+								</div>	
+								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Categoria</label><BR>
 										<select class="form-control f12" id="id_key_categoria" name="id_key_categoria">
 										   <option value="--">Selecione a categoria</option>
 										   <?
-										   		foreach ($cat1 as $cat3) 
-										   		{
-										   			echo "<option value='".$cat3['id_key']."' ";
-										   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
-										   			echo ">".$cat3['nome']."</option>";
-										   		}
+										        if ($cat1)
+										        {
+											   		foreach ($cat1 as $cat3) 
+											   		{
+											   			echo "<option value='".$cat3['id_key']."' ";
+											   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
+											   			echo ">".$cat3['nome']."</option>";
+											   		}
+											   	}
 										   ?>
 										</select>
 									</div>

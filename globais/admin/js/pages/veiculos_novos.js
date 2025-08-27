@@ -41,6 +41,31 @@
 			      }
 			    }
 			  });
+
+			$('#id_key_linha').on('change', function() {
+			    var Xid_key_linha = $(this).val();
+			
+			    if (Xid_key_linha !== "--") {
+			        $.ajax({
+			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_categorias.php",
+			            type: 'POST',
+			            data: { 'id_key_linha': Xid_key_linha },
+			            dataType: 'json',
+			            success: function(response) {
+			            	console.log(response.categorias);
+			            	$('#id_key_marca').find('option').not(':first').remove();
+			            	$('#id_key_modelo').find('option').not(':first').remove();
+			                $('#id_key_categoria').find('option').not(':first').remove();
+			                $.each(response.categorias, function(index, categoria) {
+			                    $('#id_key_categoria').append('<option value="' + categoria.id_key + '">' + categoria.nome + '</option>');
+			                });
+			            },
+			            error: function() {
+			                alert('Erro ao carregar categorias.');
+			            }
+			        });
+			    } 
+			});
 			  
 
 			$('#id_key_categoria').on('change', function() {
@@ -50,10 +75,12 @@
 			        $.ajax({
 			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_marcas.php",
 			            type: 'POST',
-			            data: { 'id_key_categoria': Xid_key_categoria },
+			            data: { 'id_key_linha' : $('#id_key_linha').val(),
+			            		   'id_key_categoria': Xid_key_categoria },
 			            dataType: 'json',
 			            success: function(response) {
 			            	console.log(response.marcas);
+			            	$('#id_key_modelo').find('option').not(':first').remove();
 			                $('#id_key_marca').find('option').not(':first').remove();
 			                $.each(response.marcas, function(index, marca) {
 			                    $('#id_key_marca').append('<option value="' + marca.id_key + '">' + marca.nome + '</option>');
@@ -73,7 +100,8 @@
 			        $.ajax({
 			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_modelos.php",
 			            type: 'POST',
-			            data: { 'id_key_categoria': $('#id_key_categoria').val(),
+			            data: { 'id_key_linha' : $('#id_key_linha').val(),
+			            		   'id_key_categoria': $('#id_key_categoria').val(),
 			            		   'id_key_marca' : Xid_key_marca },
 			            dataType: 'json',
 			            success: function(response) {

@@ -10,21 +10,22 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-//print_r($_POST);
-
 if (empty($_POST['nome']))
 {
 	http_response_code(400);
-	$response['msg'] = 'Não existe o ID...';
+	$response['msg'] = 'Não existe o nome...';
 	exit(json_encode($response));
 }
 
 $Xid_key=buildIdKey(30);
-$insert = executeQuery("
-									insert into categorias
+$insert = executeQuery("insert into modelos
 									    SET
 									        id_key       = '".$Xid_key."',
-											nome			= '".@$_POST['nome']."' ");
+									        id_key_linha = '".$_POST['id_key_linha']."',
+									        id_key_categoria = '".$_POST['id_key_categoria']."',
+									        id_key_marca = '".$_POST['id_key_marca']."',
+											nome			= '".@$_POST['nome']."',
+											anos			= '".@$_POST['anos']."' ");
 
 if(@$insert['error'])
 {
@@ -34,7 +35,9 @@ if(@$insert['error'])
 }
 
 http_response_code(200);
-$response['msg']    = 'Categoria adicionada com sucesso...';
+$response['msg']    = 'Marca adicionada com sucesso...';
 $response['id_key'] = $Xid_key;
+$response['id_key_categoria'] = $_POST['id_key_categoria'];
+$response['id_key_marca'] = $_POST['id_key_marca'];
 
 exit(json_encode($response));

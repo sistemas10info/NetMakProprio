@@ -21,6 +21,7 @@ if (@$_POST['estado']=="9")
     $Xmensagem="";
     if (empty($_POST['titulo'])) $Xmensagem.="Titulo de anuncio deve estar preenchido<BR>";
     if (empty($_POST['descrip'])) $Xmensagem.="Descrição do anuncio deve estar preenchido<BR>";
+    if ($_POST['id_key_linha']=="--") $Xmensagem.="Linha do veículo deve estar preenchida<BR>";
     if ($_POST['id_key_categoria']=="--") $Xmensagem.="Categoria deve estar preenchida<BR>";
     if ($_POST['id_key_marca']=="--") $Xmensagem.="Marca deve estar preenchida<BR>";
     if ($_POST['id_key_modelo']=="--") $Xmensagem.="Modelo deve estar preenchido<BR>";
@@ -54,22 +55,22 @@ if (empty($_POST['id']))
 
 }
 
-/*
-Array
-(
-    [id] => UEW052HKRR2ICFEFZXPT83JO5TBFV9
-    [titulo] => Novo veículo
-    [descrip] => 
-    [id_key_categoria] => --
-    [id_key_marca] => --
-    [id_key_modelo] => --
-    [preco] => 0.00
-    [comic] => 0.00
-    [comic_fica] => N
-    [estado] => 0
-    [seo] => 
-)
-*/
+$ver3=executeQuery("select interno from slugs where slug='".$_POST['slug']."' and id_key_origem<>'".$_POST['id']."' limit 1");
+
+if(@$ver3['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao busca slug: ' . @$ver3['error'];
+	exit(json_encode($response));
+}
+
+if($ver3)
+{
+	http_response_code(400);
+	$response['msg'] = 'Verifique que o slug ".$_POST'['slug']."' já existe para outra pagina";
+	exit(json_encode($response));
+}
+
 
 $Xpreco=str_replace(",","",$_POST['preco']);
 $update = executeQuery("update veiculos
@@ -78,7 +79,9 @@ $update = executeQuery("update veiculos
 									    	id_key_vendedor='--',
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
+											slug			= '".@$_POST['slug']."',
 											especifica			= '".@$_POST['especifica']."',
+											id_key_linha    	 		= '".((!empty(@$_POST['id_key_linha']))      ? @$_POST['id_key_linha']     : '')."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
 											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
 											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
@@ -98,6 +101,46 @@ if(@$update['error'])
 	$response['msg'] = 'Erro ao update registro: ' . @$update['error'];
 	exit(json_encode($response));
 }
+
+$slu3=executeQuery("select interno from slugs where id_key_origem='".$_POST['id']."' limit 1");
+
+if(@$slu3['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao update registro: ' . @$slu3['error'];
+	exit(json_encode($response));
+}
+
+if (!$slu3)
+{
+
+	$insert=executeQuery("insert into slugs 
+												set 
+													id_key='".buildIdKey(30)."',
+													id_key_origem='".$_POST['id']."',
+													tipo_pagina='1' ");
+	if(@$insert['error'])
+	{
+		http_response_code(400);
+		$response['msg'] = 'Erro ao insert registro: ' . @$insert['error'];
+		exit(json_encode($response));
+	}
+
+}
+
+$update=executeQuery("update slugs 
+											set 
+												slug='".$_POST['slug']."' 
+											where 
+												id_key_origem='".$_POST['id']."' and 
+												tipo_pagina='1' ");
+if(@$update['error'])
+{
+	http_response_code(400);
+	$response['msg'] = 'Erro ao update slug: ' . @$update['error'];
+	exit(json_encode($response));
+}
+
 
 http_response_code(200);
 $response['msg']    = 'Seu vendedor foi cadastrado.';

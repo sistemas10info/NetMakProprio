@@ -15,7 +15,7 @@ print_r($_POST);
 die();
 */
 
-$delete = executeQuery("delete from categorias_produtos
+$delete = executeQuery("delete from ".$_POST['tipo']." 
 									    where 
 									        id_key = '".$_POST['id_key']."' limit 1");
 

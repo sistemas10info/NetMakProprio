@@ -11,8 +11,9 @@ if (file_exists($arquivo)) {
 
 $mod1=executeQuery("select * from modelos 
 										where 
+											id_key_linha='".$_POST['id_key_linha']."' and
 											id_key_categoria='".$_POST['id_key_categoria']."' and
-											id_key_marca='".$_POST['id']."'  
+											id_key_marca='".$_POST['id_key_marca']."'  
 											order by nome","all");
 
 if(@$mod1['error'])
