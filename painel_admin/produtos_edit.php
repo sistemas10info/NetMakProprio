@@ -180,7 +180,7 @@ if (@$cat1['error'])
 							</div>
 
 						</div>
-						<div class='col-md-5'>
+						<div class='col-md-5'>. 
 							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
 							    <div class='row' style='padding:10px;'>
 								    <div class='col-md-12'>
