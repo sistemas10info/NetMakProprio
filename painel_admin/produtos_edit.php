@@ -397,3 +397,5 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 	</div>
 
 </div>
+
+
