@@ -22,8 +22,20 @@ else
    $Xtitulo="Editar Produto";
 }
 
-$cat1=executeQuery("select * from categorias_produtos ","all");
-			
+$cat1=executeQuery("select categorias_produtos.*,
+										 linhas.nome as Lnome,
+										 categorias.nome as Cnome,
+										 marcas.nome as Mnome
+										 	from categorias_produtos 
+										 left join linhas on (categorias_produtos.id_key_linha=linhas.id_key)
+										 left join categorias on (categorias_produtos.id_key_categoria=categorias.id_key)
+										 left join marcas on (categorias_produtos.id_key_marca=marcas.id_key)
+										 order by nome,id_key_linha,id_key_categoria,id_key_marca ","all");
+
+if (@$cat1['error'])
+{
+    die("Error categoria ".$cat1['error']);
+}			
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -183,9 +195,13 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 										   <?
 										   		foreach ($cat1 as $cat3) 
 										   		{
+										   			$cat3['Lnome']=($cat3['Lnome']) ? " / ".$cat3['Lnome'] : "";
+										   		    $cat3['Cnome']=($cat3['Cnome']) ? " / ".$cat3['Cnome'] : "";
+										   		    $cat3['Mnome']=($cat3['Mnome']) ? " / ".$cat3['Mnome'] : "";
+										   		    
 										   			echo "<option value='".$cat3['id_key']."' ";
 										   			if ($pro3['id_key_categoria']==$cat3['id_key']) echo "selected ";
-										   			echo ">".$cat3['nome']."</option>";
+										   			echo ">".$cat3['nome'].$cat3['Lnome'].$cat3['Cnome'].$cat3['Mnome']."</option>";
 										   		}
 										   ?>
 										</select>
