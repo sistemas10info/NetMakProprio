@@ -1,7 +1,7 @@
 <?php 
 
 header('Access-Control-Allow-Origin: *');
-
+$Xverifica_login=false;
 $Xerror=false;
 $arquivo = "../../../inc/inc.php";
 if (file_exists($arquivo)) {

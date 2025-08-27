@@ -2,7 +2,6 @@
 
 header('Access-Control-Allow-Origin: *');
 $Xverifica_login=false;
-$Xerror=false;
 $arquivo = "../../../inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
@@ -10,29 +9,29 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-$mar1=executeQuery("select * from marcas 
+$cat1=executeQuery("select * from categorias 
 											where 
-												id_key_categoria='".$_POST['id_key_categoria']."' 
+												id_key_linha='".$_POST['id_key_linha']."' 
 											order by nome","all");
-if(@$mar1['error'])
+if(@$cat1['error'])
 {
 	http_response_code(400);
-	$response['msg'] = 'Erro busca: ' . @$mar1['error'];
+	$response['msg'] = 'Erro busca: ' . @$cat1['error'];
 	exit(json_encode($response));
 }
 
-if ($mar1)
+if ($cat1)
 {
-    $Xmarcas=[];
-	foreach ($mar1 as $mar3)
+    $Xcategorias=[];
+	foreach ($cat1 as $cat3)
 	{
-	     $Xmarcas[]=$mar3;
+	     $Xcategorias[]=$cat3;
 	}
 }
 
 http_response_code(200);
-$response['msg'] = 'Marcas listadas com sucesso...';
-$response['marcas']=$Xmarcas;
+$response['msg'] = 'Categorias listadas com sucesso...';
+$response['categorias']=$Xcategorias;
 exit(json_encode($response));
 
 ?>

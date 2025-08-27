@@ -11,7 +11,8 @@ if (file_exists($arquivo)) {
 
 $mar1=executeQuery("select * from marcas 
 										where 
-											id_key_categoria='".$_POST['id']."' 
+											id_key_linha='".$_POST['id_key_linha']."'  and
+											id_key_categoria = '".$_POST['id_key_categoria']."' 
 											order by nome","all");
 
 if(@$mar1['error'])
@@ -35,9 +36,9 @@ if ($mar1)
 	foreach ($mar1 as $mar3)
 	{
 		echo "<tr>
-				  <td><i class='fa fa-arrow-right marcas'  id='marca_".$mar3['id_key']."' 
+				  <td><i class='fa fa-arrow-right marcas text-primary f20'  id='marca_".$mar3['id_key']."' 
 				  			style='display:none;'>
-				  		 </i> <a href='javascript:ver_modelos(\"".$_POST['id']."\",\"".$mar3['id_key']."\");'>".$mar3['nome']."</a></td>
+				  		 </i> <a href='javascript:ver_modelos(\"".$mar3['id_key']."\");'>".$mar3['nome']."</a></td>
 				  <td class='text-center'><a href='javascript:apagar_registro(\"".$mar3['id_key']."\",\"marcas\");'><i class='fa fa-trash'></i></a></td>
 				</tr>";
 	}

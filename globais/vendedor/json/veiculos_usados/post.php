@@ -80,11 +80,12 @@ $update = executeQuery("update veiculos
 									    	id_key_vendedor='".$_SESSION['vendedor']['id_key']."',
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
+											especifica			= '".@$_POST['especifica']."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
 											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
 											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
 											preco    	 		= '".$Xpreco."',
-											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."'
+											estado	      	 		= '0'
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 

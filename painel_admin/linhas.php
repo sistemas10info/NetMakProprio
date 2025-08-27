@@ -4,10 +4,7 @@ if (file_exists($arquivo)) {
     include($arquivo);
 } else {
     echo "Arquivo não encontrado: $arquivo";
-}
-
-$cat1=executeQuery("select * from categorias_produtos ","all");
-
+}			
 ?>
 
 <!DOCTYPE html>
@@ -117,63 +114,56 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 				?>
 				<!-- conteudo -->
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
-					<!-- categorias marca -->
-				    <div class='row' style='padding:5px; border-top:1px solid silver;'>
-				    	<div class='col-md-12 well'>
-				    	     <h3>Categorias de Produtos</h3>
+				    <div style='padding:5px;'>
+				    	<input type="hidden" id="id_key_categoria" value="">
+				    	<input type="hidden" id="id_key_marca" value="">
+				    	<div class='row'>
+				    	     <div class='col-md-12 text-center'>
+					    	     <h3>Configuração de linhas, categorias, marcas e modelos</h3>
+					    	 </div>
 				    	</div>
-					    <div class='col-md-12'>
-							<table class="table-light table table-bordered table-striped table-hover f12">
-								<thead>
-									<tr bgcolor='#D3D3D3'>
-										<th width="38%;"><a href='javascript:add_categoria_marca();' class='f18'>+</a> Nome</th>
-										<th width="20%;">Linha</th>
-										<th width="20%;">Categoria</th>
-										<th width="20%;">Marca</th>
-										<th class='text-center'>...</th>
-									</tr>
-								</thead>
-								<?
-								$cat1=executeQuery("select categorias_produtos.*,
-																		 linhas.nome as Lnome,
-																		 categorias.nome as Cnome,
-																		 marcas.nome as Mnome
-																	 from 
-																	 	categorias_produtos 
-																     left join linhas on (categorias_produtos.id_key_linha=linhas.id_key)
-																     left join categorias on (categorias_produtos.id_key_categoria=categorias.id_key)
-																     left join marcas on (categorias_produtos.id_key_marca=marcas.id_key)
-																	 order by categorias_produtos.nome,
-																	 			  categorias_produtos.id_key_linha,
-																	 			  categorias_produtos.id_key_categoria,
-																	 			  categorias_produtos.id_key_marca","all");
-								if(@$cat1['error'])
-								{
-									die('Erro busca: ' . @$cat1['error']);
-								}
-								if ($cat1)
-								{
-								    foreach ($cat1 as $cat3)
-								    {
-								        $cat3['Lnome']=($cat3['id_key_linha']=="--") ? "<i>Todas as linhas</i>" : $cat3['Lnome'];
-								        $cat3['Mnome']=($cat3['id_key_marca']=="--") ? "<i>Todas as Marcas</i>" : $cat3['Mnome'];
-								        $cat3['Cnome']=($cat3['id_key_categoria']=="--") ? "<i>Todas as Categorias</i>" : $cat3['Cnome'];
-										echo "<tr>
-												  <td><a href='javascript:editar_categoria_marca(\"".$cat3['id_key']."\");'>".$cat3['nome']."</a></td>
-												  <td>".$cat3['Lnome']."</td>
-												  <td>".$cat3['Cnome']."</td>
-												  <td>".$cat3['Mnome']."</td>
-												  <td class='text-center'><a href='javascript:apagar_registro(\"".$cat3['id_key']."\",\"categorias_produtos\");'><i class='fa fa-trash'></i></a></td>
-												</tr>";
-								    }
-								}
-								?>
-							</table>
-					    </div>
+				    	<BR<
+				    	<div class='row' style='padding-left:300px; padding-right:300px;'>
+							<div class="col-md-10 text-center" >
+								<select id="id_key_linha" class="form-control f16">
+									<option value="xx">Selecione a linha</option>
+									<?
+									$lin1=executeQuery("select * from linhas order by nome","all");
+									if(@$lin1['error'])
+									{
+										die('Erro busca linha: ' . @$lin1['error']);
+									}
+									if ($lin1)
+									{
+									    foreach ($lin1 as $lin3) echo "<option value='".$lin3['id_key']."'>".$lin3['nome']."</option>";
+									}
+									?>
+								</select>
+							</div>
+							<div class='col-md-2 text-center'>
+								<a href="javascript:ver_categorias();" class="btn btn-sm btn-primary">Buscar</a>
+							</div>
+				    	</div>
+				    	<BR>
+				    	<div class='row resultado'>
+						    <div class='col-md-3'>
+						    	<h2>Categorias</h2>
+						    	<div id="div_categorias">
+						    	</div>
+						    </div>
+						    <div class='col-md-4'>
+						    	<h2>Marcas</h2>
+						    	<div id="div_marcas">
+						    	</div>
+						    </div>
+						    <div class='col-md-5'>
+						    	<h2>Modelos</h2>
+						    	<div id="div_modelos">
+						    	</div>
+						    </div>
+				    	</div>
 				    </div>
 
-				</div>
-				
 				<!-- Fim conteudo -->
 				
             </div>
@@ -240,7 +230,7 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 	<!-- SweetAlert2 JS -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 
-	<script src="../globais/admin/js/pages/categorias.js">
+	<script src="../globais/admin/js/pages/linhas.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -257,70 +247,3 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 </body>
 
 </html>
-
-
-<!-- MODAL Editar -->
-<div class="modal fade" id="ModalDadosCategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="ModalLabelCategoria">----</h4>
-			</div>
-			<div class="modal-body">
-				<form name="formDadosCategoria" id='formDadosCategoria' method="POST">
-					<input type="hidden" id="id_key"  name="id_key" value="">
-					<div class=" form-horizontal">
-						<div class="row form-group"> 
-							<label class="control-label col-md-2 text-right" for="Fcpf_cnpj">Nome da categoria</label>
-							<div class="col-md-10">
-								<input type="text" name="nome" id="nome" class="form-control">
-							</div>
-						</div>
-					
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Linha</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_linha" name="id_key_linha">
-								   <option value="--">Qualquer linha</option>
-								   <?
-								        $lin1=executeQuery("select * from linhas","all");
-								   		foreach ($lin1 as $lin3) 
-								   		{
-								   			echo "<option value='".$lin3['id_key']."' ";
-								   			if ($vei3['id_key_linha']==$lin3['id_key']) echo "selected ";
-								   			echo ">".$lin3['nome']."</option>";
-								   		}
-								   ?>
-								</select>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Categoria</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_categoria" name="id_key_categoria">
-								   <option value="--">Qualquer categoria</option>
-								</select>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Marca</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_marca" name="id_key_marca">
-								   <option value="--">Qualquer marca</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" title="Fechar tela">X</button>
-						<button type="button" class="btn btn-danger" name="btnApagar" id="btnApagar" title="Apagar registro!"><i class='fa fa-trash'></i></button>
-						<a class="btn btn-primary" href='javascript:salvar_categoria();'  title="Salvar dados"><i class='fa fa-save'></i></a>
-					</div>
-
-				</form>
-		</div>
-	</div>
-	</div>
-</div>
-<!-- fim modal editar -->
