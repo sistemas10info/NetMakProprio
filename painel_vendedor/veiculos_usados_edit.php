@@ -183,7 +183,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:20px; padding:10px;'>
 							    <div class='row' style='padding:10px;'>
 								    <div class='col-md-12'>
-								    	<h5>Dados principais</h5>
+								    	<h5>Dados principais....</h5>
 								    </div>
 							    </div>
 	
