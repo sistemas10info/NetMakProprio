@@ -48,7 +48,7 @@
 	define('CHAVE_CRIPTOGRAFIA1', 'NetKffeses');
 	define('CHAVE_CRIPTOGRAFIA2', 'ssdd33@#yyhgt');
 	
-	define('SENHA_ACESSO', 'Gabito005##');
+	define('SENHA_ACESSO', '11223344');
 	define('CHAVE_FILE', 'Cotando434DD');
 	
   //Verifica a zona horária
