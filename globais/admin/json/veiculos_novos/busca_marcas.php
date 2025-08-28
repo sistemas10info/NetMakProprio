@@ -21,9 +21,9 @@ if(@$mar1['error'])
 	exit(json_encode($response));
 }
 
+$Xmarcas=[];
 if ($mar1)
 {
-    $Xmarcas=[];
 	foreach ($mar1 as $mar3)
 	{
 	     $Xmarcas[]=$mar3;

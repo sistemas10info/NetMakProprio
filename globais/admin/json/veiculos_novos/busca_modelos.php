@@ -24,9 +24,9 @@ if(@$mod1['error'])
 	exit(json_encode($response));
 }
 
+$Xmodelos=[];
 if ($mod1)
 {
-    $Xmodelos=[];
 	foreach ($mod1 as $mod3)
 	{
 	     $Xmodelos[]=$mod3;

@@ -20,9 +20,9 @@ if(@$cat1['error'])
 	exit(json_encode($response));
 }
 
+$Xcategorias=[];
 if ($cat1)
 {
-    $Xcategorias=[];
 	foreach ($cat1 as $cat3)
 	{
 	     $Xcategorias[]=$cat3;

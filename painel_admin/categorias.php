@@ -284,12 +284,7 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 								   <option value="--">Qualquer linha</option>
 								   <?
 								        $lin1=executeQuery("select * from linhas","all");
-								   		foreach ($lin1 as $lin3) 
-								   		{
-								   			echo "<option value='".$lin3['id_key']."' ";
-								   			if ($vei3['id_key_linha']==$lin3['id_key']) echo "selected ";
-								   			echo ">".$lin3['nome']."</option>";
-								   		}
+								   		foreach ($lin1 as $lin3) echo "<option value='".$lin3['id_key']."'>".$lin3['nome']."</option>";
 								   ?>
 								</select>
 							</div>

@@ -25,6 +25,11 @@
 			                alert('Erro ao carregar categorias.');
 			            }
 			        });
+			    }
+			    else
+			    {
+				    $('#id_key_marca').find('option').not(':first').remove();
+				    $('#id_key_categoria').find('option').not(':first').remove();
 			    } 
 			});
 			  
@@ -52,32 +57,6 @@
 			        });
 			    } 
 			});
-
-			$('#id_key_marca').on('change', function() {
-			    var Xid_key_marca = $(this).val();
-			
-			    if (Xid_key_marca !== "--") {
-			        $.ajax({
-			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_modelos.php",
-			            type: 'POST',
-			            data: { 'id_key_linha' : $('#id_key_linha').val(),
-			            		   'id_key_categoria': $('#id_key_categoria').val(),
-			            		   'id_key_marca' : Xid_key_marca },
-			            dataType: 'json',
-			            success: function(response) {
-			            	console.log(response.modelos);
-			                $('#id_key_modelo').find('option').not(':first').remove();
-			                $.each(response.modelos, function(index, modelo) {
-			                    $('#id_key_modelo').append('<option value="' + modelo.id_key + '">' + modelo.nome + ' ('+modelo.anos+')</option>');
-			                });
-			            },
-			            error: function() {
-			                alert('Erro ao carregar modelos.');
-			            }
-			        });
-			    } 
-			});
-
 
 		});
 
