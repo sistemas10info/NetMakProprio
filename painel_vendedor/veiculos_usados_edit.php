@@ -173,7 +173,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 				<!-- conteudo -->
 			    <div class='row' style='padding:10px;'>
 				    <div class='col-md-4'>
-				    	<h3><?=$Xtitulo?></h3>
+				    	<h3><?=$Xtitulo?>..</h3>
 				    </div>
 			    </div>
 				<form name="FormVeiculoUsado" id="FormVeiculoUsado" method="post" action="../globais/vendedor/json/veiculos_usados/post.php">
