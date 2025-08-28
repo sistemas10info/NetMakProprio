@@ -1,12 +1,12 @@
 <?
 
 $Xerror=true;
-$arquivo = "../globais/inc/inc.php";
+$arquivo = "../globais/inc/inc.php";  
 if (file_exists($arquivo)) {
     include($arquivo);
 } else {
     echo "Arquivo não encontrado: $arquivo";
-}
+} 
 
 $cab3=executeQuery("select id_key_linhas from vendedores 
 													where 

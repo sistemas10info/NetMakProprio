@@ -2,7 +2,7 @@
 		$(document).ready(function() {
 			
 			//Para voltar o foco ao modal anterior
-			$(".modal-content").parent().parent().css("overflow", "auto");
+			$(".modal-content").parent().parent().css("overflow", "auto"); 
 			
 			$('.maskMoneyBR').maskMoney();
 
