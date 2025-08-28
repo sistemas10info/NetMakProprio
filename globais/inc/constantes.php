@@ -1,6 +1,6 @@
 <?php
 
-    $Xsite='localhost';  
+    $Xsite='cotarfacil.com.br';  
     $Xsystem='NetMakProprio';     
     	
 	// DEFINES
@@ -21,7 +21,7 @@
 	define('LINK_COTACAO', 'https://'.$Xsite.'/C.php?i=');
 	define('LINK_ORDEM_DE_COMPRA', 'https://'.$Xsite.'/O.php?i=');
 	
-	define('WEBSITE_ACESSO', 'https://contarfacil.com.br/acessodev');
+	define('WEBSITE_ACESSO', 'https://cotarfacil.com.br/acessodev');
 	
 	define('NOME_SISTEMA', 'Painel Admin');
 	
@@ -39,17 +39,16 @@
     // dados para encriptação....
 
 	define('HOST', 'localhost:3306');
-	define('DBNAME', 'netmakproprio');
+	define('DBNAME', 'dmopodtb_netmak');
 	define('CHARSET', 'utf8');
-	define('USER', 'netmakproprio');
-	define('PASSWORD','123456');
+	define('USER', 'dmopodtb_netmak');
+	define('PASSWORD','Netmak1234$');
 	define('PORTA','3306');
 	
 	define('CHAVE_CRIPTOGRAFIA1', 'NetKffeses');
 	define('CHAVE_CRIPTOGRAFIA2', 'ssdd33@#yyhgt');
 	
 	define('SENHA_ACESSO', 'Gabito005##');
-	
 	define('CHAVE_FILE', 'Cotando434DD');
 	
   //Verifica a zona horária
