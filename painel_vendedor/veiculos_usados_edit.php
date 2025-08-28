@@ -8,6 +8,8 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 } 
 
+// print_r(@$_SESSION);
+
 $cab3=executeQuery("select id_key_linhas from vendedores 
 													where 
 														id_key='".$_SESSION['vendedor']['id_key']."' 
@@ -51,6 +53,8 @@ else
    													id_key_marca='".$vei3['id_key_marca']."' 
    												order by nome","all");
 }
+
+// echo "<h1>".$Xbusca_linhas."</h1>";
 
 $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all");
 			

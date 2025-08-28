@@ -14,13 +14,14 @@ if (@$_GET['d']=='s')
     													set 
     												session_id='--' 
     													where 
-    												id_key='".$_SESSION['usuario']['id_key']."' limit 1");
+    												id_key='".@$_SESSION['usuario']['id_key']."' limit 1");
 	if(@$update['error'])
 	{
 		echo 'Erro update session: ' . @$update['error'];
 	}		    												
     
 	session_destroy();
+	session_start();
 }
 
 if (isset($_POST['usuario']))

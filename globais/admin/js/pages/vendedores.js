@@ -379,7 +379,7 @@ $('#FormVendedor').on('submit', function (e) {
 function gerar_senha()
 {
 
-$('#altera_senha').val(1);
+$('#altera_senha').val('1');
 const letras = 'abcdefghijklmnopqrstuvwxyz';
 const numeros = '0123456789';
 let resultado = '';
@@ -513,7 +513,7 @@ $('#botao_lixeira').on('click', function(e) {
 						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 				}
 	
-				window.location="vendedores.php";
+				window.location="veiculos_usados.php";
 							
 	        },
 	        error: function (dataReturn) {
