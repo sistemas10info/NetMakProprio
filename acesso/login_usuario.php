@@ -10,7 +10,7 @@ if (@$_GET['d']=='s')
 	    echo "Arquivo não encontrado: $arquivo";
 	}
 
-    $update=executeQuery("update usuarios 
+    $update=executeQuery("update usuarios  
     													set 
     												session_id='--' 
     													where 
@@ -73,17 +73,12 @@ if (isset($_POST['usuario']))
 		}	
 		
 		if ($log3['altera_senha']=='1')  header("Location: altera_senha_usuario.php");
-<<<<<<< HEAD
 		else							
 		{
 		    echo "<script language=javascript>
-		            window.location='../painel_admin/veiculos_novos.php';
+		            window.location='../painel_admin/veiculos_novos.php';   
 		          </script>";
 		}
-=======
-		else									   echo "<script language=javascript>window.location='../painel_admin/veiculos_novos.php';</script>";
->>>>>>> 96e0d050e8d355f0730020fc865393697fb102c4
-		
 		exit;
 	}
 	else

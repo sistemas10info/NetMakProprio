@@ -8,20 +8,21 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-$cab3=executeQuery("select id_key_categorias from vendedores 
+$cab3=executeQuery("select id_key_linhas from vendedores 
 													where 
 														id_key='".$_SESSION['vendedor']['id_key']."' 
 													limit 1");
-$Xid_key_categorias=explode("-",$cab3['id_key_categorias']);	
-$Xbusca_categorias="(";
-for ($gg=0;$gg<count($Xid_key_categorias);$gg++) $Xbusca_categorias.="'".$Xid_key_categorias[$gg]."',";
-$Xbusca_categorias.="'XX')";
+$Xid_key_linhas=explode("-",$cab3['id_key_linhas']);	
+$Xbusca_linhas="(";
+for ($gg=0;$gg<count($Xid_key_linhas);$gg++) $Xbusca_linhas.="'".$Xid_key_linhas[$gg]."',";
+$Xbusca_linhas.="'XX')";
 
 if (!isset($_GET['id'])) 
 {
    $vei3=[];
    $vei3['titulo']="Novo veículo";
    $Xtitulo="Novo Veículo";
+   $vei3['id_key_linha']='--';
    $vei3['id_key_categoria']='--';
    $vei3['id_key_marca']='--';
    $vei3['id_key_modelo']='--';
@@ -34,6 +35,12 @@ else
    													  id_key='".$_GET['id']."' 
    													  		limit 1");
    $Xtitulo="Editar Veículo";
+
+   $cat1=executeQuery("select * from categorias 
+   												where
+   												   id_key_linha='".$vei3['id_key_linha']."' 
+   												order by nome","all");
+   
    $mar1=executeQuery("select * from marcas 
    												where
    												   id_key_categoria='".$vei3['id_key_categoria']."' 
@@ -45,7 +52,7 @@ else
    												order by nome","all");
 }
 
-$cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categorias,"all");
+$lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all");
 			
 ?>
 <!DOCTYPE html>
@@ -184,7 +191,7 @@ $cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categoria
 								</div>
 								<div class="row form-group"> 
 									<div class="col-md-12">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR>
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR> 
 										<ul class="nav nav-tabs" id="myTab" role="tablist">
 										  <li class="nav-item">
 										    <a class="nav-link active" id="descrip-tab" data-toggle="tab" href="#descrip" role="tab" aria-controls="descrip" aria-selected="true">Descrição</a>
@@ -215,6 +222,22 @@ $cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categoria
 								    </div>
 							    </div>
 								<div class="row form-group"> 
+									<div class="col-md-12">
+										<label class="control-label text-right f14b" for="Fcpf_cnpj">Linha</label><BR>
+										<select class="form-control f12" id="id_key_linha" name="id_key_linha">
+										   <option value="--">Selecione a linha</option>
+										   <?
+										   		foreach ($lin1 as $lin3) 
+										   		{
+										   			echo "<option value='".$lin3['id_key']."' ";
+										   			if ($vei3['id_key_linha']==$lin3['id_key']) echo "selected ";
+										   			echo ">".$lin3['nome']."</option>";
+										   		}
+										   ?>
+										</select>
+									</div>
+								</div>	
+								<div class="row form-group"> 
 									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Categoria</label><BR>
 										<select class="form-control f12" id="id_key_categoria" name="id_key_categoria">
@@ -229,7 +252,7 @@ $cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categoria
 										   ?>
 										</select>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-6"> 
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Marca</label><BR>
 										<select class="form-control f12" id="id_key_marca" name="id_key_marca">
 										   <option value="--">Selecione a marca</option>
@@ -259,7 +282,7 @@ $cat1=executeQuery("select * from categorias where id_key IN ".$Xbusca_categoria
 											   		{
 											   			echo "<option value='".$mod3['id_key']."' ";
 											   			if ($vei3['id_key_modelo']==$mod3['id_key']) echo "selected ";
-											   			echo ">".$mod3['nome']."</option>";
+											   			echo ">".$mod3['nome']." (".$mod3['anos'].")</option>";
 											   		}
 										   		}
 										    ?>

@@ -52,7 +52,7 @@ if ($ima1)
 								    	<a href="javascript:apaga_imagem(\''.$ima3['id_key'].'\');" class="f18"><i class="fa fa-trash"></i></a>
 								    </div>
 				                </div>
-					            <a href="javascript:ver_imagem(\''.$ima3['id_key'].'\',\''.$_POST['id'].'\');">
+					            <a href="javascript:ver_imagem(\''.$ima3['id_key'].'\',\''.@$_POST['id'].'\');">
 					            	<img src="'.$ima3['link'].'" 
 						                 style="width:98%; padding:5px;"
 						                 class="text-center"

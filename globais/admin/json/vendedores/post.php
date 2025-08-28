@@ -41,7 +41,7 @@ $Xid_key_categorias_produtos="";
 
 if (isset($_POST['id_key_linhas']))
 {
-	$Xid_key_categorias=implode("-",$_POST['id_key_linhas']);
+	$Xid_key_linhas=implode("-",$_POST['id_key_linhas']);
 }
 
 if (isset($_POST['id_key_categorias_produtos']))
