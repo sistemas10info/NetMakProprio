@@ -1,2 +1,5 @@
 globais/inc/constantes.php
 globais/inc/database.php
+acesso/login_usuario.php
+acesso/login_vendedor.php
+acesso/index.php
