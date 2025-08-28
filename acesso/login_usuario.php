@@ -10,7 +10,7 @@ if (@$_GET['d']=='s')
 	    echo "Arquivo não encontrado: $arquivo";
 	}
 
-    $update=executeQuery("update usuarios 
+    $update=executeQuery("update usuarios  
     													set 
     												session_id='--' 
     													where 
