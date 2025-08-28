@@ -72,7 +72,13 @@ if (isset($_POST['usuario']))
 			echo 'Erro update: ' . @$update['error'];
 		}	
 		
-		if ($log3['altera_senha']=='1')  header("Location: altera_senha_usuario.php");
+		if ($log3['altera_senha']=='1')  
+		{
+		    echo "<script language=javascript>
+		            window.location='altera_senha_usuario.php';   
+		          </script>";
+		
+		} 
 		else							
 		{
 		    echo "<script language=javascript>

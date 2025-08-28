@@ -52,9 +52,23 @@ if (isset($_POST['email']))
 		{
 			echo 'Erro update: ' . @$update['error'];
 		}	
+
+
+		if ($log3['altera_senha']=='1')  
+		{
+		    echo "<script language=javascript>
+		            window.location='altera_senha_vendedor.php';   
+		          </script>";
 		
-		echo "<script language=javascript>window.location='../painel_vendedor/veiculos_usados.php';</script>";
+		} 
+		else							
+		{
+		    echo "<script language=javascript>
+		            window.location='../painel_vendedor/veiculos_usados.php';   
+		          </script>";
+		}
 		exit;
+		
 	}
 	else
 	{
@@ -106,6 +120,16 @@ if (isset($_POST['email']))
                 <h3 class="text-center mb-4">Acesso ao Sistema</h3>
 
                 <form action="login_vendedor.php" method="POST">
+
+					<? 
+					if (@$_GET['alterado']=="on")
+					{
+	                    echo '<div class="d-grid text-center">
+	                    			<h5 class="text-primary">Nova senha configurada com sucesso...</h5>
+			                    </div>';
+					}
+					?>
+					
                     <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
