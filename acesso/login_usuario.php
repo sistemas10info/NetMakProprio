@@ -76,7 +76,7 @@ if (isset($_POST['usuario']))
 		else							
 		{
 		    echo "<script language=javascript>
-		            window.location='../painel_admin/veiculos_novos.php';
+		            window.location='../painel_admin/veiculos_novos.php';   
 		          </script>";
 		}
 		exit;
