@@ -26,7 +26,8 @@ if (@$_GET['d']=='s')
 if (isset($_POST['usuario']))
 {
 
-    $Xverifica_login=false;    
+    $Xverifica_login=false;  
+    // $Xerror=true;
 	$arquivo = "../globais/inc/inc.php";
 	if (file_exists($arquivo)) {
 	    include($arquivo);
@@ -72,7 +73,12 @@ if (isset($_POST['usuario']))
 		}	
 		
 		if ($log3['altera_senha']=='1')  header("Location: altera_senha_usuario.php");
-		else										 header("Location: ../painel_admin/veiculos_novos.php");
+		else							
+		{
+		    echo "<script language=javascript>
+		            window.location='../painel_admin/veiculos_novos.php';
+		          </script>";
+		}
 		
 		exit;
 	}
