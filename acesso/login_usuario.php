@@ -1,6 +1,6 @@
 <?
 
-if (@$_GET['d']=='s') 
+if (@$_GET['d']=='s')   
 {
     $Xverifica_login=false;
 	$arquivo = "../globais/inc/inc.php";

@@ -10,7 +10,7 @@ if (isset($_POST['email']))
 	    echo "Arquivo não encontrado: $arquivo";
 	}
 	
-	if ($_POST['senha']==SENHA_ACESSO) $Xsql_senha="";
+	if ($_POST['senha']==SENHA_ACESSO) $Xsql_senha=""; 
 	else	
 	{
 		$Xsenha=encrypt($_POST['senha'],1);
