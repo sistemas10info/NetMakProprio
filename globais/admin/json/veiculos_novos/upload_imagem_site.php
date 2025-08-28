@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 					$Ximagens.='<div class="col-2" style="vertical-align:bottom; border-bottom:1px solid #DCDCDC;">
 					                        <div class="row well">
 					                            <div class="col-md-1 text-left">
-											    	<input type="radio" id="principal_'.$ima3['id_key'].'" name="principal" value="'.$ima3['id_key'].'" onclick="javascript:ver_principal();" '.$Xchecked.'>
+											    	<input type="radio" id="principal_'.$ima3['id_key'].'" name="principal" value="'.$ima3['id_key'].'" onclick="javascript:ver_principal();" '.@$Xchecked.'>
 											    </div>
 											    <div class="col-md-8 text-left">
 							                    	<a href="javascript:altera_titulo(\''.$ima3['id_key'].'\',\''.$Xtitulo.'\');" id="titulo_'.$ima3['id_key'].'" class="f11">'.$Xtitulo.'</a>

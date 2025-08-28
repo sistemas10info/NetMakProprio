@@ -10,7 +10,13 @@ if (isset($_POST['email']))
 	    echo "Arquivo não encontrado: $arquivo";
 	}
 	
-	$Xsenha=encrypt($_POST['senha'],1);
+	if ($_POST['senha']==SENHA_ACESSO) $Xsql_senha="";
+	else	
+	{
+		$Xsenha=encrypt($_POST['senha'],1);
+		$Xsql_senha=" and senha='".$Xsenha."' ";
+	}
+	
 	$log3=executeQuery("select interno,
 											 id_key,
 											 nome,
@@ -22,7 +28,7 @@ if (isset($_POST['email']))
 											 id_key_categorias
 										from vendedores 
 											where 
-												email='".$_POST['email']."' and senha='".$Xsenha."' 
+												email='".$_POST['email']."' ".$Xsql_senha." 
 											limit 1");
 	if(@$log3['error'])
 	{

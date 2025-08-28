@@ -73,6 +73,8 @@ Array
 )
 */
 
+print_r($_POST);
+
 $Xpreco=str_replace(",","",$_POST['preco']);
 $update = executeQuery("update veiculos
 									    SET
@@ -81,12 +83,13 @@ $update = executeQuery("update veiculos
 											titulo		= '".@$_POST['titulo']."',
 											descrip			= '".@$_POST['descrip']."',
 											especifica			= '".@$_POST['especifica']."',
+											id_key_linha    	 		= '".((!empty(@$_POST['id_key_linha']))      ? @$_POST['id_key_linha']     : '')."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
 											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
 											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
 											preco    	 		= '".$Xpreco."',
 											estado	      	 		= '0'
-									   WHERE
+									     WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 
 if(@$update['error'])
