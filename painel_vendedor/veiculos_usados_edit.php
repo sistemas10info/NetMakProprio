@@ -191,7 +191,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 								</div>
 								<div class="row form-group"> 
 									<div class="col-md-12">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR>
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR> 
 										<ul class="nav nav-tabs" id="myTab" role="tablist">
 										  <li class="nav-item">
 										    <a class="nav-link active" id="descrip-tab" data-toggle="tab" href="#descrip" role="tab" aria-controls="descrip" aria-selected="true">Descrição</a>
