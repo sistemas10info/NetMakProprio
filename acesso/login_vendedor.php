@@ -47,7 +47,7 @@ if (isset($_POST['email']))
 			echo 'Erro update: ' . @$update['error'];
 		}	
 		
-		header("Location: ../painel_vendedor/veiculos_usados.php");
+		echo "<script language=javascript>window.location='../painel_vendedor/veiculos_usados.php';</script>";
 		exit;
 	}
 	else
