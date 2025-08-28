@@ -252,7 +252,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 										   ?>
 										</select>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-6"> 
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Marca</label><BR>
 										<select class="form-control f12" id="id_key_marca" name="id_key_marca">
 										   <option value="--">Selecione a marca</option>

@@ -55,7 +55,7 @@ if ($Xrows==-1)
 }
 else
 {
-    $Xlimit=" LIMIT $Xlimit_l, $Xlimit_h ";
+    $Xlimit=" LIMIT $Xlimit_l, $Xlimit_h ";  
 }
 
 $XqueryCap ="SELECT 
