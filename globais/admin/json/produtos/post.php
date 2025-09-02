@@ -51,20 +51,24 @@ if (empty($_POST['id']))
 
 }
 
-$ver3=executeQuery("select interno from slugs where slug='".$_POST['slug']."' and id_key_origem<>'".$_POST['id']."' limit 1");
 
-if(@$ver3['error'])
+if (!empty($_POST['slug']))
 {
-	http_response_code(400);
-	$response['msg'] = 'Erro ao busca slug: ' . @$ver3['error'];
-	exit(json_encode($response));
-}
-
-if($ver3)
-{
-	http_response_code(400);
-	$response['msg'] = 'Verifique que o slug ".$_POST'['slug']."' já existe para outra pagina";
-	exit(json_encode($response));
+	$ver3=executeQuery("select interno from slugs where slug='".$_POST['slug']."' and id_key_origem<>'".$_POST['id']."' limit 1");
+	
+	if(@$ver3['error'])
+	{
+		http_response_code(400);
+		$response['msg'] = 'Erro ao busca slug: ' . @$ver3['error'];
+		exit(json_encode($response));
+	}
+	
+	if($ver3)
+	{
+		http_response_code(400);
+		$response['msg'] = "Verifique que o slug ".$_POST['slug']."  já existe para outra pagina"; 
+		exit(json_encode($response));
+	}
 }
 
 $Xpreco=str_replace(",","",$_POST['preco']);
