@@ -1,7 +1,7 @@
 <?php
 
     $Xsite='localhost';  
-    $Xsystem='NetMakProprio';     
+    $Xsystem='NetMakProprio';      
     	
 	// DEFINES
 	define('COMPARTILHA_LEAD', 'localhost/w.php?i=');
