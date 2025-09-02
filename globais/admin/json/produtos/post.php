@@ -45,7 +45,7 @@ if (empty($_POST['id']))
 	if(@$insert['error'])
 	{
 		http_response_code(400);
-		$response['msg'] = 'Erro ao inserir registro: ' . $insert['error'];
+		$response['msg'] = 'Erro ao inserir registro: ' . $insert['error'];  
 		exit(json_encode($response));
 	}
 
