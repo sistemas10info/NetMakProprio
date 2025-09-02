@@ -1,5 +1,7 @@
 globais/inc/constantes.php
 globais/inc/database.php
-acesso/login_usuario.php
-acesso/login_vendedor.php
-acesso/index.php
+tmp_files/
+**/error_log
+error_log
+globais/admin/json/veiculos_novos/error_log
+globais/admin/json/produtos/post.php
