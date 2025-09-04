@@ -9,18 +9,22 @@ if (file_exists($arquivo)) {
 if (!isset($_GET['id'])) 
 {
    $vei3=[];
+   $vei3['codigo']="---";
    $vei3['titulo']="Novo veículo";
    $Xtitulo="Novo Veículo";
    $vei3['id_key_linha']='--';
    $vei3['id_key_categoria']='--';
    $vei3['id_key_marca']='--';
    $vei3['id_key_modelo']='--';
+   $vei3['Ctemplate']=0;
 }
 else
 {
-   $vei3=executeQuery("select * from veiculos 
+   $vei3=executeQuery("select veiculos.*,categorias.template as Ctemplate
+   													 from veiculos 
+   													 left join categorias on (categorias.id_key=veiculos.id_key_categoria)
    															where 
-   													  id_key='".$_GET['id']."' 
+   													  veiculos.id_key='".$_GET['id']."' 
    													  		limit 1");
    $Xtitulo="Editar Veículo";
    $cat1=executeQuery("select * from categorias 
@@ -163,6 +167,7 @@ $lin1=executeQuery("select * from linhas ","all");
 			    </div>
 				<form name="FormVeiculoNovo" id="FormVeiculoNovo" method="post" action="../globais/admin/json/veiculos_novos/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
+				    <input type='hidden' name='template' id='template' value='<?=@$_GET['Ctemplate']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
 							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:20px; padding:10px;'>
@@ -173,7 +178,12 @@ $lin1=executeQuery("select * from linhas ","all");
 							    </div>
 	
 								<div class="row form-group"> 
-									<div class="col-md-12">
+									<div class="col-md-2">
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Código</label><BR>
+										<input type="text" name="codigo" id="codigo" class="form-control f12" value="<?=@$vei3['codigo']?>">
+									</div>
+
+									<div class="col-md-10">
 										<label class="control-label text-right f16" for="Fcpf_cnpj">Título</label><BR>
 										<input type="text" name="titulo" id="titulo" class="form-control f12" value="<?=@$vei3['titulo']?>">
 									</div>
@@ -236,7 +246,7 @@ $lin1=executeQuery("select * from linhas ","all");
 										        {
 											   		foreach ($cat1 as $cat3) 
 											   		{
-											   			echo "<option value='".$cat3['id_key']."' ";
+											   			echo "<option value='".$cat3['id_key']."' template='".$cat3['template']."' ";
 											   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
 											   			echo ">".$cat3['nome']."</option>";
 											   		}
@@ -286,6 +296,90 @@ $lin1=executeQuery("select * from linhas ","all");
 									</div>
 								</div>
 
+								<!-- TEMPLATE 01 -->
+						    	 <div class="row form-group template_1 templates" <?=(($vei3['template']<>"1") ? "style='display:none;'" : "")?>>
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Motorização</label><BR>
+										<select class="form-control f12" id="motor_1" name="motor_1">
+										   <option value='Diesel' <? if (@$vei3['motor']=="Diesel") echo "selected ";?>>Diesel</option>
+										   <option value='GLP' <? if (@$vei3['motor']=="GLP") echo "selected ";?>>GLP</option>
+										   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Tipo de torre</label><BR>
+										<select class="form-control f12" id="tipo_torre_1" name="tipo_torre_1">
+										   <option value='Duplex' <? if (@$vei3['tipo_torre']=="Duplex") echo "selected ";?>>Duplex</option>
+										   <option value='Triplex' <? if (@$vei3['tipo_torre']=="Triplex") echo "selected ";?>>Triplex</option>
+										</select>
+									</div>		
+							     </div>
+
+							     <div class="row form-group template_1 templates" <?=(($vei3['template']<>"1") ? "style='display:none;'" : "")?>>
+							     
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Carga</label><BR>
+										<select class="form-control f12" id="cap_carga_1" name="cap_carga_1">
+										   <option value='2500kg' <? if (@$vei3['cap_carga']=="2500kg") echo "selected ";?>>2500kg</option>
+										   <option value='3000kg' <? if (@$vei3['cap_carga']=="3000kg") echo "selected ";?>>3000kg</option>
+										   <option value='3500kg' <? if (@$vei3['cap_carga']=="3500kg") echo "selected ";?>>3500kg</option>
+										   <option value='3600kg' <? if (@$vei3['cap_carga']=="3600kg") echo "selected ";?>>3600kg</option>
+										   <option value='3800kg' <? if (@$vei3['cap_carga']=="3800kg") echo "selected ";?>>3800kg</option>
+										   <option value='AC500' <? if (@$vei3['cap_carga']=="AC500") echo "selected ";?>>Acima de 5000kg</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Elevação</label><BR>
+										<select class="form-control f12" id="cap_elevacao_1" name="cap_elevacao_1">
+										   <option value='Até 3,5 metros' <? if (@$vei3['cap_elevacao']=="Até 3,5 metros") echo "selected ";?>>Até 3,5 metros</option>
+										   <option value='4 a 5 metro' <? if (@$vei3['cap_elevacao']=="4 a 5 metro") echo "selected ";?>>4 a 5 metro</option>
+										   <option value='Acima de 5 metros' <? if (@$vei3['cap_elevacao']=="Acima de 5 metros") echo "selected ";?>>Acima de 5 metros</option>
+										</select>
+									</div>									
+
+								 </div>
+								 <!-- FIM TEMPLATE 01 -->
+
+								<!-- TEMPLATE 02 -->
+						    	 <div class="row form-group template_2 templates" <?=(($vei3['template']<>"2") ? "style='display:none;'" : "")?>>
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Motorização</label><BR>
+										<select class="form-control f12" id="motor_2" name="motor_2">
+										   <option value='Manual' <? if (@$vei3['motor']=="Manual") echo "selected ";?>>Manual</option>
+										   <option value='Semi Elétrica' <? if (@$vei3['motor']=="Semi Elétrica") echo "selected ";?>>Semi Elétrica</option>
+										   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+										</select>
+									</div>									
+
+							     </div>
+
+							     <div class="row form-group template_2 templates" <?=(($vei3['template']<>"2") ? "style='display:none;'" : "")?>>
+							     
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Carga</label><BR>
+										<select class="form-control f12" id="cap_carga_2" name="cap_carga_2">
+										   <option value='1000kg' <? if (@$vei3['cap_carga']=="1000kg") echo "selected ";?>>1000kg</option>
+										   <option value='1500kg' <? if (@$vei3['cap_carga']=="1500kg") echo "selected ";?>>1500kg</option>
+										   <option value='2000kg' <? if (@$vei3['cap_carga']=="2000kg") echo "selected ";?>>2000kg</option>
+										   <option value='2500kg' <? if (@$vei3['cap_carga']=="2500kg") echo "selected ";?>>2500kg</option>
+										   <option value='3000kg' <? if (@$vei3['cap_carga']=="3000kg") echo "selected ";?>>3000kg</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Elevação</label><BR>
+										<select class="form-control f12" id="cap_elevacao_2" name="cap_elevacao_2">
+										   <option value='Sem elevação' <? if (@$vei3['cap_elevacao']=="Sem elevação") echo "selected ";?>>Sem elevação</option>
+										   <option value='Até 2 metros' <? if (@$vei3['cap_elevacao']=="Até 2 metros") echo "selected ";?>>Até 2 metros</option>
+										   <option value='Acima de 2 metros' <? if (@$vei3['cap_elevacao']=="Acima de 2 metros") echo "selected ";?>>Acima de 2 metros</option>
+										</select>
+									</div>									
+
+								 </div>
+								 <!-- FIM TEMPLATE 02 -->
+								 
 						    	 <div class="row form-group">
 
 									<div class="col-md-3">
