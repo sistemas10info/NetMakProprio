@@ -74,6 +74,12 @@ if (!empty($_POST['slug']))
 	}
 }
 
+$Xtemplate_update="";
+if ($_POST['template']=="1")
+	$Xtemplate_update="motor='".$_POST['motor_1']."',tipo_torre='".$_POST['tipo_torre_1']."',cap_carga='".$_POST['cap_carga_1']."',cap_elevacao='".$_POST['cap_elevacao_1']."',";
+
+if ($_POST['template']=="2")
+	$Xtemplate_update="motor='".$_POST['motor_2']."',cap_carga='".$_POST['cap_carga_2']."',cap_elevacao='".$_POST['cap_elevacao_2']."',";
 
 $Xpreco=str_replace(",","",$_POST['preco']);
 $update = executeQuery("update veiculos
@@ -94,6 +100,7 @@ $update = executeQuery("update veiculos
 											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
 											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."',
 											descrip_seo	      	 		= '".((!empty(@$_POST['descrip_seo']))         ? @$_POST['descrip_seo']     : '')."',
+											".$Xtemplate_update."
 											titulo_seo	      	 		= '".((!empty(@$_POST['titulo_seo']))         ? @$_POST['titulo_seo']     : '')."'
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
