@@ -7,3 +7,10 @@ globais/admin/json/veiculos_novos/error_log
 globais/admin/json/produtos/post.php
 *.log
 error*
+# Logs
+error_log
+*.log
+
+# Pastas específicas
+globais/admin/json/veiculos_novos/error_log
+acesso/error_log
