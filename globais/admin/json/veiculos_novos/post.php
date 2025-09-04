@@ -73,10 +73,13 @@ if (!empty($_POST['slug']))
 		exit(json_encode($response));
 	}
 }
+<<<<<<< HEAD
 
 $Xtemplate_update="";
 if ($_POST['template']=="1")
 	$Xtemplate_update="motor='".$_POST['motor_1']."',tipo_torre='".$_POST['tipo_torre_1']."',cap_carga='".$_POST['cap_carga_1']."',cap_elevacao='".$_POST['cap_elevacao_1']."',";
+=======
+>>>>>>> ec7f842a (Atualizações nos scripts post.php)
 
 if ($_POST['template']=="2")
 	$Xtemplate_update="motor='".$_POST['motor_2']."',cap_carga='".$_POST['cap_carga_2']."',cap_elevacao='".$_POST['cap_elevacao_2']."',";

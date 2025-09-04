@@ -2,12 +2,12 @@
 
 header('Access-Control-Allow-Origin: *');
 
-$Xerror=false;
+$Xerror=true;
 $arquivo = "../../../inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
 } else {
-    echo "Arquivo não encontrado: $arquivo";
+    echo "Arquivo não encontrado: $arquivo"; 
 }
 
 /*
@@ -140,3 +140,5 @@ $response['msg']    = 'Seu veículo foi cadastrado.';
 $response['id'] = $_POST['id'];
 
 exit(json_encode($response));
+
+?>
