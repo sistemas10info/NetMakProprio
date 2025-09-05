@@ -1,3 +1,4 @@
+constantes*.*
 globais/inc/constantes.php
 globais/inc/database.php
 tmp_files/
