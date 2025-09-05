@@ -128,6 +128,8 @@
 			
 			// apago todos os templates.
 			$(".templates").hide();
+			
+			if ($('#template').val() != "0") $('.template_'+$('#template').val()).show();
 
 		});
 		

@@ -81,6 +81,7 @@ if ($_POST['template']=="1")
 if ($_POST['template']=="2")
 	$Xtemplate_update="motor='".$_POST['motor_2']."',cap_carga='".$_POST['cap_carga_2']."',cap_elevacao='".$_POST['cap_elevacao_2']."',";
 
+
 $Xpreco=str_replace(",","",$_POST['preco']);
 $update = executeQuery("update veiculos
 									    SET

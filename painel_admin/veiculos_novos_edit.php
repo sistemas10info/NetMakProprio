@@ -26,6 +26,7 @@ else
    															where 
    													  veiculos.id_key='".$_GET['id']."' 
    													  		limit 1");
+
    $Xtitulo="Editar Veículo";
    $cat1=executeQuery("select * from categorias 
    												where
@@ -167,7 +168,7 @@ $lin1=executeQuery("select * from linhas ","all");
 			    </div>
 				<form name="FormVeiculoNovo" id="FormVeiculoNovo" method="post" action="../globais/admin/json/veiculos_novos/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
-				    <input type='hidden' name='template' id='template' value='<?=@$_GET['Ctemplate']?>'>
+				    <input type='hidden' name='template' id='template' value='<?=@$vei3['Ctemplate']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
 							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:20px; padding:10px;'>
