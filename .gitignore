@@ -4,7 +4,6 @@ tmp_files/
 **/error_log
 error_log
 globais/admin/json/veiculos_novos/error_log
-globais/admin/json/produtos/post.php
 *.log
 error*
 # Logs
