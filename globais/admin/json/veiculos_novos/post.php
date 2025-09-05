@@ -118,7 +118,7 @@ $slu3=executeQuery("select interno from slugs where id_key_origem='".$_POST['id'
 if(@$slu3['error']) 
 {
 	http_response_code(400);
-	$response['msg'] = 'Erro ao update registro: ' . @$slu3['error'];
+	$response['msg'] = 'Erro ao update registro: ' . @$slu3['error']; 
 	exit(json_encode($response));
 }
 
