@@ -94,3 +94,9 @@ Stack trace:
 [15-Aug-2025 10:44:02 America/Sao_Paulo] PHP Warning:  Undefined array key "id" in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/load_imagens_site.php on line 55
 [15-Aug-2025 10:44:02 America/Sao_Paulo] PHP Warning:  Undefined array key "id" in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/load_imagens_site.php on line 55
 [05-Sep-2025 08:31:43 America/Sao_Paulo] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/list.php on line 95
+<<<<<<< HEAD
+=======
+[05-Sep-2025 09:03:21 America/Sao_Paulo] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/list.php on line 95
+[05-Sep-2025 09:09:59 America/Sao_Paulo] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/list.php on line 95
+[05-Sep-2025 09:11:27 America/Sao_Paulo] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in /home/dmopodtb/cotarfacil.com.br/cw3/NetMakProprio/globais/admin/json/veiculos_novos/list.php on line 95
+>>>>>>> 06833378 (Alterações locais antes do pull)
