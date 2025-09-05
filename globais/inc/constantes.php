@@ -38,10 +38,10 @@
     // dados para encriptação....
 
 	define('HOST', 'localhost:3306');
-	define('DBNAME', 'dmopodtb_netmak');
+	define('DBNAME', 'netmakproprio');
 	define('CHARSET', 'utf8');
-	define('USER', 'dmopodtb_netmak');
-	define('PASSWORD','*eT?zwziBh{V');
+	define('USER', 'netmakproprio');
+	define('PASSWORD','123456');
 	define('PORTA','3306');
 	
 	define('CHAVE_CRIPTOGRAFIA1', 'NetKffeses');

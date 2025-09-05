@@ -440,23 +440,6 @@ $lin1=executeQuery("select * from linhas ","all");
 											<textarea name="seo" id="seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['seo']?></textarea>
 										</div>
 							        </div>
-									<div class="row form-group"> 
-										<!-- <form id="formUploadImagemSeo" enctype="multipart/form-data" method="post"> -->
-									    <input type='hidden' id="Vlink_seo" value="">
-										<div class="col-md-6">
-										    <div class="form-group">
-										      <label for="arquivo" class="control-label text-right f14">Imagem</label>
-										      <input type="file" name="link_seo" id="link_seo" class="form-control-file" accept="image/*">
-										    </div>
-										</div>
-										<div class="col-md-2">	
-											<BR>
-											<button class="btn btn-primary" id="btnUploadImagemSeo">Enviar</button>
-										</div>
-										<div class="col-md-4" id="resultado_link_seo" style='padding-top:25px;'>	
-										</div>
-									   <!-- </form> -->
-									</div>
 								  </div>
 								  <div class="tab-pane fade" id="slugtab" role="tabpanel" aria-labelledby="slug-tab">
 										<div class="row form-group"> 

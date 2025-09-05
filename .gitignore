@@ -1,29 +1,9 @@
-constantes*.*
 globais/inc/constantes.php
 globais/inc/database.php
 tmp_files/
 **/error_log
 error_log
 globais/admin/json/veiculos_novos/error_log
-<<<<<<< HEAD
-=======
 globais/admin/json/produtos/post.php
-<<<<<<< HEAD
->>>>>>> 072415c0 (Ajuste .gitignore e remoção de error_log do repositório)
 *.log
 error*
-=======
->>>>>>> 258dfd6d (Ajuste .gitignore e remoção de error_log do repositório)
-# Logs
-error_log
-*.log
-
-# Pastas específicas
-globais/admin/json/veiculos_novos/error_log
-acesso/error_log
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 258dfd6d (Ajuste .gitignore e remoção de error_log do repositório)
