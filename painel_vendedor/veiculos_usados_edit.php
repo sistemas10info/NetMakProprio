@@ -12,7 +12,10 @@ $cab3=executeQuery("select id_key_linhas from vendedores
 													where 
 														id_key='".$_SESSION['vendedor']['id_key']."' 
 													limit 1");
-$Xid_key_linhas=explode("-",$cab3['id_key_linhas']);	
+
+// if (!@$cab3) die("O vendedor não possui linhas para vender....");
+
+$Xid_key_linhas=explode("-",@$cab3['id_key_linhas']);	
 $Xbusca_linhas="(";
 for ($gg=0;$gg<count($Xid_key_linhas);$gg++) $Xbusca_linhas.="'".$Xid_key_linhas[$gg]."',";
 $Xbusca_linhas.="'XX')";
@@ -27,12 +30,17 @@ if (!isset($_GET['id']))
    $vei3['id_key_marca']='--';
    $vei3['id_key_modelo']='--';
    $vei3['preco']=0.00;
+   $vei3['valor_locacao']=0.00;
+   $vei3['locacao']="N";
+   $vei3['Ctemplate']=0;
 }
 else
 {
-   $vei3=executeQuery("select * from veiculos 
+   $vei3=executeQuery("select veiculos.*,categorias.template as Ctemplate
+   													 from veiculos 
+   													 left join categorias on (categorias.id_key=veiculos.id_key_categoria)
    															where 
-   													  id_key='".$_GET['id']."' 
+   													  veiculos.id_key='".$_GET['id']."' 
    													  		limit 1");
    $Xtitulo="Editar Veículo";
 
@@ -53,6 +61,8 @@ else
 }
 
 $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all");
+
+$est1=executeQuery("select * from estados","all");
 			
 ?>
 <!DOCTYPE html>
@@ -174,6 +184,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 			    </div>
 				<form name="FormVeiculoUsado" id="FormVeiculoUsado" method="post" action="../globais/vendedor/json/veiculos_usados/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
+				    <input type='hidden' name='template' id='template' value='<?=@$vei3['Ctemplate']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
 							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:20px; padding:10px;'>
@@ -245,7 +256,7 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 										   <?
 										   		foreach ($cat1 as $cat3) 
 										   		{
-										   			echo "<option value='".$cat3['id_key']."' ";
+										   			echo "<option value='".$cat3['id_key']."' template='".$cat3['template']."' ";
 										   			if ($vei3['id_key_categoria']==$cat3['id_key']) echo "selected ";
 										   			echo ">".$cat3['nome']."</option>";
 										   		}
@@ -294,7 +305,178 @@ $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all")
 									</div>
 								</div>
 
+								<div class="row form-group"> 
+
+									<div class="col-md-4">
+										<label class="control-label text-right f12" >Estado Cadastro</label><BR>
+										<select class="form-control f12" id="estado" name="estado">
+										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
+										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Publicado</option>
+										</select>
+									</div>									
+
+									<div class="col-md-4">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Disponível para locação</label><BR>
+										<select class="form-control f12" id="locacao" name="locacao">
+											<option value="N" <? if (@$vei3['locacao']=="N") echo "selected"; ?>>NÃO</option>
+											<option value="S" <? if (@$vei3['locacao']=="S") echo "selected"; ?>>SIM</option>
+										</select>
+									</div>
+									<div class="col-md-4 Dlocacao">
+										<label class="control-label text-right f12 col-md-12" >Valor Locação</label><BR>
+										<input type="text" name="valor_locacao" id="valor_locacao" 
+															class="form-control f12b maskMoneyBR text-right" 
+															value="<?=number_format(@$vei3['valor_locacao'],2)?>" >
+									</div>
+								</div>
+
+								<!-- TEMPLATE 01 -->
+						    	 <div class="row form-group template_1 templates" <?=(($vei3['Ctemplate']<>"1") ? "style='display:none;'" : "")?>>
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Motorização</label><BR>
+										<select class="form-control f12" id="motor_1" name="motor_1">
+										   <option value='Diesel' <? if (@$vei3['motor']=="Diesel") echo "selected ";?>>Diesel</option>
+										   <option value='GLP' <? if (@$vei3['motor']=="GLP") echo "selected ";?>>GLP</option>
+										   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Tipo de torre</label><BR>
+										<select class="form-control f12" id="tipo_torre_1" name="tipo_torre_1">
+										   <option value='Duplex' <? if (@$vei3['tipo_torre']=="Duplex") echo "selected ";?>>Duplex</option>
+										   <option value='Triplex' <? if (@$vei3['tipo_torre']=="Triplex") echo "selected ";?>>Triplex</option>
+										</select>
+									</div>		
+							     </div>
+
+							     <div class="row form-group template_1 templates" <?=(($vei3['Ctemplate']<>"1") ? "style='display:none;'" : "")?>>
+							     
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Carga</label><BR>
+										<select class="form-control f12" id="cap_carga_1" name="cap_carga_1">
+										   <option value='2500kg' <? if (@$vei3['cap_carga']=="2500kg") echo "selected ";?>>2500kg</option>
+										   <option value='3000kg' <? if (@$vei3['cap_carga']=="3000kg") echo "selected ";?>>3000kg</option>
+										   <option value='3500kg' <? if (@$vei3['cap_carga']=="3500kg") echo "selected ";?>>3500kg</option>
+										   <option value='3600kg' <? if (@$vei3['cap_carga']=="3600kg") echo "selected ";?>>3600kg</option>
+										   <option value='3800kg' <? if (@$vei3['cap_carga']=="3800kg") echo "selected ";?>>3800kg</option>
+										   <option value='AC500' <? if (@$vei3['cap_carga']=="AC500") echo "selected ";?>>Acima de 5000kg</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Elevação</label><BR>
+										<select class="form-control f12" id="cap_elevacao_1" name="cap_elevacao_1">
+										   <option value='Até 3,5 metros' <? if (@$vei3['cap_elevacao']=="Até 3,5 metros") echo "selected ";?>>Até 3,5 metros</option>
+										   <option value='4 a 5 metro' <? if (@$vei3['cap_elevacao']=="4 a 5 metro") echo "selected ";?>>4 a 5 metro</option>
+										   <option value='Acima de 5 metros' <? if (@$vei3['cap_elevacao']=="Acima de 5 metros") echo "selected ";?>>Acima de 5 metros</option>
+										</select>
+									</div>									
+
+								 </div>
+								 <!-- FIM TEMPLATE 01 -->
+
+								<!-- TEMPLATE 02 -->
+						    	 <div class="row form-group template_2 templates" <?=(($vei3['Ctemplate']<>"2") ? "style='display:none;'" : "")?>>
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Motorização</label><BR>
+										<select class="form-control f12" id="motor_2" name="motor_2">
+										   <option value='Manual' <? if (@$vei3['motor']=="Manual") echo "selected ";?>>Manual</option>
+										   <option value='Semi Elétrica' <? if (@$vei3['motor']=="Semi Elétrica") echo "selected ";?>>Semi Elétrica</option>
+										   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+										</select>
+									</div>									
+
+							     </div>
+
+							     <div class="row form-group template_2 templates" <?=(($vei3['Ctemplate']<>"2") ? "style='display:none;'" : "")?>>
+							     
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Carga</label><BR>
+										<select class="form-control f12" id="cap_carga_2" name="cap_carga_2">
+										   <option value='1000kg' <? if (@$vei3['cap_carga']=="1000kg") echo "selected ";?>>1000kg</option>
+										   <option value='1500kg' <? if (@$vei3['cap_carga']=="1500kg") echo "selected ";?>>1500kg</option>
+										   <option value='2000kg' <? if (@$vei3['cap_carga']=="2000kg") echo "selected ";?>>2000kg</option>
+										   <option value='2500kg' <? if (@$vei3['cap_carga']=="2500kg") echo "selected ";?>>2500kg</option>
+										   <option value='3000kg' <? if (@$vei3['cap_carga']=="3000kg") echo "selected ";?>>3000kg</option>
+										</select>
+									</div>									
+
+									<div class="col-md-6">
+										<label class="control-label text-right f12" >Cap. Elevação</label><BR>
+										<select class="form-control f12" id="cap_elevacao_2" name="cap_elevacao_2">
+										   <option value='Sem elevação' <? if (@$vei3['cap_elevacao']=="Sem elevação") echo "selected ";?>>Sem elevação</option>
+										   <option value='Até 2 metros' <? if (@$vei3['cap_elevacao']=="Até 2 metros") echo "selected ";?>>Até 2 metros</option>
+										   <option value='Acima de 2 metros' <? if (@$vei3['cap_elevacao']=="Acima de 2 metros") echo "selected ";?>>Acima de 2 metros</option>
+										</select>
+									</div>									
+
+								 </div>
+								 <!-- FIM TEMPLATE 02 -->
 						     </div>
+
+							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
+							    <div class='row' style='padding:10px;'>
+								    <div class='col-md-12'>
+								    	<h5>Localização</h5>
+								    </div>
+							    </div>
+							     <div class="row form-group">
+							     
+									<div class="col-md-5">
+										<label class="control-label text-right f12" >Estado</label><BR>
+										<select class="form-control f12" id="uf" name="uf">
+											<option value='xx'>Selecione o Estado</option>
+											<?
+											foreach ($est1 as $est3)
+											{
+												echo "<option value='".$est3['uf']."' ";
+												if ($est3['uf']==@$vei3['uf']) echo " selected ";
+												echo ">".$est3['nome']."</option>";
+											}
+											?>
+										</select>
+									</div>									
+									<div class="col-md-7">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Cidade</label><BR>
+										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=@$vei3['cidade']?>">
+									</div>									
+								 </div>
+							</div>
+
+							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
+							    <div class='row' style='padding:10px;'>
+								    <div class='col-md-12'>
+								    	<h5>Estado do veículo</h5>
+								    </div>
+							    </div>
+							     <div class="row form-group">
+							     
+									<div class="col-md-4">
+										<label class="control-label text-right f12" >Estado</label><BR>
+										<select class="form-control f12" id="estado_veiculo" name="estado_veiculo">
+											<option value='Ótimo estado' <?if(@$vei3['estado']=="Ótimo estado") echo "selected "; ?>>Ótimo estado</option>
+											<option value='⁠Bom estado' <?if(@$vei3['estado']=="Bom estado") echo "selected "; ?>>⁠Bom estado</option>
+											<option value='Estado regular' <?if(@$vei3['estado']=="Estado regular") echo "selected "; ?>>Estado regular</option>
+											<option value='⁠Estado ruim' <?if(@$vei3['estado']=="Estado ruim") echo "selected "; ?>>⁠Estado ruim</option>
+										</select>
+									</div>				
+														
+									<div class="col-md-4">
+										<label class="control-label text-right f12" >Condição</label><BR>
+										<select class="form-control f12" id="condicao" name="condicao">
+											<option value='Semi-nova' <?if(@$vei3['condicao']=="Semi-nova") echo "selected "; ?>>Semi-nova</option>
+											<option value='⁠Usada' <?if(@$vei3['condicao']=="Usada") echo "selected "; ?>>Usada</option>
+										</select>
+									</div>		
+
+									<div class="col-md-4">
+										<label class="control-label f12" for="horimetro">Horímetro</label><BR>
+										<input type="text" name="horimetro" id="horimetro" class="form-control f12 text-right" value="<?=@$vei3['horimetro']?>">
+									</div>									
+								 </div>
+							</div>
+
 
 						</div>
 						

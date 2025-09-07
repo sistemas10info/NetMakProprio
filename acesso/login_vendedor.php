@@ -28,7 +28,7 @@ if (isset($_POST['email']))
 											 id_key_categorias
 										from vendedores 
 											where 
-												email='".$_POST['email']."' ".$Xsql_senha." 
+												email='".$_POST['email']."' ".$Xsql_senha." and apagado<>'1' 
 											limit 1");
 	if(@$log3['error'])
 	{
