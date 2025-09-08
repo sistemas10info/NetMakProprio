@@ -320,7 +320,7 @@ $lin1=executeQuery("select * from linhas ","all");
 							     <div class="row form-group template_1 templates" <?=((@$vei3['template']<>"1") ? "style='display:none;'" : "")?>>
 							     
 									<div class="col-md-6">
-										<label class="control-label text-right f12" >Cap. Carga</label><BR>
+										<label class="control-label text-right f12" >Cap. Carga</label><BR> 
 										<select class="form-control f12" id="cap_carga_1" name="cap_carga_1">
 										   <option value='2500kg' <? if (@$vei3['cap_carga']=="2500kg") echo "selected ";?>>2500kg</option>
 										   <option value='3000kg' <? if (@$vei3['cap_carga']=="3000kg") echo "selected ";?>>3000kg</option>
