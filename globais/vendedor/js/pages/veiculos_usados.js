@@ -58,7 +58,7 @@
 			            	$('#id_key_modelo').find('option').not(':first').remove();
 			                $('#id_key_categoria').find('option').not(':first').remove();
 			                $.each(response.categorias, function(index, categoria) {
-			                    $('#id_key_categoria').append('<option value="' + categoria.id_key + '">' + categoria.nome + '</option>');
+			                    $('#id_key_categoria').append('<option value="' + categoria.id_key + '" template="' + categoria.template + '">' + categoria.nome + '</option>');
 			                });
 			            },
 			            error: function() {
@@ -71,6 +71,13 @@
 
 			$('#id_key_categoria').on('change', function() {
 			    var Xid_key_categoria = $(this).val();
+
+			    console.log("Template: "+$('#id_key_categoria :selected').attr('template'));
+			    $('#template').val($('#id_key_categoria :selected').attr('template'));
+			    
+				$(".templates").hide();
+				
+				if ($('#id_key_categoria :selected').attr('template')!=0) $('.template_'+$('#id_key_categoria :selected').attr('template')).show();
 			
 			    if (Xid_key_categoria !== "--") {
 			        $.ajax({
@@ -118,6 +125,21 @@
 			        });
 			    } 
 			});
+
+			$('#locacao').on('change', function() {
+			    var Xlocacao = $(this).val();
+			
+			    if (Xlocacao == "S") $('.Dlocacao').show();
+			    else						 $('.Dlocacao').hide();
+
+			});
+			
+			// apago todos os templates.
+			$(".templates").hide();
+			
+			if ($('#template').val() != "0") $('.template_'+$('#template').val()).show();
+			
+			if ($('#locacao').val()=="N") $('.Dlocacao').hide();
 
 		});
 		

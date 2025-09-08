@@ -1,8 +1,7 @@
 <?php
 
-    $Xsite='localhost';  
-    $Xsystem='NetMakProprio';     
-    	
+    $Xsite='cotarfacil.com.br';  
+    $Xsystem='NetMakProprio';     	
 	// DEFINES
 	define('COMPARTILHA_LEAD', 'localhost/w.php?i=');
 	
@@ -21,7 +20,7 @@
 	define('LINK_COTACAO', 'https://'.$Xsite.'/C.php?i=');
 	define('LINK_ORDEM_DE_COMPRA', 'https://'.$Xsite.'/O.php?i=');
 	
-	define('WEBSITE_ACESSO', 'https://cotarfacil.com.br/acessodev');
+	define('WEBSITE_ACESSO', 'https://cotarfacil.com.br/cw3/NetMakProprio');
 	
 	define('NOME_SISTEMA', 'Painel Admin');
 	
