@@ -372,7 +372,7 @@ $est1=executeQuery("select * from estados","all");
 										<label class="control-label text-right f12" >Cap. Elevação</label><BR>
 										<select class="form-control f12" id="cap_elevacao_1" name="cap_elevacao_1">
 										   <option value='Até 3,5 metros' <? if (@$vei3['cap_elevacao']=="Até 3,5 metros") echo "selected ";?>>Até 3,5 metros</option>
-										   <option value='4 a 5 metro' <? if (@$vei3['cap_elevacao']=="4 a 5 metro") echo "selected ";?>>4 a 5 metro</option>
+										   <option value='4 a 5 metros' <? if (@$vei3['cap_elevacao']=="4 a 5 metros") echo "selected ";?>>4 a 5 metros</option>
 										   <option value='Acima de 5 metros' <? if (@$vei3['cap_elevacao']=="Acima de 5 metros") echo "selected ";?>>Acima de 5 metros</option>
 										</select>
 									</div>									
