@@ -1,6 +1,6 @@
 <?php
 
-    $Xsite='cotarfacil.com.br';  
+    $Xsite='localhost';  
     $Xsystem='NetMakProprio';     	
 	// DEFINES
 	define('COMPARTILHA_LEAD', 'localhost/w.php?i=');

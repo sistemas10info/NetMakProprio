@@ -35,6 +35,7 @@ if (!isset($_GET['id']))
    $vei3['valor_locacao']=0.00;
    $vei3['locacao']="N";
    $vei3['Ctemplate']=0;
+   
 }
 else
 {
@@ -286,7 +287,7 @@ $est1=executeQuery("select * from estados","all");
 									</div>
 						        </div>
 								<div class="row form-group"> 
-									<div class="col-md-9">
+									<div class="col-md-6">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Modelo</label><BR>
 										<select class="form-control f12" id="id_key_modelo" name="id_key_modelo">
 											<option value="--">Selecione o modelo</option>
@@ -303,34 +304,20 @@ $est1=executeQuery("select * from estados","all");
 										    ?>
 										</select>
 									</div>
+ 
+									<div class="col-md-3">
+										<label class="control-label text-right f12" >Ano de fabricação</label><BR>
+										<select class="form-control f12" id="ano_fabricacao" name="ano_fabricacao">
+										   <option value='⁠Até 2010' <? if (@$vei3['ano_fabricacao']=="⁠Até 2010") echo "selected ";?>>⁠Até 2010</option>
+										   <option value='2011 a 2015' <? if (@$vei3['ano_fabricacao']=="2011 a 2015") echo "selected ";?>>2011 a 2015</option>
+										   <option value='⁠2016 a 2020' <? if (@$vei3['ano_fabricacao']=="⁠2016 a 2020") echo "selected ";?>>⁠2016 a 2020</option>
+										   <option value='⁠2021 em diante' <? if (@$vei3['ano_fabricacao']=="⁠2021 em diante") echo "selected ";?>>⁠2021 em diante</option>
+										</select>
+									</div>	
+									
 									<div class="col-md-3">
 										<label class="control-label text-right f12 col-md-12" >Preço de venda</label><BR>
 										<input type="text" name="preco" id="preco" class="form-control f12b maskMoneyBR text-right" value="<?=number_format(@$vei3['preco'],2)?>" >
-									</div>
-								</div>
-
-								<div class="row form-group"> 
-
-									<div class="col-md-4">
-										<label class="control-label text-right f12" >Estado Cadastro</label><BR>
-										<select class="form-control f12" id="estado" name="estado">
-										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
-										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Publicado</option>
-										</select>
-									</div>									
-
-									<div class="col-md-4">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Disponível para locação</label><BR>
-										<select class="form-control f12" id="locacao" name="locacao">
-											<option value="N" <? if (@$vei3['locacao']=="N") echo "selected"; ?>>NÃO</option>
-											<option value="S" <? if (@$vei3['locacao']=="S") echo "selected"; ?>>SIM</option>
-										</select>
-									</div>
-									<div class="col-md-4 Dlocacao">
-										<label class="control-label text-right f12 col-md-12" >Valor Locação</label><BR>
-										<input type="text" name="valor_locacao" id="valor_locacao" 
-															class="form-control f12b maskMoneyBR text-right" 
-															value="<?=number_format(@$vei3['valor_locacao'],2)?>" >
 									</div>
 								</div>
 
@@ -426,7 +413,6 @@ $est1=executeQuery("select * from estados","all");
 								    </div>
 							    </div>
 							     <div class="row form-group">
-							     
 									<div class="col-md-5">
 										<label class="control-label text-right f12" >Estado</label><BR>
 										<select class="form-control f12" id="uf" name="uf">
@@ -479,10 +465,71 @@ $est1=executeQuery("select * from estados","all");
 										<input type="text" name="horimetro" id="horimetro" class="form-control f12 text-right" value="<?=@$vei3['horimetro']?>">
 									</div>									
 								 </div>
+
+								<div class="row form-group"> 
+									<div class="col-md-4">
+										<label class="control-label text-right f14b text-default" >Estado Cadastro</label><BR>
+										<select class="form-control f12" id="estado" name="estado">
+										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
+										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Solicitar publicação</option>
+										</select>
+									</div>									
+
+									<div class="col-md-4">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Disponível para locação</label><BR>
+										<select class="form-control f12" id="locacao" name="locacao">
+											<option value="N" <? if (@$vei3['locacao']=="N") echo "selected"; ?>>NÃO</option>
+											<option value="S" <? if (@$vei3['locacao']=="S") echo "selected"; ?>>SIM</option>
+										</select>
+									</div>
+									<div class="col-md-4 Dlocacao">
+										<label class="control-label text-right f12 col-md-12" >Valor Locação</label><BR>
+										<input type="text" name="valor_locacao" id="valor_locacao" 
+															class="form-control f12b maskMoneyBR text-right" 
+															value="<?=number_format(@$vei3['valor_locacao'],2)?>" >
+									</div>
+								</div>
+								 
 							</div>
-
-
+					
 						</div>
+
+						<?
+						if ($vei3['estado']=="9")
+						{
+						     if 	 ($vei3['estado_autorizado']=="P") 
+						     {
+						     	  $Xestado_autorizado="<span class='text-warning f20'><i class='fa fa-clock-o fa-2x'></i>&nbsp;Pendente de publicação</span>";
+						     	  $Xobs_publicacao="";
+						     }
+						     elseif ($vei3['estado_autorizado']=="R")
+						     {	
+							      $Xestado_autorizado="<span class='text-danger f26'><i class='fa fa-warning fa-2x'></i>&nbsp;Publicação rejeitada</span>";
+							      $Xobs_publicacao="<i class='text-default f14'>".$vei3['obs_publicacao']."</i>";
+						     } 
+						     elseif ($vei3['estado_autorizado']=="S")
+						     {
+							      $Xestado_autorizado="<span class='text-success f26'><i class='fa fa-smile-o fa-2x'></i>&nbsp;Publicação aceita</span>";
+							      $Xobs_publicacao="<i class='text-default f14'>".$vei3['obs_publicacao']."</i>";
+						     }
+						?>
+								<HR>
+			                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
+									<div class='col-md-12 text-center'>
+									    <div style='padding:10px;'>
+										    <div class='text-center'>
+										    	<h3>Estado da publicação</h3>
+										    </div>
+									    </div>
+								   </div>
+								   <div class='col-md-12 text-center'> 
+									   <?=$Xestado_autorizado."<BR><BR>".$Xobs_publicacao?>
+									</div>
+						        </div>
+							
+						<?
+						}	
+						?>			
 						
 						<HR>
 	                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>

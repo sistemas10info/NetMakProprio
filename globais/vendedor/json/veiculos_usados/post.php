@@ -102,24 +102,25 @@ $Xvalor_locacao=str_replace(",","",$_POST['valor_locacao']);
 $update = executeQuery("update veiculos
 									    SET
 									    	tipo='2',
-									    	id_key_vendedor='".$_SESSION['vendedor']['id_key']."',
-											titulo		= '".@$_POST['titulo']."',
-											descrip			= '".@$_POST['descrip']."',
-											especifica			= '".@$_POST['especifica']."',
-											id_key_linha    	 		= '".((!empty(@$_POST['id_key_linha']))      ? @$_POST['id_key_linha']     : '')."',
+									    	id_key_vendedor			='".$_SESSION['vendedor']['id_key']."',
+											titulo								= '".@$_POST['titulo']."',
+											descrip							= '".@$_POST['descrip']."',
+											especifica						= '".@$_POST['especifica']."',
+											id_key_linha    	 			= '".((!empty(@$_POST['id_key_linha']))      ? @$_POST['id_key_linha']     : '')."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
-											id_key_marca    	 		= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
+											id_key_marca    	 			= '".((!empty(@$_POST['id_key_marca']))      ? @$_POST['id_key_marca']     : '')."',
+											ano_fabricacao    	 		= '".((!empty(@$_POST['ano_fabricacao']))      ? @$_POST['ano_fabricacao']     : '')."',
 											".$Xtemplate_update."
-											id_key_modelo 	 		= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
-											preco    	 		= '".$Xpreco."',
-											estado	      	 		= '".@$_POST['estado']."',
-											locacao = '".@$_POST['locacao']."',
-											valor_locacao    	 		= '".$Xvalor_locacao."',
-											uf	      	 		= '".@$_POST['uf']."',
-											cidade	      	 		= '".@$_POST['cidade']."',
-											estado_veiculo	      	 		= '".@$_POST['estado_veiculo']."',
-											condicao	      	 		= '".@$_POST['condicao']."',
-											horimetro	      	 		= '".@$_POST['horimetro']."'
+											id_key_modelo 	 			= '".((!empty(@$_POST['id_key_modelo']))      ? @$_POST['id_key_modelo']     : '')."',
+											preco    	 						= '".$Xpreco."',
+											estado	      	 				= '".@$_POST['estado']."',
+											locacao 							= '".@$_POST['locacao']."',
+											valor_locacao    	 			= '".$Xvalor_locacao."',
+											uf	      	 						= '".@$_POST['uf']."',
+											cidade	      	 				= '".@$_POST['cidade']."',
+											estado_veiculo	      	 	= '".@$_POST['estado_veiculo']."',
+											condicao	      	 			= '".@$_POST['condicao']."',
+											horimetro	      	 			= '".@$_POST['horimetro']."'
 									     WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 if(@$update['error'])
