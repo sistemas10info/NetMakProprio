@@ -13,3 +13,4 @@ globais/admin/json/produtos/post.php
 error*
 globais/admin/json/veiculos_novos/error_log
 >>>>>>> 8e286faa (Alterações locais antes do pull)
+globais/inc/constantes.php
