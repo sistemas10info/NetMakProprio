@@ -64,39 +64,6 @@ if ($_POST['template']=="1")
 if ($_POST['template']=="2")
 	$Xtemplate_update="motor='".$_POST['motor_2']."',cap_carga='".$_POST['cap_carga_2']."',cap_elevacao='".$_POST['cap_elevacao_2']."',";
 
-/*
-
-Array
-(
-    [id] => HGQ7JY21DINC22NF2SS9UOI4QGVMTW
-    [template] => 0
-    [titulo] => Novo veículo
-    [descrip] => 
-    [especifica] => 
-    [id_key_linha] => --
-    [id_key_categoria] => --
-    [id_key_marca] => --
-    [id_key_modelo] => --
-    [preco] => 0.00
-    [estado] => 0
-    [locacao] => S
-    [valor_locacao] => 0.00
-    [motor_1] => Diesel
-    [tipo_torre_1] => Duplex
-    [cap_carga_1] => 2500kg
-    [cap_elevacao_1] => Até 3,5 metros
-    [motor_2] => Manual
-    [cap_carga_2] => 1000kg
-    [cap_elevacao_2] => Sem elevação
-    [uf] => xx
-    [cidade] => 
-    [estado_veiculo] => Ótimo estado
-    [condicao] => Semi-nova
-    [horimetro] => 
-)
-
-*/
-
 $Xpreco=str_replace(",","",$_POST['preco']);
 $Xvalor_locacao=str_replace(",","",$_POST['valor_locacao']);
 $update = executeQuery("update veiculos
@@ -118,6 +85,7 @@ $update = executeQuery("update veiculos
 											valor_locacao    	 			= '".$Xvalor_locacao."',
 											uf	      	 						= '".@$_POST['uf']."',
 											cidade	      	 				= '".@$_POST['cidade']."',
+											ddd	      	 					= '".@$_POST['ddd']."',
 											estado_veiculo	      	 	= '".@$_POST['estado_veiculo']."',
 											condicao	      	 			= '".@$_POST['condicao']."',
 											horimetro	      	 			= '".@$_POST['horimetro']."'

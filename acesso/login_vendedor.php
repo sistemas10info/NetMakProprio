@@ -25,7 +25,8 @@ if (isset($_POST['email']))
 											 site,
 											 celular,
 											 telefone,
-											 id_key_categorias
+											 id_key_categorias,
+											 ddd
 										from vendedores 
 											where 
 												email='".$_POST['email']."' ".$Xsql_senha." and apagado='0' 
@@ -52,7 +53,6 @@ if (isset($_POST['email']))
 		{
 			echo 'Erro update: ' . @$update['error'];
 		}	
-
 
 		if ($log3['altera_senha']=='1')  
 		{

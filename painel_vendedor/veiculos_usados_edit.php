@@ -35,6 +35,7 @@ if (!isset($_GET['id']))
    $vei3['valor_locacao']=0.00;
    $vei3['locacao']="N";
    $vei3['Ctemplate']=0;
+   $vei3['ddd']=$_SESSION['vendedor']['ddd'];
    
 }
 else
@@ -45,6 +46,9 @@ else
    															where 
    													  veiculos.id_key='".$_GET['id']."' 
    													  		limit 1");
+
+   if (empty($vei3['ddd'])) $vei3['ddd']=$_SESSION['vendedor']['ddd'];
+     													  		
    $Xtitulo="Editar Veículo";
 
    $cat1=executeQuery("select * from categorias 
@@ -68,7 +72,9 @@ else
 $lin1=executeQuery("select * from linhas where id_key IN ".$Xbusca_linhas,"all");
 
 $est1=executeQuery("select * from estados","all");
-			
+
+$ddd1=executeQuery("select * from ddds","all");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -427,10 +433,24 @@ $est1=executeQuery("select * from estados","all");
 											?>
 										</select>
 									</div>									
-									<div class="col-md-7">
+									<div class="col-md-5">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Cidade</label><BR>
 										<input type="text" name="cidade" id="cidade" class="form-control f12" value="<?=@$vei3['cidade']?>">
 									</div>									
+									<div class="col-md-2">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">DDD</label><BR>
+										<select name="ddd"  id="ddd" class="form-control f12">
+										<?
+										foreach ($ddd1 as $ddd3)
+										{
+											echo "<option value='".$ddd3['codigo']."' ";
+											if ($ddd3['codigo']==$vei3['ddd']) echo " selected ";
+											echo ">".$ddd3['codigo']."</option>";
+										}
+										?>
+										</select>
+									</div>									
+
 								 </div>
 							</div>
 

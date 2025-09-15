@@ -38,10 +38,16 @@ if (@$_POST['estado']=="9")
 
 $Xid_key_linhas="";
 $Xid_key_categorias_produtos="";
+$Xlinhas_trabalha="";
 
 if (isset($_POST['id_key_linhas']))
 {
 	$Xid_key_linhas=implode("-",$_POST['id_key_linhas']);
+	for ($gg=0;$gg<count($_POST['id_key_linhas']);$gg++)
+	{
+		$lin3=executeQuery("select abrev from linhas where id_key='".$_POST['id_key_linhas'][$gg]."' limit 1");
+		$Xlinhas_trabalha.=$lin3['abrev']."/";
+	}
 }
 
 if (isset($_POST['id_key_categorias_produtos']))
@@ -83,21 +89,23 @@ $update = executeQuery("
 											cpf_cnpj			= '".@$_POST['cpf_cnpj']."',
 											telefone    	 		= '".((!empty(@$_POST['telefone']))      ? @$_POST['telefone']     : '')."',
 											celular    	 		= '".((!empty(@$_POST['celular']))      ? @$_POST['celular']     : '')."',
-											email    	 		= '".((!empty(@$_POST['email']))      ? @$_POST['email']     : '')."',
-											cep    	 		= '".((!empty(@$_POST['cep']))      ? @$_POST['cep']     : '')."',
-											rua    	 		= '".((!empty(@$_POST['rua']))      ? @$_POST['rua']     : '')."',
-											nro    	 		= '".((!empty(@$_POST['nro']))      ? @$_POST['nro']     : '')."',
-											comple	      	 		= '".((!empty(@$_POST['comple']))         ? @$_POST['comple']     : '')."',
-											cidade	      	 		= '".((!empty(@$_POST['cidade']))         ? @$_POST['cidade']     : '')."',
-											bairro	      	 		= '".((!empty(@$_POST['bairro']))         ? @$_POST['bairro']     : '')."',
-											uf	      	 		= '".((!empty(@$_POST['uf']))         ? @$_POST['uf']     : '')."',
-											usuario	      	 		= '".((!empty(@$_POST['usuario']))         ? @$_POST['usuario']     : '')."',
-											senha	      	 		= '".((!empty(@$_POST['senha']))         ? @$_POST['senha']     : '')."',
-											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
+											email    	 			= '".((!empty(@$_POST['email']))      ? @$_POST['email']     : '')."',
+											cep    	 			= '".((!empty(@$_POST['cep']))      ? @$_POST['cep']     : '')."',
+											rua    	 			= '".((!empty(@$_POST['rua']))      ? @$_POST['rua']     : '')."',
+											nro    	 			= '".((!empty(@$_POST['nro']))      ? @$_POST['nro']     : '')."',
+											comple	      	 	= '".((!empty(@$_POST['comple']))         ? @$_POST['comple']     : '')."',
+											cidade	      	 	= '".((!empty(@$_POST['cidade']))         ? @$_POST['cidade']     : '')."',
+											bairro	      	 	= '".((!empty(@$_POST['bairro']))         ? @$_POST['bairro']     : '')."',
+											uf	      	 			= '".((!empty(@$_POST['uf']))         ? @$_POST['uf']     : '')."',
+											usuario	      	 	= '".((!empty(@$_POST['usuario']))         ? @$_POST['usuario']     : '')."',
+											senha	      	 	= '".((!empty(@$_POST['senha']))         ? @$_POST['senha']     : '')."',
+											estado	      	 	= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
 											obs	      	 		= '".((!empty(@$_POST['obs']))         ? @$_POST['obs']     : '')."',
-											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
+											estado	      	 	= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
 											site	      	 		= '".((!empty(@$_POST['site']))         ? @$_POST['site']     : '')."',
-											instagram	      	 		= '".((!empty(@$_POST['instagram']))         ? @$_POST['instagram']     : '')."',
+											ddd	      	 		= '".((!empty(@$_POST['ddd']))         ? @$_POST['ddd']     : '')."',
+											linhas_trabalha	= '".$Xlinhas_trabalha."',
+											instagram	      	 = '".((!empty(@$_POST['instagram']))         ? @$_POST['instagram']     : '')."',
 											".$Xsql_senha." 
 											facebook	      	 		= '".((!empty(@$_POST['facebook']))         ? @$_POST['facebook']     : '')."',
 											id_key_linhas = '".$Xid_key_linhas."',

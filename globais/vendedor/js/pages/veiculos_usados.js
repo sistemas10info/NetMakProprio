@@ -8,18 +8,16 @@
 
 			  $('.summer_texto').summernote({
 			    height: 430,
-			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
-			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
+			    fontNames: ['Verdana'],
+			    fontSizes: ['14'],
 			    toolbar: [
 			      ['style', ['style']],
-			      ['font', ['bold', 'italic', 'underline', 'clear']],
-			      ['fontsize', ['fontsize']],
-			      ['fontname', ['fontname']],
+			      ['font', ['bold', 'italic']],
 			      ['color', ['color']],
 			      ['para', ['ul', 'ol', 'paragraph']],
 			      ['height', ['height']],
 			      ['insert', ['picture', 'link', 'video']],
-			      ['view', ['fullscreen', 'codeview', 'help']]
+			      ['view', ['fullscreen']]
 			    ],
 			    callbacks: {
 			      onKeydown: function(e) {
@@ -27,6 +25,22 @@
 			          e.preventDefault();
 			          document.execCommand('insertLineBreak');
 			        }
+			      },
+			      onInit: function() {
+			        // aplica Verdana 12px logo ao iniciar
+			        $('.summer_texto').next().find('.note-editable')
+			          .css({
+			            'font-family': 'Verdana',
+			            'font-size': '14px'
+			          });
+			      },
+			      onChange: function(contents) {
+			        // sempre força Verdana 12px no conteúdo editado
+			        $('.summer_texto').next().find('.note-editable')
+			          .css({
+			            'font-family': 'Verdana',
+			            'font-size': '14px'
+			          });
 			      },
 			      onImageUpload: function(files) {
 			        // Aqui você pode enviar as imagens via AJAX para o servidor

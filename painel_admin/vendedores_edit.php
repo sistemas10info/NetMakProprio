@@ -26,6 +26,8 @@ $lin1=executeQuery("select * from linhas ","all");
 $cat1=executeQuery("select * from categorias_produtos ","all");
 
 $est1=executeQuery("select * from estados","all");
+
+$ddd1=executeQuery("select * from ddds","all");
 			
 ?>
 <!DOCTYPE html>
@@ -169,6 +171,20 @@ $est1=executeQuery("select * from estados","all");
 								</div>
 	
 								<div class="row form-group"> 
+									<div class="col-md-1">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">DDD</label><BR>
+										<select name="ddd"  id="ddd" class="form-control f12">
+										<?
+										foreach ($ddd1 as $ddd3)
+										{
+											echo "<option value='".$ddd3['codigo']."' ";
+											if ($ddd3['codigo']==$ven3['ddd']) echo " selected ";
+											echo ">".$ddd3['codigo']."</option>";
+										}
+										?>
+										</select>
+									</div>									
+								
 									<div class="col-md-3">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Telefône</label><BR>
 										<input type="text" name="telefone" id="telefone" class="form-control f12 maskCelular" value="<?=@$ven3['telefone']?>">
@@ -177,7 +193,7 @@ $est1=executeQuery("select * from estados","all");
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Celular</label><BR>
 										<input type="text" name="celular" id="celular" class="form-control f12 maskCelular" value="<?=@$ven3['celular']?>">
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-5">
 										<label class="control-label text-right f12" for="Fcpf_cnpj">Email</label><BR>
 										<input type="text" name="email" id="email" class="form-control f12" value="<?=@$ven3['email']?>">
 									</div>

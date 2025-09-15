@@ -123,10 +123,13 @@ if (file_exists($arquivo)) {
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
-								<th data-column-id="nome" data-align="left" data-header-align="left" data-width="50%;">Nome</th>
-								<th data-column-id="cpf_cnpj" data-align="center" data-header-align="center" data-width="20%;">CNPJ</th>
-								<th data-column-id="estado_cidade" data-align="center" data-header-align="center" data-width="30%;">Estado/Cidade</th>
-								<th data-column-id="estoque" data-align="right" data-header-align="right"  data-width="10%;">Anuncios</th>
+								<th data-column-id="nome" data-align="left" data-header-align="left" >Razão social</th>
+								<th data-column-id="cpf_cnpj" data-align="center" data-header-align="center" >CNPJ</th>
+								<th data-column-id="cidade" data-align="center" data-header-align="center">Cidade</th>
+								<th data-column-id="uf" data-align="center" data-header-align="center" width='50px;'>UF</th>
+								<th data-column-id="ddd" data-align="center" data-header-align="center" width='50px;'>DDD</th>
+								<th data-column-id="telefone" data-align="center" data-header-align="center">Telefône</th>
+								<th data-column-id="linhas_trabalha" data-align="center" data-header-align="center">Linhas</th>
 							</tr>
 						</thead>
 					</table>
