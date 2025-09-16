@@ -344,7 +344,7 @@ $lin1=executeQuery("select * from linhas ","all");
 								 <!-- FIM TEMPLATE 01 -->
 
 								<!-- TEMPLATE 02 -->
-						    	 <div class="row form-group template_2 templates" <?=(($vei3['template']<>"2") ? "style='display:none;'" : "")?>>
+						    	 <div class="row form-group template_2 templates" <?=(($vei3['Ctemplate']<>"2") ? "style='display:none;'" : "")?>>
 									<div class="col-md-6">
 										<label class="control-label text-right f12" >Motorização</label><BR>
 										<select class="form-control f12" id="motor_2" name="motor_2">
@@ -356,7 +356,7 @@ $lin1=executeQuery("select * from linhas ","all");
 
 							     </div>
 
-							     <div class="row form-group template_2 templates" <?=(($vei3['template']<>"2") ? "style='display:none;'" : "")?>>
+							     <div class="row form-group template_2 templates" <?=(($vei3['Ctemplate']<>"2") ? "style='display:none;'" : "")?>>
 							     
 									<div class="col-md-6">
 										<label class="control-label text-right f12" >Cap. Carga</label><BR>

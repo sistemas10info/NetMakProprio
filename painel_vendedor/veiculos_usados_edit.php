@@ -515,7 +515,7 @@ $ddd1=executeQuery("select * from ddds","all");
 						</div>
 
 						<?
-						if ($vei3['estado']=="9")
+						if (@$vei3['estado']=="9")
 						{
 						     if 	 ($vei3['estado_autorizado']=="P") 
 						     {
