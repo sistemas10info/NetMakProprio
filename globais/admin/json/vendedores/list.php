@@ -105,7 +105,7 @@ if($XnRows == 0)
     $Xjson = '[]';
 }
 
-header('Content-Type: application/json'); //tell the broswer JSON is coming
+@header('Content-Type: application/json'); //tell the broswer JSON is coming
 if (isset($_REQUEST['rowCount']) ) //Means we're using bootgrid library
 {
     echo "{ \"current\": $Xcurrent, \"rowCount\":$Xrows, \"rows\": ".$Xjson.", \"total\": $XnRows }";
