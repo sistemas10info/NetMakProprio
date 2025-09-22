@@ -193,7 +193,7 @@ $ddd1=executeQuery("select * from ddds","all");
 				    	<h3><?=$Xtitulo?> (<?=$cab3['razao_social']?>)</h3>
 				    </div>
 			    </div>
-				<form name="FormVeiculoUsado" id="FormVeiculoUsado" method="post" action="../globais/vendedor/json/veiculos_usados/post.php">
+				<form name="FormVeiculoUsado" id="FormVeiculoUsado" method="post" action="../globais/admin/json/vendedores/post_veiculo_usado.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
 				    <input type='hidden' name='id_key_vendedor' id='id_key_vendedor' value='<?=@$_GET['id_vendedor']?>'>
 				    <input type='hidden' name='template' id='template' value='<?=@$vei3['Ctemplate']?>'>
@@ -466,10 +466,10 @@ $ddd1=executeQuery("select * from ddds","all");
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Estado</label><BR>
 										<select class="form-control f12" id="estado_veiculo" name="estado_veiculo">
-											<option value='Ótimo estado' <?if(@$vei3['estado']=="Ótimo estado") echo "selected "; ?>>Ótimo estado</option>
-											<option value='⁠Bom estado' <?if(@$vei3['estado']=="Bom estado") echo "selected "; ?>>⁠Bom estado</option>
-											<option value='Estado regular' <?if(@$vei3['estado']=="Estado regular") echo "selected "; ?>>Estado regular</option>
-											<option value='⁠Estado ruim' <?if(@$vei3['estado']=="Estado ruim") echo "selected "; ?>>⁠Estado ruim</option>
+											<option value='Ótimo estado' <?if(@$vei3['estado_veiculo']=="Ótimo estado") echo "selected "; ?>>Ótimo estado</option>
+											<option value='⁠Bom estado' <?if(@$vei3['estado_veiculo']=="Bom estado") echo "selected "; ?>>⁠Bom estado</option>
+											<option value='Estado regular' <?if(@$vei3['estado_veiculo']=="Estado regular") echo "selected "; ?>>Estado regular</option>
+											<option value='⁠Estado ruim' <?if(@$vei3['estado_veiculo']=="Estado ruim") echo "selected "; ?>>⁠Estado ruim</option>
 										</select>
 									</div>				
 														
@@ -492,7 +492,7 @@ $ddd1=executeQuery("select * from ddds","all");
 										<label class="control-label text-right f14b text-default" >Estado Cadastro</label><BR>
 										<select class="form-control f12" id="estado" name="estado">
 										   <option value='0' <? if (@$vei3['estado']=="0") echo "selected ";?>>Rascunho</option>
-										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Solicitar publicação</option>
+										   <option value='9' <? if (@$vei3['estado']=="9") echo "selected ";?>>Pendente de aprovação</option>
 										</select>
 									</div>									
 
@@ -512,6 +512,58 @@ $ddd1=executeQuery("select * from ddds","all");
 								</div>
 								 
 							</div>
+
+							<div class='card-body border-left-info shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:15px; padding:10px;'>
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+								  <li class="nav-item">
+								    <a class="nav-link active f16" id="seo-tab" data-toggle="tab" href="#seotab" role="tab" aria-controls="seotab" aria-selected="true">SEO</a>
+								  </li>
+								  <li class="nav-item">
+								    <a class="nav-link f16" id="slug-tab" data-toggle="tab" href="#slugtab" role="tab" aria-controls="slug" aria-selected="false">Slug</a>
+								  </li>
+								</ul>
+
+								<div class="tab-content mt-3" id="myTabContent">
+								  <div class="tab-pane fade show active" id="seotab" role="tabpanel" aria-labelledby="seo-tab">
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Título</label><BR>
+											<input type="text" name="titulo_seo" id="titulo_seo" class="form-control f12" value="<?=@$vei3['titulo_seo']?>">
+										</div>
+									</div>
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Descrição</label><BR>
+											<textarea name="descrip_seo" id="descrip_seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['descrip_seo']?></textarea>
+										</div>
+							        </div>
+									<div class="row form-group"> 
+										<div class="col-md-12">
+											<label class="control-label text-right f12" for="Fcpf_cnpj">Palavras chave</label><BR>
+											<textarea name="seo" id="seo" class='form-control' rows=3 spellcheck="false"><?=@$vei3['seo']?></textarea>
+										</div>
+							        </div>
+								  </div>
+								  <div class="tab-pane fade" id="slugtab" role="tabpanel" aria-labelledby="slug-tab">
+										<div class="row form-group"> 
+											<div class="col-md-8">
+												<label class="control-label text-right f12" for="Fcpf_cnpj">Nome do Slug</label><BR>
+												<input type="text" name="slug" id="slug" class="form-control f12" value="<?=@$vei3['slug']?>">
+											</div>
+											<div class="col-md-2">	
+												<BR>
+												<a class="btn btn-default btn-xs" id="btnVerificaSlug">Verificar</a>
+											</div>
+										</div>								  
+								        <i class='text-justify'>Os slugs tornam os links mais curtos, <b>(amigáveis)</b> claros e fáceis de lembrar, além de ajudarem no SEO (otimização para buscadores).<BR>Assim, em vez de um link técnico ou com parâmetros, você terá um endereço direto e agradável de compartilhar.</i>
+
+										<div class="text-center f14" id="resultado_slug" style="margin-top:20px;">
+										</div>								  
+								        
+								  </div>
+								</div>
+						     </div>
+							
 					
 						</div>
 
@@ -538,18 +590,37 @@ $ddd1=executeQuery("select * from ddds","all");
 			                    <div class='row card-body border-left-info shadow py-2' style='margin-left:20px; margin-right:30px; margin-top:15px; padding:10px;'>
 									<div class='col-md-12 text-center'>
 									    <div style='padding:10px;'>
-										    <div class='text-center'>
+										    <div class='text-left'>
 										    	<h3>Estado da publicação</h3>
 										    </div>
 									    </div>
 								   </div>
-								   <div class='col-md-12 text-center'> 
+								   <div class='col-md-4 text-left'> 
 									   <?=$Xestado_autorizado."<BR><BR>".$Xobs_publicacao?>
 									</div>
+									<div class='col-md-8 text-left'> 
+										<div class="row form-group"> 
+											<div class="col-md-3">
+												<label class="control-label text-left f14b text-default" >Estado</label><BR>
+												<select class="form-control f12" id="estado_autorizado" name="estado_autorizado">
+													<option value='P' <? if (@$vei3['estado_autorizado']=="P") echo "selected ";?>>Deixar pendente</option>
+													<option value='S' <? if (@$vei3['estado_autorizado']=="S") echo "selected ";?>>Autorizar</option>
+													<option value='R' <? if (@$vei3['estado_autorizado']=="R") echo "selected ";?>>Rejeitar !</option>
+												</select>
+											</div>									
+											<div class="col-md-9">
+												<label class="control-label text-left f14b text-default" >Observações</label><BR>
+												<input type="text" name="obs_publicacao" id="obs_publicacao" class="form-control f12" value="<?=@$vei3['obs_publicacao']?>">
+											</div>									
+
+									   </div>
 						        </div>
 							
 						<?
 						}	
+						
+						$Xback=(!isset($_GET['b'])) ? "vendedores_anuncios.php?id=".$_GET['id_vendedor'] : "verificar_anuncios.php";
+						
 						?>			
 						
 						<HR>
@@ -576,7 +647,7 @@ $ddd1=executeQuery("select * from ddds","all");
 					</div>
 					<div class="col-md-12 d-grid gap-2 d-md-block text-center" style='padding-top:20px;'>
 					  <button type="submit" class="btn btn-primary btn-sm">💾 SALVAR</button>&nbsp;
-					  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='veiculos_usados.php';">↩️ VOLTAR</button>&nbsp;
+					  <button type="button" class="btn btn-secondary btn-sm" onclick="window.location='<?=$Xback?>';">↩️ VOLTAR</button>&nbsp;
 					  <?
 					     if (!empty($_GET['id'])) echo '<button id="botao_lixeira" type="button" class="btn btn-danger btn-sm">🗑️ Lixeira</button>';
 					   ?>

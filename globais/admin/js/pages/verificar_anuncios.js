@@ -6,163 +6,14 @@
 			
 			$('.maskMoneyBR').maskMoney();
 
-			  $('.summer_texto').summernote({
-			    height: 430,
-			    fontNames: ['Verdana'],
-			    fontSizes: ['14'],
-			    toolbar: [
-			      ['style', ['style']],
-			      ['font', ['bold', 'italic']],
-			      ['color', ['color']],
-			      ['para', ['ul', 'ol', 'paragraph']],
-			      ['height', ['height']],
-			      ['insert', ['picture', 'link', 'video']],
-			      ['view', ['fullscreen']]
-			    ],
-			    callbacks: {
-			      onKeydown: function(e) {
-			        if (e.keyCode === 13) { // Enter
-			          e.preventDefault();
-			          document.execCommand('insertLineBreak');
-			        }
-			      },
-			      onInit: function() {
-			        // aplica Verdana 12px logo ao iniciar
-			        $('.summer_texto').next().find('.note-editable')
-			          .css({
-			            'font-family': 'Verdana',
-			            'font-size': '14px'
-			          });
-			      },
-			      onChange: function(contents) {
-			        // sempre força Verdana 12px no conteúdo editado
-			        $('.summer_texto').next().find('.note-editable')
-			          .css({
-			            'font-family': 'Verdana',
-			            'font-size': '14px'
-			          });
-			      },
-			      onImageUpload: function(files) {
-			        // Aqui você pode enviar as imagens via AJAX para o servidor
-			        // ou exibir diretamente (apenas para testes locais)
-			        for (let i = 0; i < files.length; i++) {
-			          const reader = new FileReader();
-			          reader.onload = function(e) {
-			            $('#quem_somos').summernote('insertImage', e.target.result, 'imagem');
-			          };
-			          reader.readAsDataURL(files[i]);
-			        }
-			      }
-			    }
-			  });
-			  
-			  
-			$('#id_key_linha').on('change', function() {
-			    var Xid_key_linha = $(this).val();
-			
-			    if (Xid_key_linha !== "--") {
-			        $.ajax({
-			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_categorias.php",
-			            type: 'POST',
-			            data: { 'id_key_linha': Xid_key_linha },
-			            dataType: 'json',
-			            success: function(response) {
-			            	console.log(response.categorias);
-			            	$('#id_key_marca').find('option').not(':first').remove();
-			            	$('#id_key_modelo').find('option').not(':first').remove();
-			                $('#id_key_categoria').find('option').not(':first').remove();
-			                $.each(response.categorias, function(index, categoria) {
-			                    $('#id_key_categoria').append('<option value="' + categoria.id_key + '" template="' + categoria.template + '">' + categoria.nome + '</option>');
-			                });
-			            },
-			            error: function() {
-			                alert('Erro ao carregar categorias.');
-			            }
-			        });
-			    } 
-			});
-			  
-
-			$('#id_key_categoria').on('change', function() {
-			    var Xid_key_categoria = $(this).val();
-
-			    console.log("Template: "+$('#id_key_categoria :selected').attr('template'));
-			    $('#template').val($('#id_key_categoria :selected').attr('template'));
-			    
-				$(".templates").hide();
-				
-				if ($('#id_key_categoria :selected').attr('template')!=0) $('.template_'+$('#id_key_categoria :selected').attr('template')).show();
-			
-			    if (Xid_key_categoria !== "--") {
-			        $.ajax({
-			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_marcas.php",
-			            type: 'POST',
-			            data: { 'id_key_linha' : $('#id_key_linha').val(),
-			            		   'id_key_categoria': Xid_key_categoria },
-			            dataType: 'json',
-			            success: function(response) {
-			            	console.log(response.marcas);
-			            	$('#id_key_modelo').find('option').not(':first').remove();
-			                $('#id_key_marca').find('option').not(':first').remove();
-			                $.each(response.marcas, function(index, marca) {
-			                    $('#id_key_marca').append('<option value="' + marca.id_key + '">' + marca.nome + '</option>');
-			                });
-			            },
-			            error: function() {
-			                alert('Erro ao carregar marcas.');
-			            }
-			        });
-			    } 
-			});
-
-			$('#id_key_marca').on('change', function() {
-			    var Xid_key_marca = $(this).val();
-			
-			    if (Xid_key_marca !== "--") {
-			        $.ajax({
-			            url: WEBSITE + "../globais/admin/json/veiculos_novos/busca_modelos.php",
-			            type: 'POST',
-			            data: { 'id_key_linha' : $('#id_key_linha').val(),
-			            		   'id_key_categoria': $('#id_key_categoria').val(),
-			            		   'id_key_marca' : Xid_key_marca },
-			            dataType: 'json',
-			            success: function(response) {
-			            	console.log(response.modelos);
-			                $('#id_key_modelo').find('option').not(':first').remove();
-			                $.each(response.modelos, function(index, modelo) {
-			                    $('#id_key_modelo').append('<option value="' + modelo.id_key + '">' + modelo.nome + ' ('+modelo.anos+')</option>');
-			                });
-			            },
-			            error: function() {
-			                alert('Erro ao carregar modelos.');
-			            }
-			        });
-			    } 
-			});
-
-			$('#locacao').on('change', function() {
-			    var Xlocacao = $(this).val();
-			
-			    if (Xlocacao == "S") $('.Dlocacao').show();
-			    else						 $('.Dlocacao').hide();
-
-			});
-			
-			// apago todos os templates.
-			$(".templates").hide();
-			
-			if ($('#template').val() != "0") $('.template_'+$('#template').val()).show();
-			
-			if ($('#locacao').val()=="N") $('.Dlocacao').hide();
-
 		});
 		
 		// > Configuracoes iniciais da pagina **********************************************
 		
 		// < configuracoes do Bootgrid *****************************************************
-		if ($("#table-veiculos-usados").length)
+		if ($("#table-veiculos-pendentes").length)
 		{
-			var grid = $("#table-veiculos-usados").bootgrid({
+			var grid = $("#table-veiculos-pendentes").bootgrid({
 				labels: {
 					noResults: "Não foi encontrado nenhum resultado!",
 					infos: "Mostrando {{ctx.start}} a {{ctx.end}} de {{ctx.total}} registros",
@@ -176,10 +27,12 @@
 										}
 				},
 				ajax: true,
-				url: "../globais/vendedor/json/veiculos_usados/list.php",
+				url: "../globais/admin/json/vendedores/list_veiculos_pendentes.php",
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='veiculos_usados_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;</div></div></div>"
 				},
+				// adicionado no header para agregar veiculos usados.
+				// <a href='veiculos_usados_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a>
 				columnSelection : false,
 				ajaxSettings: {
 					method: "POST",
@@ -234,7 +87,7 @@ $('#FormVeiculoUsado').on('submit', function (e) {
       if (result.isConfirmed) 
       {
  		    $.ajax({
-	        url: '../globais/admin/json/vendedores/post_veiculos_usados.php', // PHP que irá processar
+	        url: '../globais/vendedor/json/veiculos_usados/post.php', // PHP que irá processar
 	        type: 'POST',
 	        data: formData,
 	        processData: false,
@@ -257,7 +110,6 @@ $('#FormVeiculoUsado').on('submit', function (e) {
 		          'info'
 		        );
 		        
-		        location.reload();
 				// window.location="vendedores_edit.php?id="+response.id;
 							
 	        },

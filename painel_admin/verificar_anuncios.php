@@ -7,16 +7,6 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-$ven3=executeQuery("select * from vendedores where id_key='".$_GET['id']."' limit 1");
-
-if(@$ven3['error'])
-{
-	die('Erro ao buscar registro: ' . $ven3['error']);
-}
-if (!@$ven3)
-{
-	die("Vendedor não encontrado....");
-}
 
 ?>
 
@@ -129,15 +119,15 @@ if (!@$ven3)
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
 				    <div class='row' style='padding:5px;'>
 					    <div class='col-md-12'>
-					    	<h5 id="titulo_anuncio">Veículos anunciados pelo vendedor <b><?=$ven3['razao_social']?></b></h5>
+					    	<h5 id="titulo_anuncio">Veículos pendentes de publicação</h5>
 					    </div>
 				    </div>
-				    <input type='hidden' id="id_key_vendedor" value="<?=$ven3['id_key']?>">
-					<table class="table-light table table-bordered table-striped table-hover f12" id="table-veiculos-usados" >
+					<table class="table-light table table-bordered table-striped table-hover f12" id="table-veiculos-pendentes" >
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
-								<th data-column-id="titulo" data-align="left" data-header-align="left" data-width="45%;">Titulo</th>
+								<th data-column-id="Vnome" data-align="left" data-header-align="left" data-width="25%;">Vendedor</th>
+								<th data-column-id="titulo" data-align="left" data-header-align="left" data-width="30%;">Titulo</th>
 								<th data-column-id="categoria" data-align="center" data-header-align="center" data-width="10%;">Categoria</th>
 								<th data-column-id="marca" data-align="center" data-header-align="center" data-width="10%;">Marca</th>
 								<th data-column-id="modelo" data-align="center" data-header-align="center" data-width="10%;">Modelo</th>
@@ -208,7 +198,7 @@ if (!@$ven3)
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
-	<script src="../globais/admin/js/pages/vendedores_anuncios.js">
+	<script src="../globais/admin/js/pages/verificar_anuncios.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

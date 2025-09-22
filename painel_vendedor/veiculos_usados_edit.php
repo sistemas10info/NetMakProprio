@@ -465,10 +465,10 @@ $ddd1=executeQuery("select * from ddds","all");
 									<div class="col-md-4">
 										<label class="control-label text-right f12" >Estado</label><BR>
 										<select class="form-control f12" id="estado_veiculo" name="estado_veiculo">
-											<option value='Ótimo estado' <?if(@$vei3['estado']=="Ótimo estado") echo "selected "; ?>>Ótimo estado</option>
-											<option value='⁠Bom estado' <?if(@$vei3['estado']=="Bom estado") echo "selected "; ?>>⁠Bom estado</option>
-											<option value='Estado regular' <?if(@$vei3['estado']=="Estado regular") echo "selected "; ?>>Estado regular</option>
-											<option value='⁠Estado ruim' <?if(@$vei3['estado']=="Estado ruim") echo "selected "; ?>>⁠Estado ruim</option>
+											<option value='Ótimo estado' <?if(@$vei3['estado_veiculo']=="Ótimo estado") echo "selected "; ?>>Ótimo estado</option>
+											<option value='⁠Bom estado' <?if(@$vei3['estado_veiculo']=="Bom estado") echo "selected "; ?>>⁠Bom estado</option>
+											<option value='Estado regular' <?if(@$vei3['estado_veiculo']=="Estado regular") echo "selected "; ?>>Estado regular</option>
+											<option value='⁠Estado ruim' <?if(@$vei3['estado_veiculo']=="Estado ruim") echo "selected "; ?>>⁠Estado ruim</option>
 										</select>
 									</div>				
 														

@@ -61,13 +61,15 @@ else
 $XqueryCap ="SELECT 
 						veiculos.id_key,veiculos.titulo,veiculos.preco,veiculos.estado,veiculos.id_key_vendedor,
 						veiculos.id_key_marca,veiculos.id_key_categoria,veiculos.id_key_modelo,
-						categorias.nome as Cnome,marcas.nome as MAnome,modelos.nome as MOnome
+						categorias.nome as Cnome,marcas.nome as MAnome,modelos.nome as MOnome,
+						vendedores.razao_social as Vrazao_social,vendedores.cpf_cnpj as Vcpf_cnpj
 					 from veiculos 
+					 	left join vendedores on (vendedores.id_key=veiculos.id_key_vendedor)
 					 	left join categorias on (categorias.id_key=veiculos.id_key_categoria)
 					 	left join marcas on (marcas.id_key=veiculos.id_key_marca)
 					 	left join modelos on (modelos.id_key=veiculos.id_key_modelo)
 					 where 
-					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.id_key_vendedor='".$_POST['id']."' ".$Xwhere_busca."
+					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.estado='9' ".$Xwhere_busca."
 		    		ORDER BY 
 						".$Xorder_by." ".$Xlimit." ";
 
@@ -93,12 +95,13 @@ if ($cap1)
 	    elseif ($cap3['estado']=="1") $Xestado="Publicado";
 
 		$cap3['id']=$cap3['id_key'];
-		$cap3['titulo']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$cap3['titulo']."</a>";
-		$cap3['categoria']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['Cnome']."</a>";
-		$cap3['marca']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MAnome']."</a>";
-		$cap3['modelo']="<a href='veiculos_usados_edit.php?id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MOnome']."</a>";
-		$cap3['preco']="<a href='veiculos_usados_edit.php?id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".number_format(@$cap3['preco'],2)."</a>";
-		$cap3['estado']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$Xestado."</a>";
+		$cap3['Vnome']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$cap3['Vrazao_social']." (".$cap3['Vcpf_cnpj'].")</a>";
+		$cap3['titulo']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$cap3['titulo']."</a>";
+		$cap3['categoria']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['Cnome']."</a>";
+		$cap3['marca']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MAnome']."</a>";
+		$cap3['modelo']="<a href='veiculos_usados_edit.php?b=N&id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MOnome']."</a>";
+		$cap3['preco']="<a href='veiculos_usados_edit.php?b=N&id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".number_format(@$cap3['preco'],2)."</a>";
+		$cap3['estado']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$Xestado."</a>";
 	    $Aresults[] = $cap3;
 	    ++$XnRows;
 	}
