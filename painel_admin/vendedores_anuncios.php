@@ -1,10 +1,23 @@
 <?
+$Xerro=true;
 $arquivo = "../globais/inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
 } else {
     echo "Arquivo não encontrado: $arquivo";
-}			
+}
+
+$ven3=executeQuery("select * from vendedores where id_key='".$_GET['id']."' limit 1");
+
+if(@$ven3['error'])
+{
+	die('Erro ao buscar registro: ' . $ven3['error']);
+}
+if (!@$ven3)
+{
+	die("Vendedor não encontrado....");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -115,22 +128,21 @@ if (file_exists($arquivo)) {
 				<!-- conteudo -->
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
 				    <div class='row' style='padding:5px;'>
-					    <div class='col-md-4'>
-					    	<h3>Vendedores</h3>
+					    <div class='col-md-12'>
+					    	<h5 id="titulo_anuncio">Veículos anunciados pelo vendedor <b><?=$ven3['razao_social']?></b></h5>
 					    </div>
 				    </div>
-					<table class="table-light table table-bordered table-striped table-hover f12" id="table-vendedores" >
+				    <input type='hidden' id="id_key_vendedor" value="<?=$ven3['id_key']?>">
+					<table class="table-light table table-bordered table-striped table-hover f12" id="table-veiculos-usados" >
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
-								<th data-column-id="nome" data-align="left" data-header-align="left" >Razão social</th>
-								<th data-column-id="cpf_cnpj" data-align="center" data-header-align="center" >CNPJ</th>
-								<th data-column-id="cidade" data-align="center" data-header-align="center">Cidade</th>
-								<th data-column-id="uf" data-align="center" data-header-align="center" width='50px;'>UF</th>
-								<th data-column-id="ddd" data-align="center" data-header-align="center" width='50px;'>DDD</th>
-								<th data-column-id="telefone" data-align="center" data-header-align="center">Telefône</th>
-								<th data-column-id="linhas_trabalha" data-align="center" data-header-align="center">Linhas</th>
-								<th data-column-id="anuncios" data-align="center" data-header-align="center">Anúncios</th>
+								<th data-column-id="titulo" data-align="left" data-header-align="left" data-width="45%;">Titulo</th>
+								<th data-column-id="categoria" data-align="center" data-header-align="center" data-width="10%;">Categoria</th>
+								<th data-column-id="marca" data-align="center" data-header-align="center" data-width="10%;">Marca</th>
+								<th data-column-id="modelo" data-align="center" data-header-align="center" data-width="10%;">Modelo</th>
+								<th data-column-id="preco" data-align="right" data-header-align="right" data-width="15%;">Preço</th>
+								<th data-column-id="estado" data-align="right" data-header-align="center"  data-width="10%;">Estado</th>
 							</tr>
 						</thead>
 					</table>
@@ -196,7 +208,7 @@ if (file_exists($arquivo)) {
 	<script src="../bootstrap/assets/plugins/summernote/summernote.min.js"></script>
 	<script src="../bootstrap/assets/plugins/dropzone/min/dropzone.min.js"></script>
 
-	<script src="../globais/admin/js/pages/vendedores.js">
+	<script src="../globais/admin/js/pages/vendedores_anuncios.js">
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -207,9 +219,6 @@ if (file_exists($arquivo)) {
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     
-    
-
-
 </body>
 
 </html>

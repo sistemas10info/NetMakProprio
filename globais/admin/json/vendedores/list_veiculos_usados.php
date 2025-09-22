@@ -2,7 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 
-$Xerror=true;
+$Xerror=false;
 $arquivo = "../../../inc/inc.php";
 if (file_exists($arquivo)) {
     include($arquivo);
@@ -10,7 +10,7 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-$Xorder_by = " razao_social ";
+$Xorder_by = " titulo ";
 $Xrows     = 50;
 $Xcurrent  = 1;
 $Xlimit_l  = ($Xcurrent * $Xrows) - ($Xrows);
@@ -30,7 +30,7 @@ if (isset($_REQUEST['searchPhrase']) )
     if(!empty($_REQUEST['searchPhrase']))
 	{
 		$Xsearch = trim($_REQUEST['searchPhrase']);
-    	$Xwhere[] .= "  ( vendedores.razao_social LIKE '%".$Xsearch."%') ";
+    	$Xwhere[] .= "  ( veiculos.titulo LIKE '%".$Xsearch."%' ) ";
 	}
 }
 
@@ -58,17 +58,16 @@ else
     $Xlimit=" LIMIT $Xlimit_l, $Xlimit_h ";
 }
 
-// echo "Busca: ".$Xwhere_busca;
-
 $XqueryCap ="SELECT 
-						vendedores.id_key,vendedores.razao_social,vendedores.cpf_cnpj,
-						vendedores.uf,vendedores.cidade,vendedores.linhas_trabalha,vendedores.ddd,vendedores.telefone,
-						estados.nome as Enome,
-						(select count(interno) from veiculos where vendedores.id_key=veiculos.id_key_vendedor) as Tanuncios
-					 from vendedores 
-					 	left join estados on (vendedores.uf=estados.uf)
+						veiculos.id_key,veiculos.titulo,veiculos.preco,veiculos.estado,veiculos.id_key_vendedor,
+						veiculos.id_key_marca,veiculos.id_key_categoria,veiculos.id_key_modelo,
+						categorias.nome as Cnome,marcas.nome as MAnome,modelos.nome as MOnome
+					 from veiculos 
+					 	left join categorias on (categorias.id_key=veiculos.id_key_categoria)
+					 	left join marcas on (marcas.id_key=veiculos.id_key_marca)
+					 	left join modelos on (modelos.id_key=veiculos.id_key_modelo)
 					 where 
-					 	vendedores.apagado=0 ".$Xwhere_busca."
+					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.id_key_vendedor='".$_POST['id']."' ".$Xwhere_busca."
 		    		ORDER BY 
 						".$Xorder_by." ".$Xlimit." ";
 
@@ -89,13 +88,12 @@ if ($cap1)
 	foreach ($cap1 as $cap3)
 	{
 		$cap3['id']=$cap3['id_key'];
-		$cap3['nome']="<a href='vendedores_edit.php?id=".$cap3['id_key']."' class='f12b'>".$cap3['razao_social']."</a>";
-		$cap3['cpf_cnpj']="<a href='vendedores_edit.php?id=".$cap3['id_key']."'>".$cap3['cpf_cnpj']."</a>";
-		$cap3['cidade']="<a href='vendedores_edit.php?id=".$cap3['id_key']."'>".$cap3['cidade']."</a>";
-		$cap3['uf']="<a href='vendedores_edit.php?id=".$cap3['id_key']."'>".$cap3['uf']."</a>";
-		$cap3['ddd']="<a href='vendedores_edit.php?id=".$cap3['id_key']."'>".$cap3['ddd']."</a>";
-		$cap3['telefone']="<a href='vendedores_edit.php?id=".$cap3['id_key']."'>".$cap3['telefone']."</a>";
-		$cap3['anuncios']="<a class='btn btn-xs btn-info f10' href='vendedores_anuncios.php?id=".$cap3['id_key']."'>".$cap3['Tanuncios']."</a>";
+		$cap3['titulo']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$cap3['titulo']."</a>";
+		$cap3['categoria']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['Cnome']."</a>";
+		$cap3['marca']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MAnome']."</a>";
+		$cap3['modelo']="<a href='veiculos_usados_edit.php?id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."'>".$cap3['MOnome']."</a>";
+		$cap3['preco']="<a href='veiculos_usados_edit.php?id=id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".number_format(@$cap3['preco'],2)."</a>";
+		$cap3['estado']="<a href='veiculos_usados_edit.php?id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".(($cap3['estado']=="0") ? "Pendente" : "Publicado")."</a>";
 	    $Aresults[] = $cap3;
 	    ++$XnRows;
 	}
@@ -106,7 +104,7 @@ if($XnRows == 0)
     $Xjson = '[]';
 }
 
-@header('Content-Type: application/json'); //tell the broswer JSON is coming
+header('Content-Type: application/json'); //tell the broswer JSON is coming
 if (isset($_REQUEST['rowCount']) ) //Means we're using bootgrid library
 {
     echo "{ \"current\": $Xcurrent, \"rowCount\":$Xrows, \"rows\": ".$Xjson.", \"total\": $XnRows }";
