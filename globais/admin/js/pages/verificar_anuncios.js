@@ -29,7 +29,7 @@
 				ajax: true,
 				url: "../globais/admin/json/vendedores/list_veiculos_pendentes.php",
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;</div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><input type=\"radio\" name='Bopc' id=\"Bpendentes\" value=\"on\" onchange=\"$('#table-veiculos-pendentes').bootgrid('reload');\" checked> Pendentes&nbsp;&nbsp;&nbsp;<input type=\"radio\" name='Bopc' id=\"Bpublicados\" value=\"on\" onchange=\"$('#table-veiculos-pendentes').bootgrid('reload');\"> Publicados&nbsp;&nbsp;&nbsp;<input type=\"radio\" name='Bopc' id=\"Brejeitados\" value=\"on\" onchange=\"$('#table-veiculos-pendentes').bootgrid('reload');\"> Rejeitados<p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;</div></div></div>"
 				},
 				// adicionado no header para agregar veiculos usados.
 				// <a href='veiculos_usados_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a>
@@ -42,8 +42,33 @@
 					delay: 100,
 					characters: 3
 				},
-	
-	
+			    requestHandler: 
+						function (request) {
+						 //Add your id property or anything else
+						 if($('#Bpendentes').is(":checked")) request.Bpendentes = 'on';
+						else											   request.Bpendentes = '';
+
+
+						if($('#Bpublicados').is(":checked")) request.Bpublicados = 'on';
+						else											   request.Bpublicados = '';
+
+						if($('#Brejeitados').is(":checked")) request.Brejeitados = 'on';
+						else											  request.Brejeitados = '';
+
+						if ($(".search-field").val() == '' && $('#hid_busca').val() != '') 
+						{
+							$(".search-field").val($('#hid_busca').val());
+							request.searchPhrase=$('#hid_busca').val();
+							$('#hid_busca').val('');
+						}
+						else if($(".search-field").val() != '') 
+						{
+							request.searchPhrase=$(".search-field").val();
+						}
+
+						 return request;
+			},
+
 				caseSensitive:false /* make search case insensitive */
 			}).on("loaded.rs.jquery.bootgrid", function()
 			{

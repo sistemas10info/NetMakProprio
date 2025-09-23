@@ -7,7 +7,6 @@ if (file_exists($arquivo)) {
     echo "Arquivo não encontrado: $arquivo";
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -126,13 +125,13 @@ if (file_exists($arquivo)) {
 						<thead>
 							<tr bgcolor='#D3D3D3'>
 								<th data-visible="false" data-column-id="id" data-identifier="true">id</th>
-								<th data-column-id="Vnome" data-align="left" data-header-align="left" data-width="25%;">Vendedor</th>
+								<th data-column-id="Vnome" data-align="left" data-header-align="left" data-width="20%;">Vendedor</th>
 								<th data-column-id="titulo" data-align="left" data-header-align="left" data-width="30%;">Titulo</th>
-								<th data-column-id="categoria" data-align="center" data-header-align="center" data-width="10%;">Categoria</th>
-								<th data-column-id="marca" data-align="center" data-header-align="center" data-width="10%;">Marca</th>
-								<th data-column-id="modelo" data-align="center" data-header-align="center" data-width="10%;">Modelo</th>
-								<th data-column-id="preco" data-align="right" data-header-align="right" data-width="15%;">Preço</th>
-								<th data-column-id="estado" data-align="center" data-header-align="center"  data-width="10%;">Estado</th>
+								<th data-column-id="categoria" data-align="center" data-header-align="center" >Categoria</th>
+								<th data-column-id="marca" data-align="center" data-header-align="center" >Marca</th>
+								<th data-column-id="modelo" data-align="center" data-header-align="center" >Modelo</th>
+								<th data-column-id="preco" data-align="right" data-header-align="right">Preço</th>
+								<th data-column-id="estado" data-align="center" data-header-align="center" data-width="140px;">Estado</th>
 							</tr>
 						</thead>
 					</table>

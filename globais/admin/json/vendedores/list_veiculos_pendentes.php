@@ -58,9 +58,28 @@ else
     $Xlimit=" LIMIT $Xlimit_l, $Xlimit_h ";
 }
 
+// print_r($_REQUEST);
+
+$Xwhere="";
+if (!empty($_REQUEST['Bpendentes']))
+{
+	$Xwhere .= " AND veiculos.estado_autorizado='P' ";
+}	
+
+if (!empty($_REQUEST['Bpublicados']))
+{
+	$Xwhere .= " AND veiculos.estado_autorizado='S' ";
+}	
+
+if (!empty($_REQUEST['Brejeitados']))
+{
+	$Xwhere .= " AND veiculos.estado_autorizado='R' ";
+}	
+
 $XqueryCap ="SELECT 
 						veiculos.id_key,veiculos.titulo,veiculos.preco,veiculos.estado,veiculos.id_key_vendedor,
 						veiculos.id_key_marca,veiculos.id_key_categoria,veiculos.id_key_modelo,
+						veiculos.estado_autorizado,veiculos.obs_publicacao,
 						categorias.nome as Cnome,marcas.nome as MAnome,modelos.nome as MOnome,
 						vendedores.razao_social as Vrazao_social,vendedores.cpf_cnpj as Vcpf_cnpj
 					 from veiculos 
@@ -69,7 +88,7 @@ $XqueryCap ="SELECT
 					 	left join marcas on (marcas.id_key=veiculos.id_key_marca)
 					 	left join modelos on (modelos.id_key=veiculos.id_key_modelo)
 					 where 
-					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.estado='9' ".$Xwhere_busca."
+					 	veiculos.apagado=0 and veiculos.tipo='2' and veiculos.estado='9' ".$Xwhere_busca." ".$Xwhere." 
 		    		ORDER BY 
 						".$Xorder_by." ".$Xlimit." ";
 
@@ -91,8 +110,25 @@ if ($cap1)
 	{
 
 	    if 		($cap3['estado']=="0") $Xestado="rascunho";
-	    elseif ($cap3['estado']=="9") $Xestado="Esperando<BR>aprovação";
-	    elseif ($cap3['estado']=="1") $Xestado="Publicado";
+	    elseif ($cap3['estado']=="9") 
+	    {
+		     if 	 ($cap3['estado_autorizado']=="P") 
+		     {
+		     	  $Xestado_autorizado="<span class='text-warning'><i class='fa fa-clock-o fa-2x'></i><BR>Pendente</span>";
+		     	  $Xobs_publicacao="";
+		     }
+		     elseif ($cap3['estado_autorizado']=="R")
+		     {	
+			      $Xestado_autorizado="<span class='text-danger'><i class='fa fa-warning fa-2x'></i><BR>Rejeitada</span>";
+			      $Xobs_publicacao="<i class='text-default f10'>".$vei3['obs_publicacao']."</i>";
+		     } 
+		     elseif ($cap3['estado_autorizado']=="S")
+		     {
+			      $Xestado_autorizado="<span class='text-success'><i class='fa fa-smile-o fa-2x'></i><BR>Publicado</span>";
+			      $Xobs_publicacao="<i class='text-default f10'>".$vei3['obs_publicacao']."</i>";
+		     }
+		     $Xestado=$Xestado_autorizado."<BR>".$Xobs_publicacao;
+	   }
 
 		$cap3['id']=$cap3['id_key'];
 		$cap3['Vnome']="<a href='veiculos_usados_edit.php?b=N&id=".$cap3['id_key']."&id_vendedor=".$cap3['id_key_vendedor']."' class='f12b'>".$cap3['Vrazao_social']." (".$cap3['Vcpf_cnpj'].")</a>";
