@@ -74,12 +74,79 @@ if (!empty($_POST['slug']))
 	}
 }
 
+/*
+[motor_P] => Diesel
+[potencia_hp_P] => até 100 HP
+[capacidade_cacamba_P] => até 1,5 m³
+[peso_operacional_P] => até 10 t
+
+[motor_R] => Diesel
+[potencia_hp_R] => até 100 HP
+[capacidade_cacamba_R] => até 0,2 m³
+[profundidade_escavacao_R] => até 4 m
+
+[motor_E] => Diesel
+[peso_operacional_E] => até 6 t
+[capacidade_cacamba_E] => até 0,4 m³
+[profundidade_escavacao_E] => até 4 m
+
+[motor_M] => Diesel
+[peso_operacional_M] => até 10 t
+[potencia_hp_M] => até 120 HP
+[largura_lamina_M] => até 3 m
+
+[motor_RC] => Diesel
+[peso_operacional_RC] => até 8 t
+[tipo_rolo_RC] => liso
+[largura_tambor_RC] => até 1,5 m
+
+[motor_T] => Diesel
+[peso_operacional_T] => até 10 t
+[potencia_hp_T] => até 120 HP
+[largura_lamina_T] => até 3 m
+
+[motor_C] => Diesel
+[potencia_hp_C] => até 200 HP
+[capacidade_carga_C] => até 10 t
+[volume_cacamba_C] => até 10 m³
+*/
+
+
 $Xtemplate_update="";
+
 if ($_POST['template']=="1")
 	$Xtemplate_update="motor='".$_POST['motor_1']."',tipo_torre='".$_POST['tipo_torre_1']."',cap_carga='".$_POST['cap_carga_1']."',cap_elevacao='".$_POST['cap_elevacao_1']."',";
-
+	
 if ($_POST['template']=="2")
 	$Xtemplate_update="motor='".$_POST['motor_2']."',cap_carga='".$_POST['cap_carga_2']."',cap_elevacao='".$_POST['cap_elevacao_2']."',";
+
+if ($_POST['template']=="P")
+	$Xtemplate_update="motor='".$_POST['motor_P']."',potencia_hp='".$_POST['potencia_hp_P']."',
+								   capacidade_cacamba='".$_POST['capacidade_cacamba_P']."',peso_operacional='".$_POST['peso_operacional_P']."',";
+
+if ($_POST['template']=="R")
+	$Xtemplate_update="motor='".$_POST['motor_R']."',potencia_hp='".$_POST['potencia_hp_R']."',
+								   capacidade_cacamba='".$_POST['capacidade_cacamba_R']."',profundidade_escavacao='".$_POST['profundidade_escavacao_R']."',";
+
+if ($_POST['template']=="E")
+	$Xtemplate_update="motor='".$_POST['motor_R']."',peso_operacional='".$_POST['peso_operacional_E']."',
+								   capacidade_cacamba='".$_POST['capacidade_cacamba_E']."',profundidade_escavacao='".$_POST['profundidade_escavacao_E']."',";
+
+if ($_POST['template']=="M")
+	$Xtemplate_update="motor='".$_POST['motor_M']."',peso_operacional='".$_POST['peso_operacional_M']."',
+								   potencia_hp='".$_POST['potencia_hp_M']."',largura_lamina='".$_POST['largura_lamina_M']."',";
+
+if ($_POST['template']=="RC")
+	$Xtemplate_update="motor='".$_POST['motor_RC']."',peso_operacional='".$_POST['peso_operacional_RC']."',
+								   tipo_rolo='".$_POST['tipo_rolo_RC']."',largura_tambor='".$_POST['largura_tambor_RC']."',";
+
+if ($_POST['template']=="T")
+	$Xtemplate_update="motor='".$_POST['motor_T']."',peso_operacional='".$_POST['peso_operacional_T']."',
+								   potencia_hp='".$_POST['potencia_hp_T']."',largura_lamina='".$_POST['largura_lamina_T']."',";
+
+if ($_POST['template']=="C")
+	$Xtemplate_update="motor='".$_POST['motor_C']."',potencia_hp='".$_POST['potencia_hp_C']."',
+								   capacidade_carga='".$_POST['capacidade_carga_C']."',volume_cacamba='".$_POST['volume_cacamba_C']."',";
 
 
 $Xpreco=str_replace(",","",$_POST['preco']);
