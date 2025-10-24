@@ -78,6 +78,13 @@ if (file_exists($arquivo)) {
 	    <!-- Custom scripts for all pages-->
 	    <script src="js/sb-admin-2.min.js"></script>
 
+	 <!-- SweetAlert2 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+	
+	<!-- SweetAlert2 JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+	    
+
 </head>
 
 <body id="page-top"> 
@@ -101,7 +108,7 @@ if (file_exists($arquivo)) {
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+			<input type='hidden' id='id_key_linha' value=''>
             <!-- Main Content -->
             <div id="content">
 	 			<? 
@@ -118,6 +125,16 @@ if (file_exists($arquivo)) {
 					    <div class='col-md-4'>
 					    	<h3>Produtos</h3>
 					    </div>
+				    	<div class='col-md-8'>
+				    	    <span class='f16b'>Escolha uma linha: </span>
+				    	    <?
+				    	       $lin1=executeQuery("select * from linhas order by abrev","all");
+				    	       foreach ($lin1 as $lin3)
+				    	       {
+					    	       echo "<a class='btn btn-big btn-default botoes' id='id_key_linha_".$lin3['id_key']."' href='javascript:lista_produtos(\"".$lin3['id_key']."\");'>".$lin3['abrev']."</a>&nbsp;";
+				    	       }
+				    	    ?>
+				    	</div>
 				    </div>
 					<table class="table-light table table-bordered table-striped table-hover f12" id="table-produtos" >
 						<thead>

@@ -148,6 +148,30 @@ if ($_POST['template']=="C")
 	$Xtemplate_update="motor='".$_POST['motor_C']."',potencia_hp='".$_POST['potencia_hp_C']."',
 								   capacidade_carga='".$_POST['capacidade_carga_C']."',volume_cacamba='".$_POST['volume_cacamba_C']."',";
 
+// ultima versão.
+
+if ($_POST['template']=="TA")
+	$Xtemplate_update="motor='".$_POST['motor_TA']."',potencia_hp='".$_POST['potencia_hp_TA']."',
+								   tracao='".$_POST['tracao_TA']."',peso_operacional='".$_POST['peso_operacional_TA']."',
+								   transmissao='".$_POST['transmissao_TA']."',";
+
+if ($_POST['template']=="PU")
+	$Xtemplate_update="motor='".$_POST['motor_PU']."',capacidade_tanque='".$_POST['capacidade_tanque_PU']."',
+								   largura_barra='".$_POST['largura_barra_PU']."',tipo_propulsao='".$_POST['tipo_propulsao_PU']."',
+								   sistema_controle='".$_POST['sistema_controle_PU']."',";
+
+if ($_POST['template']=="PL")
+	$Xtemplate_update="numero_linhas='".$_POST['numero_linhas_PL']."',espacamento_linhas='".$_POST['espacamento_linhas_PL']."',
+								   capacidade_reservatorio='".$_POST['capacidade_reservatorio_PL']."',tipo_propulsao='".$_POST['tipo_propulsao_PL']."',";
+
+if ($_POST['template']=="CO")
+	$Xtemplate_update="motor='".$_POST['motor_CO']."',potencia_hp='".$_POST['potencia_hp_CO']."',peso_operacional='".$_POST['peso_operacional_CO']."',
+								   largura_plataforma='".$_POST['largura_plataforma_CO']."',capacidade_granaleiro='".$_POST['capacidade_granaleiro_CO']."',";
+
+if ($_POST['template']=="AR")
+	$Xtemplate_update="largura_trabalho='".$_POST['largura_trabalho_AR']."',numero_discos='".$_POST['numero_discos_AR']."',diametro_disco='".$_POST['diametro_disco_AR']."',
+								   tipo_maquina='".$_POST['tipo_maquina_AR']."',";
+
 
 $Xpreco=str_replace(",","",$_POST['preco']);
 $update = executeQuery("update veiculos

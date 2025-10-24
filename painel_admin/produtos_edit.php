@@ -22,19 +22,39 @@ else
    $Xtitulo="Editar Produto";
 }
 
-$cat1=executeQuery("select categorias_produtos.*,
-										 linhas.nome as Lnome,
-										 categorias.nome as Cnome,
-										 marcas.nome as Mnome
+$Xid_key_categorias_linha=explode("||",$pro3['id_key_categorias_linha']);
+// Xprint_r($Xid_key_categorias_linha,"lista",false);
+
+$cat1=executeQuery("select categorias_produtos.*
 										 	from categorias_produtos 
-										 left join linhas on (categorias_produtos.id_key_linha=linhas.id_key)
-										 left join categorias on (categorias_produtos.id_key_categoria=categorias.id_key)
-										 left join marcas on (categorias_produtos.id_key_marca=marcas.id_key)
-										 order by nome,id_key_linha,id_key_categoria,id_key_marca ","all");
+										 where 
+										 	categorias_produtos.id_key_linha='".$_GET['id_key_linha']."' 
+										 order by nome ","all");
 
 if (@$cat1['error'])
 {
     die("Error categoria ".$cat1['error']);
+}			
+
+$catl1=executeQuery("select categorias.*
+										 	from categorias
+										 where 
+										 	categorias.id_key_linha='".$_GET['id_key_linha']."' 
+										 order by nome ","all");
+
+if (@$catl1['error'])
+{
+    die("Error categoria linha ".$catl1['error']);
+}			
+
+$lin3=executeQuery("select linhas.*
+										 	from linhas 
+										 where 
+										 	linhas.id_key='".$_GET['id_key_linha']."' limit 1");
+
+if (@$lin3['error'])
+{
+    die("Error linha ".$lin3['error']);
 }			
 ?>
 <!DOCTYPE html>
@@ -151,11 +171,12 @@ if (@$cat1['error'])
 				<!-- conteudo -->
 			    <div class='row' style='padding:10px;'>
 				    <div class='col-md-4'>
-				    	<h3><?=$Xtitulo?></h3>
+				    	<h3><?=$Xtitulo." <i>(".$lin3['nome'].")</i>"?></h3>
 				    </div>
 			    </div>
 				<form name="FormProduto" id="FormProduto" method="post" action="../globais/admin/json/produtos/post.php">
 				    <input type='hidden' name='id' id='id' value='<?=@$_GET['id']?>'>
+				    <input type='hidden' name='id_key_linha' id='id' value='<?=@$_GET['id_key_linha']?>'>
 					<div class='row'>
 						<div class='col-md-7'>
 							<div class='card-body border-left-secondary shadow py-2' style='margin-left:10px; margin-right:10px; margin-bottom:20px; padding:10px;'>
@@ -173,10 +194,27 @@ if (@$cat1['error'])
 								</div>
 								<div class="row form-group"> 
 									<div class="col-md-12">
-										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR>
-										<textarea name="descrip" id="descrip" class='summer_texto form-control'><?=@$pro3['descrip']?></textarea>
+										<label class="control-label text-right f16" for="Fcpf_cnpj">Anúncio:</label><BR> 
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+										  <li class="nav-item">
+										    <a class="nav-link active" id="descrip-tab" data-toggle="tab" href="#descrip" role="tab" aria-controls="descrip" aria-selected="true">Descrição</a>
+										  </li>
+										  <li class="nav-item">
+										    <a class="nav-link" id="especifica-tab" data-toggle="tab" href="#especifica" role="tab" aria-controls="especifica" aria-selected="false">Especificações</a>
+										  </li>
+										</ul>
+										
+										<div class="tab-content mt-3" id="myTabContent">
+										  <div class="tab-pane fade show active" id="descrip" role="tabpanel" aria-labelledby="descrip-tab">
+										       <textarea id="descripText" name="descrip" class="form-control summer_texto"><?=@$pro3['descrip']?></textarea>
+										  </div>
+										  <div class="tab-pane fade" id="especifica" role="tabpanel" aria-labelledby="especifica-tab">
+										        <textarea id="especificaText" name="especifica" class="form-control summer_texto"><?=@$pro3['especifica']?></textarea>
+										  </div>
+										</div>
 									</div>
 								</div>
+
 							</div>
 
 						</div>
@@ -189,24 +227,41 @@ if (@$cat1['error'])
 							    </div>
 								<div class="row form-group"> 
 									<div class="col-md-12">
-										<label class="control-label text-right f12" for="Fcpf_cnpj">Categoria</label><BR>
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Categoria produto</label><BR>
 										<select class="form-control f12" id="id_key_categoria" name="id_key_categoria">
 										   <option value="--">Selecione a categoria</option>
 										   <?
 										   		foreach ($cat1 as $cat3) 
 										   		{
-										   			$cat3['Lnome']=($cat3['Lnome']) ? " / ".$cat3['Lnome'] : "";
-										   		    $cat3['Cnome']=($cat3['Cnome']) ? " / ".$cat3['Cnome'] : "";
-										   		    $cat3['Mnome']=($cat3['Mnome']) ? " / ".$cat3['Mnome'] : "";
-										   		    
 										   			echo "<option value='".$cat3['id_key']."' ";
 										   			if ($pro3['id_key_categoria']==$cat3['id_key']) echo "selected ";
-										   			echo ">".$cat3['nome'].$cat3['Lnome'].$cat3['Cnome'].$cat3['Mnome']."</option>";
+										   			echo ">".$cat3['nome']."</option>";
 										   		}
 										   ?>
 										</select>
 									</div>
 						        </div>
+
+								<div class="row form-group"> 
+									<div class="col-md-12">
+										<label class="control-label text-right f12" for="Fcpf_cnpj">Categoria linha</label><BR>
+										<select class="form-control f10 selectpicker" id="id_key_categorias_linha" data-live-search="true" multiple name="id_key_categorias_linha[]">
+										   <option value="--">Todas as categorías</option>
+										   <?
+										   		foreach ($catl1 as $catl3) 
+										   		{
+										   			echo "<option value='".$catl3['id_key']."' ";
+										   			if (in_array($catl3['id_key'], $Xid_key_categorias_linha)) echo "selected ";
+										   			echo ">".$catl3['nome']."</option>";
+										   		}
+										   ?>
+										</select>
+										<script language=javascript>
+											$('#id_key_categorias_linha').selectpicker('refresh');
+										</script>
+									</div>
+						        </div>
+
 								<div class="row form-group"> 
 									<div class="col-md-4">
 										<label class="control-label f12 col-md-12">Preço de venda</label><BR>
@@ -388,6 +443,16 @@ if (@$cat1['error'])
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
+	<!-- BOOTSTRAP SELECT -->
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+		
+		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>	
+
+	<!-- FIM BOOTSTRAP -->	    
     
 </body>
 

@@ -18,6 +18,7 @@ die();
 // <- Filtros *************************************************************************
 if (@$_POST['estado']=="9")
 {
+
     $Xmensagem="";
     if (empty($_POST['titulo'])) $Xmensagem.="Titulo de anuncio deve estar preenchido<BR>";
     if (empty($_POST['descrip'])) $Xmensagem.="Descrição do anuncio deve estar preenchido<BR>";
@@ -31,6 +32,8 @@ if (@$_POST['estado']=="9")
 		exit(json_encode($response));
      }    
 }
+
+$Xid_key_categorias_linha=implode("||",$_POST['id_key_categorias_linha']);
 
 if (empty($_POST['id']))
 {
@@ -80,12 +83,14 @@ $update = executeQuery("update produtos
 											descrip			= '".@$_POST['descrip']."',
 											slug			= '".@$_POST['slug']."',
 											id_key_categoria    	 		= '".((!empty(@$_POST['id_key_categoria']))      ? @$_POST['id_key_categoria']     : '')."',
+											id_key_categorias_linha = '".$Xid_key_categorias_linha."',
 											preco    	 		= '".$Xpreco."',
 											preco_oferta   = '".$Xpreco_oferta."',
 											comic    	 		= '".((!empty(@$_POST['comic']))      ? @$_POST['comic']     : '')."',
 											comic_fixa    	 		= '".((!empty(@$_POST['comic_fixa']))      ? @$_POST['comic_fixa']     : '')."',
 											estado	      	 		= '".((!empty(@$_POST['estado']))         ? @$_POST['estado']     : '')."',
-											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."'
+											seo	      	 		= '".((!empty(@$_POST['seo']))         ? @$_POST['seo']     : '')."',
+											id_key_linha   = '".$_POST['id_key_linha']."' 
 									   WHERE
 										    id_key='".$_POST['id']."' limit 1 ");
 
@@ -96,6 +101,7 @@ if(@$update['error'])
 	exit(json_encode($response));
 }
 
+/*
 $slu3=executeQuery("select interno from slugs where id_key_origem='".$_POST['id']."' limit 1");
 
 if(@$slu3['error'])
@@ -124,7 +130,7 @@ if (!$slu3)
 
 $update=executeQuery("update slugs 
 											set 
-												slug='".$_POST['slug']."' 
+												slug='".@$_POST['slug']."' 
 											where 
 												id_key_origem='".$_POST['id']."' and 
 												tipo_pagina='4' ");
@@ -134,6 +140,7 @@ if(@$update['error'])
 	$response['msg'] = 'Erro ao update slug: ' . @$update['error'];
 	exit(json_encode($response));
 }
+*/
 
 http_response_code(200);
 $response['msg']    = 'Seu veículo foi cadastrado.';

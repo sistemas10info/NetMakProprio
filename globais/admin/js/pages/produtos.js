@@ -6,7 +6,7 @@
 			
 			$('.maskMoneyBR').maskMoney();
 
-			  $('#descrip').summernote({
+			  $('.summer_texto').summernote({
 			    height: 300,
 			    fontNames: ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'],
 			    fontSizes: ['8', '10', '12', '14', '16', '18', '20', '24', '28', '36'],
@@ -64,9 +64,14 @@
 										}
 				},
 				ajax: true,
-				url: "../globais/admin/json/produtos/list.php",
+				url: "../globais/admin/json/produtos/list.php?",
+				post: function() {
+				            return {
+				                id_key_linha: $('#id_key_linha').val() // Envia o parâmetro como POST
+				            };
+				        },				
 				templates: {
-					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='produtos_edit.php' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
+					header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-xs-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p>&nbsp;&nbsp;<a href='javascript:add_produto();' class=\"btn btn-primary\" id=\"btnAdicionar\">+ Adicionar</a></div></div></div>"
 				},
 				columnSelection : false,
 				ajaxSettings: {
@@ -591,3 +596,35 @@ $('#botao_lixeira').on('click', function(e) {
 
 });
 
+
+function lista_produtos(Xid_key)
+{
+
+$('.botoes').removeClass('btn-default');
+$('.botoes').removeClass('btn-primary');
+$('.botoes').addClass('btn-default');
+$('#id_key_linha_'+Xid_key).removeClass('btn-default');
+$('#id_key_linha_'+Xid_key).addClass('btn-primary');
+
+$('#id_key_linha').val(Xid_key);
+
+$('#table-produtos').bootgrid('reload');
+
+}
+
+
+function add_produto()
+{
+
+if ($('#id_key_linha').val()) window.location="produtos_edit.php?id_key_linha="+$('#id_key_linha').val();
+else
+{
+        Swal.fire(
+          'Escolha uma linha',
+          '',
+          'info'
+        );
+}
+
+
+}

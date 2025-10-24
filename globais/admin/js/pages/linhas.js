@@ -198,10 +198,10 @@ function apagar_registro(Xid_key,Xtipo)
 			    switch (Xtipo) 
 			    {
 			        case "categorias":
-			            window.location="categorias.php";
+			            window.location="linhas.php";
 			            break;
 			        case "categorias_marcas":
-			            window.location="categorias.php";
+			            window.location="linhas.php";
 			            break;
 			        case "marcas":
 			            ver_marcas($('#id_key_categoria').val());

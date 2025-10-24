@@ -96,7 +96,9 @@ function apagar_registro(Xid_key,Xtipo)
 						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
 				}
 	
-			    window.location="categorias.php";
+				$('#ModalDadosCategoria').modal('hide');
+				lista_categoria_produto(Xid_key);
+			    // window.location="categorias.php";
 							
 	        },
 	        error: function (dataReturn) {
@@ -137,9 +139,11 @@ function add_categoria_marca(Xid_key="")
 	$('#id_key').val('--');
 	$('#ModalLabelCategoria').html('Nova categoria');
 	$('#nome').val('Nova categoria');
+	/*
 	$('#id_key_linha').val('--');
 	$('#id_key_categoria').val('--');
 	$('#id_key_marca').val('--');
+	*/
 	$('#btnApagar').hide();
 	$('#ModalDadosCategoria').modal("show");
 
@@ -251,9 +255,8 @@ function salvar_categoria()
 	        type: 'POST',
 	        data: { 'id_key' : $('#id_key').val() ,
 	        		   'nome' : $('#nome').val() ,
-	        		   'id_key_linha' : $('#id_key_linha').val() ,
-	        		   'id_key_categoria' : $('#id_key_categoria').val() ,
-	        		   'id_key_marca' : $('#id_key_marca').val() },	
+	        		   'id_key_linha' : $('#id_key_linha').val() 
+	        		 },	
 	        success: function (dataReturn) {
 				try {
 						response = JSON.parse(dataReturn);
@@ -261,7 +264,7 @@ function salvar_categoria()
 						link = response.link;
 						imagem = response.imagem;
 				} catch (e) {
-						mensagem = 'Houve um problema com nosso servidor, tente novamente.';
+						mensagem = 'Houve um problema com nosso servidor, tente novamente.'; 
 				}
 				
 				Swal.close();
@@ -272,7 +275,9 @@ function salvar_categoria()
 		          'info'
 		        );
 				
-				window.location="categorias.php";
+				$('#ModalDadosCategoria').modal('hide');
+				lista_categoria_produto($('#id_key_linha').val());
+				// window.location="categorias.php";
 							
 	        },
 	        error: function (dataReturn) {
@@ -306,3 +311,20 @@ function salvar_categoria()
 }
 
 
+
+function lista_categoria_produto(Xid_key)
+{
+
+$('.botoes').removeClass('btn-default');
+$('.botoes').removeClass('btn-primary');
+$('.botoes').addClass('btn-default');
+$('#id_key_linha_'+Xid_key).removeClass('btn-default');
+$('#id_key_linha_'+Xid_key).addClass('btn-primary');
+
+$('#id_key_linha').val(Xid_key);
+
+$('#lista_categorias').html('<div class="col-md-12 text-left"><BR><BR><img src="../globais/images/Preloader_10.gif"><BR><h3>Carregando</h3><BR><BR></div>');
+$('#lista_categorias').load("../globais/admin/json/categorias/lst_categorias.php",{'id_key_linha' : Xid_key});
+
+
+}

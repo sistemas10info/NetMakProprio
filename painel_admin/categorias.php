@@ -104,7 +104,7 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+			<input type='hidden' id='id_key_linha' value=''>
             <!-- Main Content -->
             <div id="content">
 	 			<? 
@@ -119,56 +119,21 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 				<div class='card-body border-left-secondary shadow h-100 py-2' style='margin-left:10px; margin-right:10px; margin-bottom:60px; padding:10px;'>
 					<!-- categorias marca -->
 				    <div class='row' style='padding:5px; border-top:1px solid silver;'>
-				    	<div class='col-md-12 well'>
+				    	<div class='col-md-4 well'>
 				    	     <h3>Categorias de Produtos</h3>
 				    	</div>
-					    <div class='col-md-12'>
-							<table class="table-light table table-bordered table-striped table-hover f12">
-								<thead>
-									<tr bgcolor='#D3D3D3'>
-										<th width="38%;"><a href='javascript:add_categoria_marca();' class='f18'>+</a> Nome</th>
-										<th width="20%;">Linha</th>
-										<th width="20%;">Categoria</th>
-										<th width="20%;">Marca</th>
-										<th class='text-center'>...</th>
-									</tr>
-								</thead>
-								<?
-								$cat1=executeQuery("select categorias_produtos.*,
-																		 linhas.nome as Lnome,
-																		 categorias.nome as Cnome,
-																		 marcas.nome as Mnome
-																	 from 
-																	 	categorias_produtos 
-																     left join linhas on (categorias_produtos.id_key_linha=linhas.id_key)
-																     left join categorias on (categorias_produtos.id_key_categoria=categorias.id_key)
-																     left join marcas on (categorias_produtos.id_key_marca=marcas.id_key)
-																	 order by categorias_produtos.nome,
-																	 			  categorias_produtos.id_key_linha,
-																	 			  categorias_produtos.id_key_categoria,
-																	 			  categorias_produtos.id_key_marca","all");
-								if(@$cat1['error'])
-								{
-									die('Erro busca: ' . @$cat1['error']);
-								}
-								if ($cat1)
-								{
-								    foreach ($cat1 as $cat3)
-								    {
-								        $cat3['Lnome']=($cat3['id_key_linha']=="--") ? "<i>Todas as linhas</i>" : $cat3['Lnome'];
-								        $cat3['Mnome']=($cat3['id_key_marca']=="--") ? "<i>Todas as Marcas</i>" : $cat3['Mnome'];
-								        $cat3['Cnome']=($cat3['id_key_categoria']=="--") ? "<i>Todas as Categorias</i>" : $cat3['Cnome'];
-										echo "<tr>
-												  <td><a href='javascript:editar_categoria_marca(\"".$cat3['id_key']."\");'>".$cat3['nome']."</a></td>
-												  <td>".$cat3['Lnome']."</td>
-												  <td>".$cat3['Cnome']."</td>
-												  <td>".$cat3['Mnome']."</td>
-												  <td class='text-center'><a href='javascript:apagar_registro(\"".$cat3['id_key']."\",\"categorias_produtos\");'><i class='fa fa-trash'></i></a></td>
-												</tr>";
-								    }
-								}
-								?>
-							</table>
+				    	<div class='col-md-8'>
+				    	    <span class='f16b'>Escolha uma linha: </span>
+				    	    <?
+				    	       $lin1=executeQuery("select * from linhas order by abrev","all");
+				    	       foreach ($lin1 as $lin3)
+				    	       {
+					    	       echo "<a class='btn btn-big btn-default botoes' id='id_key_linha_".$lin3['id_key']."' href='javascript:lista_categoria_produto(\"".$lin3['id_key']."\");'>".$lin3['abrev']."</a>&nbsp;";
+				    	       }
+				    	    ?>
+				    	</div>
+					    <div class='col-md-12' id="lista_categorias">
+					       
 					    </div>
 				    </div>
 
@@ -258,7 +223,6 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 
 </html>
 
-
 <!-- MODAL Editar -->
 <div class="modal fade" id="ModalDadosCategoria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
@@ -274,36 +238,6 @@ $cat1=executeQuery("select * from categorias_produtos ","all");
 							<label class="control-label col-md-2 text-right" for="Fcpf_cnpj">Nome da categoria</label>
 							<div class="col-md-10">
 								<input type="text" name="nome" id="nome" class="form-control">
-							</div>
-						</div>
-					
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Linha</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_linha" name="id_key_linha">
-								   <option value="--">Qualquer linha</option>
-								   <?
-								        $lin1=executeQuery("select * from linhas","all");
-								   		foreach ($lin1 as $lin3) echo "<option value='".$lin3['id_key']."'>".$lin3['nome']."</option>";
-								   ?>
-								</select>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Categoria</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_categoria" name="id_key_categoria">
-								   <option value="--">Qualquer categoria</option>
-								</select>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="control-label col-md-2 text-right" for="descrip">Marca</label>
-							<div class="col-md-10">
-								<select class="form-control f12" id="id_key_marca" name="id_key_marca">
-								   <option value="--">Qualquer marca</option>
-								</select>
 							</div>
 						</div>
 					</div>

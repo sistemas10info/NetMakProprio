@@ -42,9 +42,7 @@ if ($_POST['id_key']=="--")
 $update = executeQuery("update  categorias_produtos
 									    SET
 									        nome			= '".@$_POST['nome']."',
-									        id_key_linha			= '".@$_POST['id_key_linha']."',
-									        id_key_categoria			= '".@$_POST['id_key_categoria']."',
-									        id_key_marca			= '".@$_POST['id_key_marca']."'
+									        id_key_linha			= '".@$_POST['id_key_linha']."'
 									    where
 									    	id_key='".$_POST['id_key']."' limit 1 ");
 

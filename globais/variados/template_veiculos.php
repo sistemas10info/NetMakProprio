@@ -379,3 +379,255 @@
 	 </div>
 	 <!-- TEMPLATE C Caminhão Basculante-->
 
+
+	<!-- TEMPLATE TA Trator agrícola-->
+	 <div class="row form-group template_TA templates" <?=((@$vei3['template']<>"TA") ? "style='display:none;'" : "")?>>
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Motorização</label><BR>
+			<select class="form-control f12" id="motor_TA" name="motor_TA">
+			   <option value='Diesel' <? if (@$vei3['motor']=="Diesel") echo "selected ";?>>Diesel</option>
+			   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+			</select>
+		</div>									
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Potência do motor</label><BR>
+			<select class="form-control f12" id="potencia_hp_TA" name="potencia_hp_TA">
+			   <option value='até 80 HP' <? if (@$vei3['potencia_hp']=="até 80 HP") echo "selected ";?>>até 80 HP</option>
+			   <option value='de 81 a 150 HP' <? if (@$vei3['potencia_hp']=="de 81 a 150 HP") echo "selected ";?>>de 81 a 150 HP</option>
+			   <option value='acima de 150 HP' <? if (@$vei3['potencia_hp']=="acima de 150 HP") echo "selected ";?>>acima de 150 HP</option>
+			</select>
+		</div>		
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Tração</label><BR>
+			<select class="form-control f12" id="tracao_TA" name="tracao_TA">
+			   <option value='4X2' <? if (@$vei3['tracao']=="4X2") echo "selected ";?>>4X2</option>
+			   <option value='4X4' <? if (@$vei3['tracao']=="4X4") echo "selected ";?>>4X4</option>
+			</select>
+		</div>		
+
+     </div>
+
+     <div class="row form-group template_TA templates" <?=((@$vei3['template']<>"TA") ? "style='display:none;'" : "")?>>
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Peso operacional</label><BR> 
+			<select class="form-control f12" id="peso_operacional_TA" name="peso_operacional_TA">
+			   <option value='até 3 t' <? if (@$vei3['peso_operacional']=="até 3 t") echo "selected ";?>>até 3 t</option>
+			   <option value='3,1 a 5 t' <? if (@$vei3['peso_operacional']=="3,1 a 5 t") echo "selected ";?>>3,1 a 5 t</option>
+			   <option value='acima de 5 t' <? if (@$vei3['peso_operacional']=="acima de 5 t") echo "selected ";?>>acima de 5 t</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Transmissão</label><BR>
+			<select class="form-control f12" id="transmissao_TA" name="transmissao_TA">
+			   <option value='manual' <? if (@$vei3['transmissao']=="manual") echo "selected ";?>>manual</option>
+			   <option value='automática' <? if (@$vei3['transmissao']=="automática³") echo "selected ";?>>automática</option>
+			   <option value='hidrostática' <? if (@$vei3['transmissao']=="hidrostática") echo "selected ";?>>hidrostática</option>
+			</select>
+		</div>									
+
+	 </div>
+	 <!-- TEMPLATE TA Trator agrícola-->
+
+	<!-- TEMPLATE PU Pulverizador-->
+	 <div class="row form-group template_PU templates" <?=((@$vei3['template']<>"PU") ? "style='display:none;'" : "")?>>
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Motorização</label><BR>
+			<select class="form-control f12" id="motor_PU" name="motor_PU">
+			   <option value='Diesel' <? if (@$vei3['motor']=="Diesel") echo "selected ";?>>Diesel</option>
+			   <option value='Elétrico' <? if (@$vei3['motor']=="Elétrico") echo "selected ";?>>Elétrico</option>
+			</select>
+		</div>									
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Capacidade do tanque</label><BR>
+			<select class="form-control f12" id="capacidade_tanque_PU" name="capacidade_tanque_PU">
+			   <option value='até 1.000 L' <? if (@$vei3['capacidade_tanque']=="até 1.000 L") echo "selected ";?>>até 1.000 L</option>
+			   <option value='1.001 a 2.500 L' <? if (@$vei3['capacidade_tanque']=="1.001 a 2.500 L") echo "selected ";?>>1.001 a 2.500 L</option>
+			   <option value='acima de 2.500 L' <? if (@$vei3['capacidade_tanque']=="acima de 2.500 L") echo "selected ";?>>acima de 2.500 L</option>
+			</select>
+		</div>		
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Largura da barra</label><BR>
+			<select class="form-control f12" id="largura_barra_PU" name="largura_barra_PU">
+			   <option value='até 18 m' <? if (@$vei3['largura_barra']=="até 18 m") echo "selected ";?>>até 18 m</option>
+			   <option value='18,1 a 28 m' <? if (@$vei3['largura_barra']=="18,1 a 28 m") echo "selected ";?>>18,1 a 28 m</option>
+			   <option value='acima de 28 m' <? if (@$vei3['largura_barra']=="acima de 28 m") echo "selected ";?>>acima de 28 m</option>
+			</select>
+		</div>		
+
+     </div>
+
+     <div class="row form-group template_PU templates" <?=((@$vei3['template']<>"PU") ? "style='display:none;'" : "")?>>
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Tipo propulsão</label><BR> 
+			<select class="form-control f12" id="tipo_propulsao_PU" name="tipo_propulsao_PU">
+			   <option value='autopropelido' <? if (@$vei3['tipo_propulsao']=="autopropelido") echo "selected ";?>>Autopropelido</option>
+			   <option value='arrasto' <? if (@$vei3['tipo_propulsao']=="arrasto") echo "selected ";?>>Arrasto</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Sistema de controle</label><BR>
+			<select class="form-control f12" id="sistema_controle_PU" name="sistema_controle_PU">
+			   <option value='manual' <? if (@$vei3['sistema_controle']=="manual") echo "selected ";?>>manual</option>
+			   <option value='eletrônico' <? if (@$vei3['sistema_controle']=="eletrônico") echo "selected ";?>>eletrônico</option>
+			   <option value='automático' <? if (@$vei3['sistema_controle']=="automático") echo "selected ";?>>automático</option>
+			</select>
+		</div>									
+
+	 </div>
+	 <!-- TEMPLATE PU Pulverizador-->
+
+	<!-- TEMPLATE PL Plantadeira -->
+	 <div class="row form-group template_PL templates" <?=((@$vei3['template']<>"PL") ? "style='display:none;'" : "")?>>
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Número de linhas</label><BR>
+			<select class="form-control f12" id="numero_linhas_PL" name="numero_linhas_PL">
+			   <option value='até 7' <? if (@$vei3['numero_linhas']=="até 7") echo "selected ";?>>até 7</option>
+			   <option value='8 a 14' <? if (@$vei3['numero_linhas']=="8 a 14") echo "selected ";?>>8 a 14</option>
+			   <option value='acima de 14' <? if (@$vei3['numero_linhas']=="acima de 14") echo "selected ";?>>acima de 14</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >espaçamento entre linhas</label><BR>
+			<select class="form-control f12" id="espacamento_linhas_PL" name="espacamento_linhas_PL">
+			   <option value='até 45 cm' <? if (@$vei3['espacamento_linhas']=="até 45 cm") echo "selected ";?>>até 45 cm</option>
+			   <option value='46 a 60 cm' <? if (@$vei3['espacamento_linhas']=="46 a 60 cm") echo "selected ";?>>46 a 60 cm</option>
+			   <option value='acima de 60 cm' <? if (@$vei3['espacamento_linhas']=="acima de 60 cm") echo "selected ";?>>acima de 60 cm</option>
+			</select>
+		</div>		
+
+     </div>
+
+     <div class="row form-group template_PL templates" <?=((@$vei3['template']<>"PL") ? "style='display:none;'" : "")?>>
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >capacidade do reservatório</label><BR>
+			<select class="form-control f12" id="capacidade_reservatorio_PL" name="capacidade_reservatorio_PL">
+			   <option value='até 500 L' <? if (@$vei3['capacidade_reservatorio']=="até 500 L") echo "selected ";?>>até 500 L</option>
+			   <option value='501 a 1.000 L' <? if (@$vei3['capacidade_reservatorio']=="501 a 1.000 L") echo "selected ";?>>501 a 1.000 L</option>
+			   <option value='acima de 1.000 L' <? if (@$vei3['capacidade_reservatorio']=="acima de 1.000 L") echo "selected ";?>>acima de 1.000 L</option>
+			</select>
+		</div>		
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Tipo propulsão</label><BR> 
+			<select class="form-control f12" id="tipo_propulsao_PL" name="peso_operacional_PL">
+			   <option value='arrasto' <? if (@$vei3['tipo_propulsao']=="arrasto") echo "selected ";?>>Arrasto</option>
+			   <option value='acoplamento' <? if (@$vei3['tipo_propulsao']=="acoplamento") echo "selected ";?>>acoplamento</option>
+			   <option value='pneumática' <? if (@$vei3['tipo_propulsao']=="pneumática") echo "selected ";?>>pneumática</option>
+			   <option value='mecânica' <? if (@$vei3['tipo_propulsao']=="mecânica") echo "selected ";?>>mecânica</option>
+			</select>
+		</div>									
+
+	 </div>
+	 <!-- TEMPLATE PL Plantadeira -->
+	 
+	 <!-- TEMPLATE CO Colheitadera -->
+	 <div class="row form-group template_CO templates" <?=((@$vei3['template']<>"CO") ? "style='display:none;'" : "")?>>
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Motorização</label><BR>
+			<select class="form-control f12" id="motor_CO" name="motor_CO">
+			   <option value='Diesel' <? if (@$vei3['motor']=="Diesel") echo "selected ";?>>Diesel</option>
+			   <option value='Elétrica' <? if (@$vei3['motor']=="Elétrica") echo "selected ";?>>Elétrica</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Potência do motor</label><BR>
+			<select class="form-control f12" id="potencia_hp_CO" name="potencia_hp_CO">
+			   <option value='até 150 HP' <? if (@$vei3['potencia_hp']=="até 150 HP") echo "selected ";?>>até 150 HP</option>
+			   <option value='151 a 300 HP' <? if (@$vei3['potencia_hp']=="151 a 300 HP") echo "selected ";?>>151 a 300 HP</option>
+			   <option value='acima de 300 HP' <? if (@$vei3['potencia_hp']=="acima de 300 HP") echo "selected ";?>>acima de 300 HP</option>
+			</select>
+		</div>		
+
+     </div>
+
+     <div class="row form-group template_CO templates" <?=((@$vei3['template']<>"CO") ? "style='display:none;'" : "")?>>
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Largura da plataforma</label><BR>
+			<select class="form-control f12" id="largura_plataforma_CO" name="largura_plataforma_CO">
+			   <option value='até 3 m' <? if (@$vei3['largura_plataforma']=="até 3 m") echo "selected ";?>>até 3 m</option>
+			   <option value='3,1 a 6 m' <? if (@$vei3['largura_plataforma']=="3,1 a 6 m") echo "selected ";?>>3,1 a 6 m</option>
+			   <option value='acima de 6 m' <? if (@$vei3['largura_plataforma']=="acima de 6 m") echo "selected ";?>>acima de 6 m</option>
+			</select>
+		</div>									
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Capacidade do graneleiro</label><BR> 
+			<select class="form-control f12" id="capacidade_granaleiro_CO" name="capacidade_granaleiro_CO">
+			   <option value='até 4.000 L' <? if (@$vei3['capacidade_granaleiro']=="até 4.000 L") echo "selected ";?>>até 4.000 L</option>
+			   <option value='4.001 a 8.000 L' <? if (@$vei3['capacidade_granaleiro']=="4.001 a 8.000 L") echo "selected ";?>>4.001 a 8.000 L</option>
+			   <option value='acima de 8.000 L' <? if (@$vei3['capacidade_granaleiro']=="acima de 8.000 L") echo "selected ";?>>acima de 8.000 L</option>
+			</select>
+		</div>									
+
+		<div class="col-md-4">
+			<label class="control-label text-right f12" >Peso operacional</label><BR>
+			<select class="form-control f12" id="peso_operacional_CO" name="peso_operacional_CO">
+			   <option value='até 10 t' <? if (@$vei3['peso_operacional']=="até 10 t") echo "selected ";?>>até 10 t</option>
+			   <option value='10 a 20 t' <? if (@$vei3['peso_operacional']=="10 a 20 t") echo "selected ";?>>10 a 20 t</option>
+			   <option value='acima de 20 t' <? if (@$vei3['peso_operacional']=="acima de 20 t") echo "selected ";?>>acima de 20 t</option>
+			</select>
+		</div>									
+
+	 </div>
+	 <!-- TEMPLATE PL Plantadeira -->
+
+
+	 <!-- TEMPLATE AR Aradora/Niveladora -->
+	 <div class="row form-group template_AR templates" <?=((@$vei3['template']<>"AR") ? "style='display:none;'" : "")?>>
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Largura de trabalho</label><BR>
+			<select class="form-control f12" id="largura_trabalho_AR" name="largura_trabalho_AR">
+			   <option value='até 2 m' <? if (@$vei3['largura_trabalho']=="até 2 m") echo "selected ";?>>até 2 m</option>
+			   <option value='2,1 a 3 m' <? if (@$vei3['largura_trabalho']=="2,1 a 3 m") echo "selected ";?>>2,1 a 3 m</option>
+			   <option value='acima de 3 m' <? if (@$vei3['largura_trabalho']=="acima de 3 m") echo "selected ";?>>acima de 3 m</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Número de discos</label><BR>
+			<select class="form-control f12" id="numero_discos_AR" name="numero_discos_AR">
+			   <option value='até 14' <? if (@$vei3['numero_discos']=="até 14") echo "selected ";?>>até 14</option>
+			   <option value='15 a 24' <? if (@$vei3['numero_discos']=="15 a 24") echo "selected ";?>>15 a 24</option>
+			   <option value='acima de 24' <? if (@$vei3['numero_discos']=="acima de 24") echo "selected ";?>>acima de 24</option>
+			</select>
+		</div>		
+
+     </div>
+
+     <div class="row form-group template_AR templates" <?=((@$vei3['template']<>"AR") ? "style='display:none;'" : "")?>>
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Diâmetro dos disco</label><BR>
+			<select class="form-control f12" id="diametro_disco_AR" name="diametro_disco_AR">
+			   <option value='até 22"' <? if (@$vei3['diametro_disco']=='até 22"') echo "selected ";?>>até 22"</option>
+			   <option value='23" a 28' <? if (@$vei3['diametro_disco']=='23" a 28"') echo "selected ";?>>23" a 28"</option>
+			   <option value='acima de 28"' <? if (@$vei3['diametro_disco']=='acima de 28"') echo "selected ";?>>acima de 28"</option>
+			</select>
+		</div>									
+
+		<div class="col-md-6">
+			<label class="control-label text-right f12" >Tipo maquina</label><BR> 
+			<select class="form-control f12" id="tipo_maquina_AR" name="tipo_maquina_AR">
+			   <option value='aradora' <? if (@$vei3['tipo_maquina']=="aradora") echo "selected ";?>>Aradora</option>
+			   <option value='niveladora' <? if (@$vei3['tipo_maquina']=="niveladora") echo "selected ";?>>Niveladora</option>
+			   <option value='hidráulica' <? if (@$vei3['tipo_maquina']=="hidráulica") echo "selected ";?>>Hidráulica</option>
+			   <option value='fixa' <? if (@$vei3['tipo_maquina']=="fixa") echo "selected ";?>>Fixa</option>
+			</select>
+		</div>									
+
+	 </div>
+	 <!-- TEMPLATE PL Plantadeira -->
+
+
