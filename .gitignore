@@ -11,3 +11,8 @@ globais/admin/json/produtos/post.php
 error*
 globais/admin/json/veiculos_novos/error_log
 globais/inc/constantes.php
+*.insv
+# Ou mais genérico: arquivos grandes de vídeo
+*.mp4
+*.avi
+# etc.
